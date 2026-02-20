@@ -1,0 +1,173 @@
+import { Rating } from "../model/rating.js";
+
+
+  export const createRating = async (req, res) => {
+    const { user, rating } = req.body;
+  const data = req.body;
+    try {
+      const existRating = await Rating.findOne({ user, rating });
+  
+      // if (existRating) {
+      //   return res.status(400).json({
+      //     status: "fail",
+      //     message: "You have already given a rating to this product",
+      //   });
+      // }
+  
+      const newRating = new Rating(data);
+      await newRating.save();
+  
+      res.status(201).json({
+        data: newRating,
+        message: "Rating created successfully",
+        status: "success",
+      });
+    } catch (error) {
+      res.status(500).json({ status: "error", message: error.message });
+    }
+  };
+
+export const getRatings = async (req, res) => {
+  try {
+    const ratings = await Rating.find();
+    res.status(200).json({
+      data: ratings,
+      message: "Ratings fetched successfully",
+      status: "success",
+    });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+export const getRating = async (req, res) => {
+  const { id } = req.params;
+  const page = parseInt(req.query.page) || 1; // Get page number from query params, default to 1
+  const limit = 5;
+  
+  try { 
+    // Calculate skip value for pagination
+    const skip = (page - 1) * limit;
+    
+    // Fetch ratings with pagination
+    const ratings = await Rating.find({ productId: id })
+      .skip(skip)
+      .limit(limit);
+    
+    // Get total count for pagination info
+    const totalRatings = await Rating.countDocuments({ productId: id });
+    const totalPages = Math.ceil(totalRatings / limit);
+    
+    res.status(200).json({
+      data: ratings,
+      pagination: {
+        currentPage: page,
+        totalPages: totalPages,
+        totalItems: totalRatings,
+        itemsPerPage: limit,
+        hasNextPage: page < totalPages,
+        hasPrevPage: page > 1
+      },
+      message: "Ratings fetched successfully",
+      status: "success",
+    });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+export const updateRating = async (req, res) => {
+  const { id } = req.params;
+  const rating = req.body;
+  if (!id) return res.status(404).send(`No rating with id: ${id}`);
+  const updatedRating = await Rating.findByIdAndUpdate(id, rating, {
+    new: true,
+  });
+  res.status(200).json({
+    data: updatedRating,
+    message: "Rating updated successfully",
+    status: "success",
+  });
+};
+export const deleteRating = async (req, res) => {
+  const { id } = req.params;
+  if (!id) return res.status(404).send(`No rating with id: ${id}`);
+  await Rating.findByIdAndRemove(id);
+  res
+    .status(200)
+    .json({ message: "Rating deleted successfully", status: "success" });
+};
+export const getRatingByProductId = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const ratings = await Rating.find({ product: id }).populate("user");
+    res.status(200).json({
+      data: ratings,
+      message: "Ratings fetched successfully",
+      status: "success",
+    });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+export const getRatingByUserId = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const ratings = await Rating.find({ user: id }).populate("product");
+    res.status(200).json({
+      data: ratings,
+      message: "Ratings fetched successfully",
+      status: "success",
+    });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+export const getOverallRating = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const ratings = await Rating.find({ product: id });
+    let sum = 0;
+    ratings.forEach((rating) => {
+      sum += rating.rating;
+    });
+    const overallRating = sum / ratings.length;
+    res.status(200).json({
+      data: overallRating,
+      message: "Overall rating fetched successfully",
+      status: "success",
+    });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+
+export const getGoogleReviews = async (req, res) => {
+  try {
+    const placeId = process.env.PLACE_ID;
+    const apiKey = process.env.GOOGLE_API_KEY;
+
+    if (!placeId || !apiKey) {
+      return res.status(400).json({ message: "Missing PLACE_ID or GOOGLE_API_KEY" });
+    }
+
+    const url = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=reviews,rating,user_ratings_total&key=${apiKey}`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+console.log(data.result);
+
+    if (data.status !== "OK") {
+      return res.status(400).json({ message: data.error_message});
+    }
+
+    res.json({
+      rating: data.result.rating,
+      totalReviews: data.result.user_ratings_total,
+      reviews: data.result.reviews,
+    });
+  } catch (error) {
+    console.error("Google Reviews Error:", error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
