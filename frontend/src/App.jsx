@@ -8,7 +8,6 @@ import { Suspense, useEffect, useState } from 'react';
 import Navbar from './components/Header/Navbar';
 import WhatsAppFloat from './components/SocialMedia/WhatsAppModal';
 import AnnouncementBanner from './components/AnnouncementBanner';
-import PopupGlobal from './components/PopupGlobal/PopupGlobal';
 function App({ serverData, CategoryProducts, homePageData }) {
   const location = useLocation();
   const [currentUrl, setCurrentUrl] = useState('');
@@ -22,7 +21,7 @@ function App({ serverData, CategoryProducts, homePageData }) {
     <>
     {/* sd */}
       <ToastContainer />
-      <PopupGlobal/>
+      
           <WhatsAppFloat
             phone="+17472470456"
             message={`Hello, I am reaching out to inquire about ${currentUrl}`}
@@ -30,7 +29,7 @@ function App({ serverData, CategoryProducts, homePageData }) {
             bottomClass="bottom-5"
             leftClass="left-8"
           />
-          <AnnouncementBanner />
+          {/* <AnnouncementBanner /> */}
           {/* <TopNav /> */}
           <Navbar />
           

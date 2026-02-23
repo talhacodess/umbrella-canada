@@ -5,11 +5,11 @@
   font-family: 'Inter', sans-serif !important;
 }
 span{
-  @apply text-[#333333] sm:text-[14px] text-[13px] 
+  @apply  sm:text-[14px] text-[13px] 
 }
 
 a{
-@apply     sm:text-sm text-[13px] hover:text-[#EE334B]  font-medium
+@apply     sm:text-sm text-[13px]   font-medium
 }
 
 h1{

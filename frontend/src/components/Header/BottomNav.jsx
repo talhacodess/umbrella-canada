@@ -284,49 +284,7 @@ const BottomNav = ({ Menu, OpenMenu }) => {
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#EE334B] to-[#213554] group-hover:w-full transition-all duration-300"></span>
           </Link>
         </ul>
-         <div className=" flex gap-2 items-center">
-          {/* Left Side: Social Media Icons with About US */}
-         <div className="flex items-center space-x-2">
-            <a href="#" className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
-              <FaFacebookF size={14} className="text-gray-600 group-hover:text-white transition-colors" />
-            </a>
-            <a href="#" className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
-              <FaXTwitter size={14} className="text-gray-600 group-hover:text-white transition-colors" />
-            </a>
-            <a href="#" className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
-              <FaInstagram size={14} className="text-gray-600 group-hover:text-white transition-colors" />
-            </a>
-            <a href="#" className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
-              <FaPinterest size={14} className="text-gray-600 group-hover:text-white transition-colors" />
-            </a>
-            <a href="#" className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
-              <FaYoutube size={14} className="text-gray-600 group-hover:text-white transition-colors" />
-            </a>
-            <a href="#" className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
-              <FaLinkedinIn size={14} className="text-gray-600 group-hover:text-white transition-colors" />
-            </a>
-            {/* Red Separator */}
-            <div className="h-8 w-0.5 mx-2"></div>
-            {/* About US */}
-            {/* <Link to="/about-us" className="text-[#213554] font-semibold text-lg sm:text-2xl" style={{ fontFamily: 'cursive', fontStyle: 'italic' }}>
-              About US
-            </Link> */}
-          </div>
-        {/* Global Operations - Right Side */}
-        <div className="flex items-center space-x-2 text-sm">
-          <span className="text-gray-700 font-medium">Local Globally:</span>
-          <div className="flex items-center space-x-0.5">
-            <img src={usa} alt="USA" className="w-7 h-7 object-center" />
-           
-            <img src={uk} alt="UK" className="w-7 h-7 object-center" />
-            <img src={canada} alt="canada" className="w-7 h-7 object-center" />
-            <img src={australia} alt="canada" className="w-7 h-7 object-center" />
-            <img src={uae} alt="canada" className="w-7 h-7 object-center" />
-            <img src={chaina} alt="canada" className="w-7 h-7 object-center" />
-           
-          </div>
-        </div>
-         </div>
+      
         </div>
 
         {/* Dropdown Menu */}

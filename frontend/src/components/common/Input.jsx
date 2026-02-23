@@ -19,10 +19,10 @@ const Input = ({
       {label && (
         <label
           htmlFor={name}
-          className="block pb-1.5 text-[#213554] text-sm font-semibold mb-1"
+          className="block pb-1.5 text-[#192133] text-sm font-semibold mb-1"
         >
           {label}
-          {star && <span className="text-[#EE334B] ml-1">{star}</span>}
+          {star && <span className="text-[#AC292A] ml-1">{star}</span>}
         </label>
       )}
       <div className="relative">
@@ -36,7 +36,7 @@ const Input = ({
           type={type}
           required={required}
           disabled={disabled}
-          className={`w-full border-2 border-gray-200  bg-white text-sm text-[#213554] placeholder:text-gray-400 px-4 py-2.5 outline-none focus:border-[#213554] focus:ring-2 focus:ring-[#213554]/20 transition-all duration-300 shadow-sm hover:border-gray-300 disabled:bg-gray-50 disabled:cursor-not-allowed disabled:text-gray-500 ${Icon ? "pr-10" : ""} ${className}`}
+          className={`w-full border-2 border-gray-200  bg-white text-sm text-[#192133] placeholder:text-gray-400 px-4 py-2.5 outline-none focus:border-[#192133] focus:ring-2 focus:ring-[#192133]/20 transition-all duration-300 shadow-sm hover:border-gray-300 disabled:bg-gray-50 disabled:cursor-not-allowed disabled:text-gray-500 ${Icon ? "pr-10" : ""} ${className}`}
         />
         {Icon && (
           <div className="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">

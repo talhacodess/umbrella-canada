@@ -24,7 +24,6 @@ import requestQuoteRouter from "./routes/RequestQuote.js";
 import instantQuoteRouter from "./routes/InstantQuote.js";
 import sitemapRouter from "./routes/sitemapRouter.js";
 import { REDIS, redisClient }  from './redis_APIS/redis.js';
-import popupRouter from "./routes/PopupRouter.js";
 import path from 'path';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
@@ -121,8 +120,6 @@ app.use("/requestQuote", requestQuoteRouter);
 app.use("/instantQuote", instantQuoteRouter);
 app.use("/", sitemapRouter);
 
-// Popup form routes
-app.use("/popup", popupRouter);
 
 // Simple API test route 
 app.get("/apis", async (req, res) => {
