@@ -39,6 +39,7 @@ export const useProductSelection = () => {
 const ProductCardTwo = ({ data, disableSelection = false, size = "default" }) => {
   const { selectedProducts, toggleProduct } = useProductSelection();
   const isSelected = selectedProducts.has(data?._id);
+  const isCompact = size === "compact";
 
   const handleMouseEnter = () => {
     if (data?.slug) prefetchProduct(data.slug);
@@ -56,46 +57,34 @@ const ProductCardTwo = ({ data, disableSelection = false, size = "default" }) =>
     }
   };
 
-  const isCompact = size === "compact";
-
   const cardContent = (
     <div
       style={{
+        borderRadius: "16px",
+        overflow: "hidden",
         backgroundColor: "#ffffff",
         border: isSelected && !disableSelection
           ? "2px solid #AC292A"
-          : "1px solid #e5e7eb",
-        borderRadius: "12px",
-        overflow: "hidden",
-        transition: "box-shadow 0.2s ease, transform 0.2s ease",
+          : "1px solid transparent",
+        boxShadow: isSelected && !disableSelection
+          ? "0 0 0 3px rgba(172,41,42,0.12)"
+          : "0 2px 8px rgba(0,0,0,0.08)",
+        transition: "box-shadow 0.25s ease, transform 0.25s ease",
         display: "flex",
         flexDirection: "column",
         width: "100%",
-        height: "100%",
         cursor: "pointer",
-        boxShadow: isSelected && !disableSelection
-          ? "0 0 0 3px rgba(172,41,42,0.15)"
-          : "0 1px 4px rgba(25,33,51,0.08)",
       }}
-      onMouseEnter={(e) => {
-        // e.currentTarget.style.boxShadow = "0 6px 20px rgba(25,33,51,0.12)";
-        e.currentTarget.style.transform = "translateY(-2px)";
-      }}
-      onMouseLeave={(e) => {
-        // e.currentTarget.style.boxShadow = isSelected && !disableSelection
-        //   ? "0 0 0 3px rgba(172,41,42,0.15)"
-        //   : "0 1px 4px rgba(25,33,51,0.08)";
-        e.currentTarget.style.transform = "translateY(0)";
-      }}
+      className="card-hover-effect"
     >
-      {/* Image Area */}
+      {/* Square image area */}
       <div
         style={{
           width: "100%",
-          height: isCompact ? "120px" : "190px",
+          aspectRatio: "1 / 1",
           overflow: "hidden",
-          backgroundColor: "#f3f4f6",
-          flexShrink: 0,
+          backgroundColor: "#f0f0f0",
+          position: "relative",
         }}
       >
         {data?.images?.[0]?.url ? (
@@ -107,10 +96,10 @@ const ProductCardTwo = ({ data, disableSelection = false, size = "default" }) =>
               height: "100%",
               objectFit: "cover",
               display: "block",
-              transition: "transform 0.3s ease",
+              transition: "transform 0.35s ease",
             }}
             loading="lazy"
-            onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.04)")}
+            onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
             onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
           />
         ) : (
@@ -121,31 +110,50 @@ const ProductCardTwo = ({ data, disableSelection = false, size = "default" }) =>
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: "#192133",
+              background: "linear-gradient(135deg, #192133 0%, #2e3f62 100%)",
             }}
           >
             <span
               style={{
-                fontSize: isCompact ? "28px" : "40px",
+                fontSize: isCompact ? "32px" : "52px",
                 fontWeight: "700",
-                color: "rgba(255,255,255,0.25)",
-                letterSpacing: "-1px",
+                color: "rgba(255,255,255,0.2)",
               }}
             >
               {data?.name?.charAt(0) || "P"}
             </span>
           </div>
         )}
+
+        {/* Selected checkmark badge */}
+        {isSelected && !disableSelection && (
+          <div
+            style={{
+              position: "absolute",
+              top: "10px",
+              right: "10px",
+              width: "28px",
+              height: "28px",
+              borderRadius: "50%",
+              backgroundColor: "#AC292A",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.25)",
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2.5 7L5.5 10L11.5 4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+        )}
       </div>
 
-      {/* Info Area */}
+      {/* Name label below image */}
       <div
         style={{
-          padding: isCompact ? "10px 12px" : "12px 16px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "6px",
-          flexGrow: 1,
+          padding: isCompact ? "8px 10px" : "10px 14px",
+          backgroundColor: "#ffffff",
         }}
       >
         <p
@@ -163,75 +171,37 @@ const ProductCardTwo = ({ data, disableSelection = false, size = "default" }) =>
         >
           {data?.name || "Product Name"}
         </p>
-
-        {/* Selected indicator */}
-        {isSelected && !disableSelection && (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "5px",
-              marginTop: "2px",
-            }}
-          >
-            <div
-              style={{
-                width: "6px",
-                height: "6px",
-                borderRadius: "50%",
-                backgroundColor: "#AC292A",
-              }}
-            />
-            <span
-              style={{
-                fontSize: "11px",
-                fontWeight: "600",
-                color: "#AC292A",
-                letterSpacing: "0.02em",
-              }}
-            >
-              Selected
-            </span>
-          </div>
-        )}
       </div>
-
-      {/* Bottom accent bar */}
-      <div
-        style={{
-          height: "3px",
-          backgroundColor: isSelected && !disableSelection ? "#AC292A" : "#192133",
-          opacity: isSelected && !disableSelection ? 1 : 0.08,
-          transition: "opacity 0.2s ease, background-color 0.2s ease",
-          flexShrink: 0,
-        }}
-      />
     </div>
   );
 
   return (
     <>
+      <style>{`
+        .card-hover-effect:hover {
+          box-shadow: 0 8px 24px rgba(0,0,0,0.13) !important;
+          transform: translateY(-3px);
+        }
+      `}</style>
+
       {disableSelection ? (
         <Link
           state={{ productSlug: data._id }}
           to={`/product/${data?.slug}`}
           onMouseEnter={handleMouseEnter}
           onMouseDown={handleMouseDown}
-          style={{ display: "block", height: "100%", width: "100%", textDecoration: "none" }}
+          style={{ display: "block", width: "100%", textDecoration: "none" }}
         >
           {cardContent}
         </Link>
       ) : (
-        <div
-          onClick={handleProductClick}
-          style={{ transition: "all 0.2s ease", height: "100%", width: "100%" }}
-        >
+        <div onClick={handleProductClick} style={{ width: "100%" }}>
           <Link
             state={{ productSlug: data._id }}
             to={`/product/${data?.slug}`}
             onMouseEnter={handleMouseEnter}
             onMouseDown={handleMouseDown}
-            style={{ display: "block", height: "100%", width: "100%", textDecoration: "none" }}
+            style={{ display: "block", width: "100%", textDecoration: "none" }}
             onClick={(e) => e.stopPropagation()}
           >
             {cardContent}
