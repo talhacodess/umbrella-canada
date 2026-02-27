@@ -7,7 +7,7 @@ import axios from 'axios';
 import { BaseUrl } from '../../utils/BaseUrl';
 import { useIntersectionObserver } from '../../utils/useIntersectionObserver';
 
-const Category = ({ serverData }) => {
+const Social = ({ serverData }) => {
   const [products, setProducts] = useState(serverData || []);
   const [loading, setLoading] = useState(!serverData);
   const [elementRef, isIntersecting] = useIntersectionObserver({
@@ -48,22 +48,20 @@ const Category = ({ serverData }) => {
   }, [isIntersecting, serverData]);
 
   return (
-    <div ref={elementRef} className=' bg-[#f7f7f7] py-10'>
+    <div ref={elementRef} className=' bg-[#fff] py-10'>
       <div className=' sm:max-w-8xl w-[95%] mx-auto'>
-          <div className="text-left mb-8 inline-flex items-baseline gap-2">
+          <div className="text-left mb-8  gap-2">
                     <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
-                    Shop by collection
+                 Made by you, #MadeWithUmbrellapackaging
 
                     </h2>
+                    <p className="text-gray-600">
+                        Share your creations with us using #MadeWithUmbrellapackaging
+                        
+                      
+                      </p>
                     
         
-                      <Link
-                        to=""
-                        className="ml-2 uppercase font-bold text-[#AC292A] inline-flex items-center align-baseline hover:opacity-80 transition-opacity"
-                      >
-                       See all collections
-                        <FaAngleRight className="ml-1" size={15} />
-                      </Link>
                
         
                   </div>
@@ -108,4 +106,4 @@ const Category = ({ serverData }) => {
   )
 }
 
-export default Category
+export default Social;

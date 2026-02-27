@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import hero from "../../assets/images/banner-slider-image.webp";
+import hero from "../../assets/images/hero-banner.png";
 
 import Button from "../../components/common/Button";
 import { Link } from "react-router-dom";
@@ -46,7 +46,7 @@ const Hero = () => {
     
 
       {/* Linear Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/75 to-black/40 z-10" style={{backgroundImage:''}}></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/75 to-black/40 z-10" style={{backgroundImage:`url(${hero})`, backgroundSize: 'cover', backgroundPosition: 'center'}}></div>
 
       {/* Text Content Overlay */}
       <div className="relative w-full h-full flex items-center justify-center z-20 ">

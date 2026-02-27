@@ -8,6 +8,10 @@ import OfferCard from '../../components/common/OfferCard'
 import google from '../../assets/images/footer/google-reviws-logo.webp';
 import kraftPackagingBanner from '../../assets/images/goScreen.webp';
 import Category from '../../components/Category'
+import Seasonal from '../../components/seasonal'
+import Arrival from '../../components/NewArrival'
+import Tools from '../../components/Tools'
+import Social from '../../components/Social'
 import CategoryBoxes from '../../components/CategoryBoxes'
 import FeaturesPackaging from '../../components/FeaturesPackaging'
 import PageMetadata from '../../components/common/PageMetadata'
@@ -22,6 +26,7 @@ import Tabs from '../../components/common/Tabs'
 import WorkWithYou from '../../components/WorkWithYou'
 import CustomInserts from '../../components/CustomInserts'
 import BannerContent from '../../components/BannerContent'
+import Help from '../../components/help'
 
 // Lazy load below-the-fold components for better FCP
 const FAQ = lazy(() => import('../../components/FAQ/FAQ'))
@@ -193,12 +198,20 @@ export const Home = React.memo(({ homePageData }) => {
         <Hero />
         <BottomHero />
         <CategoryBoxes />
-    
-        <OfferCard discount={'Get 40%'} title={'Saving on Buying the Bulk'} />
-        <Category serverData={homePageData?.topProducts} />
         
-        <div className="w-full max-w-[95%] sm:max-w-8xl mx-auto mt-10 px-2 sm:px-4">
-          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+    
+       
+        <Category serverData={homePageData?.topProducts} />
+        <Seasonal serverData={homePageData?.seasonalProducts} />
+         <OfferCard discount={'Get 40%'} title={'Saving on Buying the Bulk'} />
+        <Help/>
+        <Arrival serverData={homePageData?.seasonalProducts} />
+        <Tools serverData={homePageData?.seasonalProducts} />
+        <Social serverData={homePageData?.socialProducts} />
+     
+        
+        {/* <div className="w-full max-w-[95%] sm:max-w-8xl mx-auto mt-10 px-2 sm:px-4">
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6"> */}
            
             {/* <div className="flex md:flex-col flex-row w-full md:w-auto justify-center md:justify-start gap-2 md:gap-3 px-2">
               {[
@@ -233,7 +246,7 @@ export const Home = React.memo(({ homePageData }) => {
 
 
            
-            <div className="flex-1 w-full min-w-0 mt-6 md:mt-0">
+            {/* <div className="flex-1 w-full min-w-0 mt-6 md:mt-0">
               {activeTab === "material" && (
                 <Suspense fallback={<LoadingFallback />}>
                   <CustomBoxMaterial />
@@ -245,18 +258,18 @@ export const Home = React.memo(({ homePageData }) => {
                   <SpecialPackaging />
                 </Suspense>
               )}
-            </div>
-          </div>
-        </div>
-        <CustomPackagingProduced />
+            </div> */}
+          {/* </div>
+        </div> */}
+        {/* <CustomPackagingProduced /> */}
        
-        <div className=' pt-5'>
+        {/* <div className=' pt-5'>
           <Suspense fallback={<LoadingFallback height="h-64" />}>
             <GetPriceQuote />
           </Suspense>
-        </div>
-        <div className='flex flex-col gap-8 my-12 bg-[#F6F6F6]'>
-          <div>
+        </div> */}
+        {/* <div className='flex flex-col gap-8 my-12 bg-[#F6F6F6]'>
+          <div> */}
             {/* <div className="  mt-8  sm:max-w-8xl bg-[#fff] p-8 flex sm:flex-row flex-col gap-5 justify-between items-center rounded-xl max-w-[95%] mx-auto">
               <div>
                 <img src={google} alt='' loading="lazy" />
@@ -269,7 +282,7 @@ export const Home = React.memo(({ homePageData }) => {
                 </a>
               </div>
             </div> */}
-            <div className="mt-8 sm:max-w-8xl bg-gradient-to-r from-[#213554] to-[#213554]/95 p-8 flex sm:flex-row flex-col gap-5 justify-between items-center rounded-2xl max-w-[95%] mx-auto shadow-xl">
+            {/* <div className="mt-8 sm:max-w-8xl bg-gradient-to-r from-[#213554] to-[#213554]/95 p-8 flex sm:flex-row flex-col gap-5 justify-between items-center rounded-2xl max-w-[95%] mx-auto shadow-xl">
         <div>
           <img src={google} alt='Google Reviews' className="filter brightness-0 invert" />
         </div>
@@ -287,20 +300,20 @@ export const Home = React.memo(({ homePageData }) => {
         
         </div>
       </div>
-          </div>
-          <div>
+          </div> */}
+          {/* <div> */}
             {/* Below the fold - lazy loaded with Suspense */}
-            <Suspense fallback={<LoadingFallback height="h-96" />}>
+            {/* <Suspense fallback={<LoadingFallback height="h-96" />}>
               <Testimonials />
-            </Suspense>
-          </div>
+            </Suspense> */}
+          {/* </div>
 
         </div>
         <WorkWithYou/>
-        <CustomInserts/>
+        <CustomInserts/> */}
         
-        
-        <CustomPackagingApart />
+{/*         
+        <CustomPackagingApart /> */}
         {/* <FeaturesPackaging /> */}
         {/* <OfferCard discount={'Save 30%'} title={'on Bulk Orders'} subTitle={'Need more this year?'} /> */}
 
@@ -309,26 +322,26 @@ export const Home = React.memo(({ homePageData }) => {
 
 
         
-        <PackagingBanner title={'Go green with Kraft packaging.'} bgImage={kraftPackagingBanner} subTitle={'X Custom Packaging Cares About Its Environment'} url={'/shop'} />
+        {/* <PackagingBanner title={'Go green with Kraft packaging.'} bgImage={kraftPackagingBanner} subTitle={'X Custom Packaging Cares About Its Environment'} url={'/shop'} />
 
-        <WeFulfil />
+        <WeFulfil /> */}
 
 
-        <Suspense fallback={<LoadingFallback height="h-96" />}>
+        {/* <Suspense fallback={<LoadingFallback height="h-96" />}>
           <InspirationPackaging />
-        </Suspense>
+        </Suspense> */}
        
-        <Suspense fallback={<LoadingFallback height="h-96" />}>
+        {/* <Suspense fallback={<LoadingFallback height="h-96" />}>
           <PersonalTestimonial />
-        </Suspense>
-        <BannerContent serverData={homePageData?.banner} />
+        </Suspense> */}
+        {/* <BannerContent serverData={homePageData?.banner} /> */}
        
-        <Suspense fallback={<LoadingFallback height="h-96" />}>
+        {/* <Suspense fallback={<LoadingFallback height="h-96" />}>
           <FAQ serverData={homePageData?.faqs} />
         </Suspense>
         <Suspense fallback={<LoadingFallback height="h-96" />}>
           <Blog />
-        </Suspense>
+        </Suspense> */}
 
       </main>
     </>

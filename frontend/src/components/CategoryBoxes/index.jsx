@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import { FaAngleRight } from 'react-icons/fa';
 import Button from '../common/Button';
 import GetQuoteModal from '../common/GetQuoteModal';
+import CardSlider from '../common/CardSlider';
+import ProductCard from '../common/ProductCard';
+
 
 const CategoryBoxes = () => {
   const [categories, setCategories] = useState([]);
@@ -87,55 +90,48 @@ const CategoryBoxes = () => {
       <div className="py-10 bg-white">
         <div className="sm:max-w-8xl w-[95%] mx-auto">
           {/* Header Section - Always visible */}
-          <div className="text-center mb-10">
+          <div className="text-left mb-10">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
-              Customized Packaging for Every Industry
+             Explore all categories
             </h2>
-            <p className="text-gray-600 text-base sm:text-lg">
-              We recognize that each industry has distinct packaging requirements. That’s why X Custom Packaging offers custom packaging solutions designed for retail, apparel, e-commerce, food and beverage, cosmetics, electronics, and beyond. We ensure the quality, feel, and durability of your packaging so that your every box stands out well on the store shelves.
-
-              <Link
-                to=""
-                className="ml-2 uppercase font-bold text-[#EE334B] inline-flex items-center align-baseline hover:opacity-80 transition-opacity"
-              >
-                View all
-                <FaAngleRight className="ml-1" size={15} />
-              </Link>
-            </p>
-
+          
           </div>
 
           {/* Categories Grid - Loading or Content */}
           {loading ? (
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-9 gap-6 ">
               {[1, 2, 3, 4, 5].map((i) => (
                 <div key={i} className="animate-pulse">
-                  <div className="bg-gray-200 rounded-2xl h-64 mb-4"></div>
-                  <div className="bg-gray-200 h-6 rounded mb-2"></div>
-                  <div className="bg-gray-200 h-4 rounded w-2/3"></div>
+                  <div className="bg-gray-200 rounded-full h-40 w-40 mb-4"></div>
+                  <div className="bg-gray-200 h-6 rounded-full mb-2"></div>
+                  {/* <div className="bg-gray-200 h-4 rounded-full w-2/3"></div> */}
                 </div>
               ))}
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
-                {categories.map((category) => (
-                  <div
-                    key={category._id}
+          
+               <CardSlider
+              top={40}
+              items={categories?.map((item, index) => {
+                return (
+                 
+                     <div
+                    key={item._id}
                     className="group flex flex-col items-center text-center"
                   >
                     {/* Category Image */}
-                    <div className="relative w-full rounded-2xl overflow-hidden mb-4 bg-gray-50 group-hover:shadow-lg transition-shadow duration-300">
-                      <Link to={`/category/${category.slug}`}>
-                        <div className="relative w-full sm:h-64 h-44 rounded-2xl overflow-hidden">
+                    <div className="relative  rounded-full overflow-hidden mb-4 bg-gray-50 group-hover:shadow-lg transition-shadow duration-300">
+                      <Link to=''>
+                        <div className="relative w-40 sm:h-40 h-40  rounded-full overflow-hidden">
                           <img
-                            src={category.image ? `${BaseUrl}/${category.image}` : `${BaseUrl}/images/placeholder.jpg`}
-                            alt={category.imageAltText || category.title}
+                            src={item.image ? `${BaseUrl}/${item.image}` : `${BaseUrl}/images/placeholder.jpg`}
+                            alt={item.imageAltText || item.title}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 rounded-2xl"
                             loading="lazy"
                           />
                           {/* Gallery Hover Overlay Gradient */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#213554]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"></div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#192133]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"></div>
                           {/* Gallery Shine Effect - Sweeps across on hover */}
                           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out pointer-events-none rounded-2xl"></div>
                         </div>
@@ -144,28 +140,25 @@ const CategoryBoxes = () => {
 
                     {/* Category Title */}
                     <h6 className="font-bold text-lg text-gray-800 mb-3">
-                      {category.title}
+                      {item.title}
                     </h6>
 
-                    {/* Request Quote Link */}
-                    {/* <button
-                      onClick={() => handleRequestQuote(category)}
-                      className="text-[#EE334B] font-semibold hover:underline transition-colors"
-                    >
-                      Request a Quote
-                    </button> */}
+                   
                   </div>
-                ))}
-              </div>
+                    
+                  
+                );
+              })}
+            />
 
               {/* Bottom Request A Quote Button */}
-              <div className="flex justify-center mt-6">
+              {/* <div className="flex justify-center mt-6">
                 <Button
                   className="bg-[#800020] text-white hover:bg-[#800020]/90 rounded-lg text-base font-semibold"
                   label="Get Instant Quote"
                   onClick={() => setIsQuoteModalOpen(true)}
                 />
-              </div>
+              </div> */}
             </>
           )}
         </div>

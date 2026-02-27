@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import ProductCard, { ProductSelectionProvider } from '../common/ProductCard';
+import ProductCardTwo, { ProductSelectionProvider } from '../common/ProductCardTwo';
 import { Link } from 'react-router-dom';
 import { FaAngleRight } from 'react-icons/fa';
 import CardSlider from '../common/CardSlider';
@@ -7,7 +7,7 @@ import axios from 'axios';
 import { BaseUrl } from '../../utils/BaseUrl';
 import { useIntersectionObserver } from '../../utils/useIntersectionObserver';
 
-const Category = ({ serverData }) => {
+const Seasonal = ({ serverData }) => {
   const [products, setProducts] = useState(serverData || []);
   const [loading, setLoading] = useState(!serverData);
   const [elementRef, isIntersecting] = useIntersectionObserver({
@@ -48,23 +48,23 @@ const Category = ({ serverData }) => {
   }, [isIntersecting, serverData]);
 
   return (
-    <div ref={elementRef} className=' bg-[#f7f7f7] py-10'>
+    <div ref={elementRef} className=' bg-[#fff] py-10'>
       <div className=' sm:max-w-8xl w-[95%] mx-auto'>
           <div className="text-left mb-8 inline-flex items-baseline gap-2">
                     <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
-                    Shop by collection
+                  Explore our seasonal favorites
 
                     </h2>
                     
         
-                      <Link
+                      {/* <Link
                         to=""
                         className="ml-2 uppercase font-bold text-[#AC292A] inline-flex items-center align-baseline hover:opacity-80 transition-opacity"
                       >
                        See all collections
                         <FaAngleRight className="ml-1" size={15} />
                       </Link>
-               
+                */}
         
                   </div>
       
@@ -95,7 +95,7 @@ const Category = ({ serverData }) => {
               items={products?.map((item, index) => {
                 return (
                   <div key={item._id || index} className="w-[85vw] sm:w-[285px] flex-shrink-0 px-2 sm:px-2">
-                    <ProductCard data={item} disableSelection={true} />
+                    <ProductCardTwo data={item} disableSelection={true} />
                   </div>
                 );
               })}
@@ -108,4 +108,4 @@ const Category = ({ serverData }) => {
   )
 }
 
-export default Category
+export default Seasonal;

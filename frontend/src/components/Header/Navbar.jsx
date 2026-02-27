@@ -15,12 +15,10 @@ import australia from '../../assets/images/flag/australia.svg';
 import uae from '../../assets/images/flag/uae.svg';
 
 import chaina from '../../assets/images/flag/chaina.svg';
-
-import help from '../../assets/images/header/help.svg'
-
-import project from '../../assets/images/header/project.svg'
-
-import user from '../../assets/images/header/user.svg'
+import chat from "../../assets/images/header/chat.svg";
+import projects from "../../assets/images/header/projects.svg";
+import quote from "../../assets/images/header/quote.svg";
+import user from "../../assets/images/header/user.svg";
 
 
 
@@ -530,7 +528,7 @@ const Navbar = () => {
 
                 <div className="w-18 h-18">
 
-                  <img src={help} alt="" />
+                  <img src={chat} alt="" />
 
 
 
@@ -560,7 +558,7 @@ const Navbar = () => {
 
                 <div className="w-12 h-12">
 
-                  <img src={project} alt="" />
+                  <img src={projects} alt="" />
 
 
 
@@ -592,7 +590,7 @@ const Navbar = () => {
 
                 <div className="w-12 h-12">
 
-                  <img src={project} alt="" />
+                  <img src={quote} alt="" />
 
 
 

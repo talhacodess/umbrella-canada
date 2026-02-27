@@ -142,14 +142,10 @@ const Footer = () => {
             <li><Link to={'#'} className={navLinkClass}>866-255-2112</Link></li>
             <li><Link to={'#'} className={`${navLinkClass} break-all !text-[13px]`}>orders@xcustompackaging.com</Link></li>
             <li><Link to={'/contact-us'} className={navLinkClass}>Contact Us</Link></li>
+            <li><Link to={'#'} className={navLinkClass}>9854 National Blvd # 1042 Los Angeles, CA 90034 USA</Link></li>
+
           </FooterSection>
 
-        </div>
-
-        {/* Address Row */}
-        <div className='flex items-center gap-2 py-5 border-b border-black/[0.08] text-[#555]'>
-          <IoLocationOutline size={18} className='shrink-0' />
-          <span className='text-sm'>9854 National Blvd # 1042 Los Angeles, CA 90034 USA</span>
         </div>
 
         {/* Trust + Logistics */}
