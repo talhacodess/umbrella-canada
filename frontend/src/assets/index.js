@@ -54,7 +54,7 @@ import Icon9 from './images/icon/Free-design.png';
 import Icon10 from './images/icon/Quick-turnaround.png';
 import Icon11 from './images/icon/cheapest-price.png';
 import Icon12 from './images/icon/Free-delivery.png';
-import Icon13 from './images/icon/Free shipping.svg';
+import Icon13 from './images/icon/free shipping.svg';
 import Icon14 from './images/icon/No die cost.svg';
 import Icon15 from './images/icon/Online support.svg';
 import Icon16 from './images/icon/Quick Turnaround.svg';
