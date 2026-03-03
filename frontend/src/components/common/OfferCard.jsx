@@ -2,11 +2,11 @@ import React from 'react'
 import { RiShoppingCartLine } from 'react-icons/ri'
 import Button from './Button'
 
-const OfferCard = ({discount,title,subTitle, buttonText = 'Order Now', buttonIcon}) => {
+const OfferCard = ({discount,title,subTitle, buttonText = 'Order Now', buttonIcon, className}) => {
   const defaultIcon = buttonIcon || <RiShoppingCartLine size={18} />
   
   return (
-    <div className='bg-gradient-to-r from-[#AC292A] to-[#AC292A]/90 py-6 shadow-lg'>
+    <div className={`bg-gradient-to-r from-[#AC292A] to-[#AC292A]/90 py-6 shadow-lg ${className}`}>
       <div className='sm:max-w-8xl mx-auto w-[95%] flex sm:flex-row flex-col gap-4 justify-between items-center'>
         <div>
           <h3 className='font-bold text-white flex gap-2 flex-wrap items-center text-lg sm:text-xl'> 

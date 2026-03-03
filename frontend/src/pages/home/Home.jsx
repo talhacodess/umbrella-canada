@@ -7,6 +7,7 @@ import BottomHero from '../../components/Hero/BottomHero'
 import OfferCard from '../../components/common/OfferCard'
 import google from '../../assets/images/footer/google-reviws-logo.webp';
 import kraftPackagingBanner from '../../assets/images/goScreen.webp';
+import umbrellaHelp from '../../assets/images/umbrella-help.png'
 import Category from '../../components/Category'
 import Seasonal from '../../components/seasonal'
 import Arrival from '../../components/NewArrival'
@@ -204,7 +205,7 @@ export const Home = React.memo(({ homePageData }) => {
         <Category serverData={homePageData?.topProducts} />
         <Seasonal serverData={homePageData?.seasonalProducts} />
          <OfferCard discount={'Get 40%'} title={'Saving on Buying the Bulk'} />
-        <Help/>
+        <Help img={umbrellaHelp} title={"Need Help?"} description={"Our team is here to help you every step of the way."} btn={"Get Help Now"} />
         <Arrival serverData={homePageData?.seasonalProducts} />
         <Tools serverData={homePageData?.seasonalProducts} />
         <Social serverData={homePageData?.socialProducts} />

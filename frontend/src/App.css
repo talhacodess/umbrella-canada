@@ -21,7 +21,7 @@ h2{
 }
 
 h4{
-  @apply  sm:text-xl text-lg  font-semibold
+
   }
   h5{
     @apply  sm:text-lg text-sm  font-medium
