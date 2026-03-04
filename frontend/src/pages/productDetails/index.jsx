@@ -23,6 +23,12 @@ import CardSlider from '../../components/common/CardSlider'
 import ProductCard from '../../components/common/ProductCard'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
 import { RiShoppingCartLine } from 'react-icons/ri'
+import TemplatePage from '../../components/TemplatePage'
+import Design from '../../assets/images/Design.webp'  
+import prepare from '../../assets/images/prepare.webp'  
+import Help from '../../components/help'
+import OfferCard from '../../components/common/OfferCard'
+import FAQ from '../../components/FAQ/FAQ'
 
 // Skeleton shimmer animation style
 const shimmerStyle = {
@@ -176,7 +182,7 @@ const ProductDetails = ({
             setCurr(0);
             setSelectedImage(null);
             setCurrentIndex(0);
-            
+
             // Preload first image immediately for instant display
             if (productData?.images && productData.images.length > 0) {
                 const firstImage = new Image();
@@ -199,7 +205,7 @@ const ProductDetails = ({
         try {
             const response = await axios.get(`${BaseUrl}/products/related-products?slug=${slug}`)
             setRelatedProduct(response?.data?.data)
-            
+
             // Prefetch related products immediately for fast navigation
             if (response?.data?.data?.relatedProducts && response.data.data.relatedProducts.length > 0) {
                 prefetchProductsBatch(response.data.data.relatedProducts, {
@@ -222,7 +228,7 @@ const ProductDetails = ({
         setCurrentIndex(0);
         setLoadedImages(new Set());
         setThumbnailLoadedImages(new Set());
-        
+
         // If serverData is provided and matches current slug, use it first
         if (serverData && serverData.slug === slug) {
             setProduct(serverData);
@@ -239,7 +245,7 @@ const ProductDetails = ({
             }
             fetchRelatedProducts();
         }
-        
+
         // Always fetch fresh data to ensure we have the latest
         fetchProducts();
         fetchRelatedProducts();
@@ -328,7 +334,7 @@ const ProductDetails = ({
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [isViewerOpen]);
 
-    
+
     const materialSlides = [
         {
             title: "White",
@@ -388,7 +394,7 @@ const ProductDetails = ({
             content: (
                 <div className="flex flex-col lg:flex-row gap-8 bg-white rounded-xl border border-gray-200 shadow-sm p-6">
                     <div className="lg:w-6/12 w-full">
-                        <h3 className="text-lg font-semibold text-[#213554]">
+                        <h3 className="text-lg font-semibold text-[#192133]">
                             Discover our range of high-quality packaging materials
                         </h3>
                         <p className="mt-3 text-sm text-gray-700 leading-relaxed">
@@ -428,7 +434,7 @@ const ProductDetails = ({
                                                             />
                                                         </div>
                                                     </div>
-                                                    <h4 className="mt-4 text-sm font-semibold text-[#213554] group-hover:text-[#EE334B] transition-colors duration-300">
+                                                    <h4 className="mt-4 text-sm font-semibold text-[#192133] group-hover:text-[#AC292A] transition-colors duration-300">
                                                         {slide.title}
                                                     </h4>
                                                     <p className="mt-1 text-[11px] text-gray-600 text-center">
@@ -445,16 +451,16 @@ const ProductDetails = ({
                                 <button
                                     type="button"
                                     onClick={prevMaterial}
-                                    className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md hover:bg-gradient-to-r hover:from-[#213554] hover:to-[#213554]/90 hover:shadow-lg transition-all duration-300 group"
+                                    className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md hover:bg-gradient-to-r hover:from-[#192133] hover:to-[#192133]/90 hover:shadow-lg transition-all duration-300 group"
                                 >
-                                    <TfiAngleLeft size={18} className="text-[#213554] group-hover:text-white transition-colors duration-300" />
+                                    <TfiAngleLeft size={18} className="text-[#192133] group-hover:text-white transition-colors duration-300" />
                                 </button>
                                 <button
                                     type="button"
                                     onClick={nextMaterial}
-                                    className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md hover:bg-gradient-to-r hover:from-[#213554] hover:to-[#213554]/90 hover:shadow-lg transition-all duration-300 group"
+                                    className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md hover:bg-gradient-to-r hover:from-[#192133] hover:to-[#192133]/90 hover:shadow-lg transition-all duration-300 group"
                                 >
-                                    <TfiAngleRight size={18} className="text-[#213554] group-hover:text-white transition-colors duration-300" />
+                                    <TfiAngleRight size={18} className="text-[#192133] group-hover:text-white transition-colors duration-300" />
                                 </button>
                             </div>
                         </div>
@@ -468,8 +474,8 @@ const ProductDetails = ({
                 <div className="flex flex-col lg:flex-row gap-8 bg-gradient-to-br from-white to-gray-50 rounded-2xl border border-gray-200 shadow-lg p-6 sm:p-8">
                     <div className="lg:w-6/12 w-full">
                         <div className="flex items-center gap-3 mb-4">
-                            <div className="w-1 h-10 bg-gradient-to-b from-[#EE334B] to-[#213554] rounded-full"></div>
-                            <h3 className="text-xl sm:text-2xl font-bold text-[#213554]">
+                            <div className="w-1 h-10 bg-gradient-to-b from-[#AC292A] to-[#192133] rounded-full"></div>
+                            <h3 className="text-xl sm:text-2xl font-bold text-[#192133]">
                                 Discover our range of high-quality packaging materials
                             </h3>
                         </div>
@@ -510,7 +516,7 @@ const ProductDetails = ({
                                                             />
                                                         </div>
                                                     </div>
-                                                    <h4 className="mt-4 text-sm font-semibold text-[#213554] group-hover:text-[#EE334B] transition-colors duration-300">
+                                                    <h4 className="mt-4 text-sm font-semibold text-[#192133] group-hover:text-[#AC292A] transition-colors duration-300">
                                                         {slide.title}
                                                     </h4>
                                                     <p className="mt-1 text-[11px] text-gray-600 text-center">
@@ -527,16 +533,16 @@ const ProductDetails = ({
                                 <button
                                     type="button"
                                     onClick={prevMaterial}
-                                    className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md hover:bg-gradient-to-r hover:from-[#213554] hover:to-[#213554]/90 hover:shadow-lg transition-all duration-300 group"
+                                    className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md hover:bg-gradient-to-r hover:from-[#192133] hover:to-[#192133]/90 hover:shadow-lg transition-all duration-300 group"
                                 >
-                                    <TfiAngleLeft size={18} className="text-[#213554] group-hover:text-white transition-colors duration-300" />
+                                    <TfiAngleLeft size={18} className="text-[#192133] group-hover:text-white transition-colors duration-300" />
                                 </button>
                                 <button
                                     type="button"
                                     onClick={nextMaterial}
-                                    className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md hover:bg-gradient-to-r hover:from-[#213554] hover:to-[#213554]/90 hover:shadow-lg transition-all duration-300 group"
+                                    className="w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md hover:bg-gradient-to-r hover:from-[#192133] hover:to-[#192133]/90 hover:shadow-lg transition-all duration-300 group"
                                 >
-                                    <TfiAngleRight size={18} className="text-[#213554] group-hover:text-white transition-colors duration-300" />
+                                    <TfiAngleRight size={18} className="text-[#192133] group-hover:text-white transition-colors duration-300" />
                                 </button>
                             </div>
                         </div>
@@ -552,7 +558,7 @@ const ProductDetails = ({
             title: "SHIPPING",
             content: <></>,
         }
-      
+
     ]
 
     const breadcrumbSchema = {
@@ -635,17 +641,17 @@ const ProductDetails = ({
                 />
             ) : null} */}
 
-            <section className=' bg-[#F4F4F4] py-8'>
-                <div className=' lg:max-w-8xl max-w-[95%]   flex lg:flex-row flex-col gap-4 mx-auto'>
+            <section className=' bg-[#F7F7F7] py-10'>
+                <div className=' lg:max-w-8xl max-w-[95%]   flex lg:flex-row flex-col gap-20 mx-auto'>
                     <div className='  lg:w-6/12 '>
                         <div className=' flex gap-2 pb-5 items-center'>
                             <IoHomeOutline size={20} /> <LiaAngleRightSolid />
                             <h6 className=' flex items-center '>
-                                <Link to={'/'} className='text-[#213554]'>Home</Link>
+                                <Link to={'/'} className='text-[#192133]'>Home</Link>
                                 {product?.brandId?.name && (
                                     <>
                                         <LiaAngleRightSolid />
-                                        <Link to={`/category/${product.brandId.slug}`} className='text-[#213554] capitalize'>
+                                        <Link to={`/category/${product.brandId.slug}`} className='text-[#192133] capitalize'>
                                             {product.brandId.name}
                                         </Link>
                                     </>
@@ -653,7 +659,7 @@ const ProductDetails = ({
                                 {product?.categoryId?.title && (
                                     <>
                                         <LiaAngleRightSolid />
-                                        <Link to={`/category/${product.categoryId.slug}`} className='text-[#213554] capitalize'>
+                                        <Link to={`/category/${product.categoryId.slug}`} className='text-[#192133] capitalize'>
                                             {product.categoryId.title}
                                         </Link>
                                     </>
@@ -666,64 +672,35 @@ const ProductDetails = ({
                                 )}
                             </h6>
                         </div>
-                        <div className='w-full flex gap-7'>
-                            <div className="  sm:block md:block hidden">
-                                <div className="flex flex-col items-center justify-center gap-2">
-                                    {images?.map((_, i) => (
-                                        <div
-                                            key={i}
-                                            onClick={() => goToSlide(i)}
-                                            className={`
-                                                transition-all w-28 rounded-xl h-28 overflow-hidden bg-white relative cursor-pointer group
-                                                ${curr === i ? " w-20 h-20 border-2 border-[#F05367] border-dashed ring-2 ring-[#F05367]/30" : "bg-opacity-50 hover:bg-opacity-100 hover:scale-105"}
-                                            `}
-                                        >
-                                            {!thumbnailLoadedImages.has(i) && (
-                                                <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 rounded-xl overflow-hidden">
-                                                    <div className="absolute inset-0" style={shimmerStyle}></div>
-                                                </div>
-                                            )}
-                                            <img
-                                                src={_}
-                                                alt=""
-                                                className={`w-full h-full object-center transition-opacity duration-300 ${
-                                                    thumbnailLoadedImages.has(i) ? 'opacity-100' : 'opacity-0'
-                                                }`}
-                                                onLoad={() => setThumbnailLoadedImages(prev => new Set([...prev, i]))}
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                        <div className='w-full flex flex-col gap-7'>
                             <div className="overflow-hidden relative rounded-2xl group">
                                 <div
-                                    className="flex relative transition-transform ease-in-out duration-500 h-[90vh]"
+                                    className="flex relative transition-transform ease-in-out duration-500 h-[75vh]"
                                     style={{ transform: `translateX(-${curr * 100}%)` }}
                                 >
                                     {images?.map((image, i) => {
                                         const isFirstImage = i === 0;
                                         const isCurrentSlide = i === curr;
                                         const shouldShowSkeleton = !loadedImages.has(i) && !isFirstImage;
-                                        
+
                                         return (
-                                            <div key={i} className="flex-none w-full h-full rounded-2xl overflow-hidden relative">
+                                            <div key={i} className="flex-none w-full  rounded-2xl overflow-hidden relative">
                                                 {shouldShowSkeleton && (
                                                     <div className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100 rounded-2xl overflow-hidden z-10">
                                                         <div className="absolute inset-0" style={shimmerStyle}></div>
                                                         <div className="absolute inset-0 flex items-center justify-center">
-                                                            <div className="w-16 h-16 border-4 border-gray-200 border-t-[#213554] rounded-full animate-spin"></div>
+                                                            <div className="w-16 h-16 border-4 border-gray-200 border-t-[#192133] rounded-full animate-spin"></div>
                                                         </div>
                                                     </div>
                                                 )}
-                                                <div className="relative w-full h-full overflow-hidden rounded-2xl">
+                                                <div className="relative w-full h-full  overflow-hidden rounded-2xl">
                                                     <img
                                                         onClick={() => openImageViewer(product?.images?.[i] || { url: image }, i)}
                                                         src={image}
                                                         alt={product?.images?.[i]?.altText || ""}
                                                         loading={isFirstImage ? "eager" : "lazy"}
-                                                        className={`w-full h-full cursor-pointer object-cover rounded-2xl transition-all duration-500 group-hover:scale-110 ${
-                                                            loadedImages.has(i) || isFirstImage ? 'opacity-100' : 'opacity-0'
-                                                        }`}
+                                                        className={`w-full h-full cursor-pointer object-cover rounded-2xl transition-all duration-500 group-hover:scale-110 ${loadedImages.has(i) || isFirstImage ? 'opacity-100' : 'opacity-0'
+                                                            }`}
                                                         onLoad={() => {
                                                             setLoadedImages(prev => new Set([...prev, i]));
                                                         }}
@@ -731,10 +708,7 @@ const ProductDetails = ({
                                                             setLoadedImages(prev => new Set([...prev, i]));
                                                         }}
                                                     />
-                                                    {/* Hover Overlay Gradient */}
-                                                    <div className="absolute inset-0 bg-gradient-to-t from-[#213554]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                                                    {/* Shine Effect */}
-                                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out pointer-events-none"></div>
+
                                                 </div>
                                             </div>
                                         );
@@ -758,14 +732,53 @@ const ProductDetails = ({
                                     <TfiAngleRight size={20} />
                                 </button>
                             </div>
+                            <div className="  sm:block md:block hidden">
+                                <div className="flex flex-row items-center justify-start gap-5">
+                                    {images?.map((_, i) => (
+                                        <div
+                                            key={i}
+                                            onClick={() => goToSlide(i)}
+                                            className={`
+                                                transition-all w-28 rounded-xl h-28 overflow-hidden bg-white relative cursor-pointer group
+                                                ${curr === i ? " w-20 h-20 border-2 border-[#AC292A]  ring-2 ring-[#AC292A]/30" : "bg-opacity-50 hover:bg-opacity-100 hover:scale-105"}
+                                            `}
+                                        >
+
+                                            <img
+                                                src={_}
+                                                alt=""
+                                                className={`w-full h-full object-center transition-opacity duration-300 ${thumbnailLoadedImages.has(i) ? 'opacity-100' : 'opacity-0'
+                                                    }`}
+                                                onLoad={() => setThumbnailLoadedImages(prev => new Set([...prev, i]))}
+                                            />
+                                            {!thumbnailLoadedImages.has(i) && (
+                                                <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 rounded-xl overflow-hidden">
+                                                    <div className="absolute inset-0" style={shimmerStyle}></div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
                     <div className="pt-3.5 lg:w-6/12 w-full">
-                    <div className=' flex gap-2 items-center  mb-4'>
-                    <div className="w-1 h-12 bg-gradient-to-b from-[#EE334B] to-[#213554] rounded-full"></div>
-                    <h3 className=' pb-2 text-xl sm:text-2xl font-bold text-[#213554]'>{product?.name || "Tuck Top Mailer Boxes"}</h3>
-                    </div>
+                        <div className=' flex gap-2 items-start flex-col mb-4'>
+                            {/* <div className="w-1 h-12 bg-gradient-to-b from-[#AC292A] to-[#192133] rounded-full"></div> */}
+                            <h3 className=' pb-2 text-xl sm:text-3xl font-bold text-[#192133]'>{product?.name || "Tuck Top Mailer Boxes"}</h3>
+                            <p className=' text-lg font-semibold'>⭐⭐⭐⭐⭐<span> 4.5 </span> <span>(123 Reviews)</span></p>
+                            <p className=''>Go big on impact, not on price, with eye-catching vinyl banners. Upload or customize your way, with help if you want.  <a
+                                href="#more-detail"
+                                className="ml-2 uppercase font-bold text-[#AC292A] inline-flex items-center align-baseline hover:opacity-80 transition-opacity"
+                            >
+                                See details
+                                <FaAngleRight className="ml-1" size={15} />
+                            </a></p>
+
+
+                        </div>
 
                         <form onSubmit={handleSubmit}>
                             <div className=' grid grid-cols-2 pb-2 gap-2'>
@@ -964,12 +977,12 @@ const ProductDetails = ({
                                     <div className="flex flex-col">
                                         <label
                                             htmlFor="design_upload"
-                                            className="block pb-1.5 text-[#213554] text-sm font-semibold mb-1"
+                                            className="block pb-1.5 text-[#192133] text-sm font-semibold mb-1"
                                         >
                                             Upload Your Design
-                                            <span className="text-[#EE334B] ml-1">*</span>
+                                            <span className="text-[#AC292A] ml-1">*</span>
                                         </label>
-                                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-[#213554] transition-all duration-300 bg-gradient-to-br from-gray-50 to-white group cursor-pointer flex flex-col justify-center" style={{ minHeight: '120px', height: '100%' }}>
+                                        <div className="border-2  border-gray-300 rounded-lg p-4 text-center hover:border-[#192133] transition-all duration-300 bg-gradient-to-br from-gray-50 to-white group cursor-pointer flex flex-col justify-center" style={{ minHeight: '120px', height: '100%' }}>
                                             <input
                                                 type="file"
                                                 name="image"
@@ -979,19 +992,19 @@ const ProductDetails = ({
                                                 accept=".png,.pdf,.jpg,.jpeg,.webp"
                                             />
                                             <label htmlFor="design_upload" className="cursor-pointer flex flex-col items-center">
-                                                <div className="w-12 h-12 bg-gradient-to-br from-[#213554]/10 to-[#EE334B]/10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
-                                                    <svg className="w-6 h-6 text-[#213554]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <div className="w-12 h-12 bg-gradient-to-br from-[#192133]/10 to-[#AC292A]/10 rounded-full flex items-center justify-center mb-2 group-hover:scale-110 transition-transform duration-300">
+                                                    <svg className="w-6 h-6 text-[#192133]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                                                     </svg>
                                                 </div>
-                                                <p className="text-sm text-[#213554] font-semibold mb-0.5 group-hover:text-[#EE334B] transition-colors duration-300">
+                                                <p className="text-sm text-[#192133] font-semibold mb-0.5 group-hover:text-[#AC292A] transition-colors duration-300">
                                                     {formData.image ? formData.image.name : 'Click to upload or drag and drop'}
                                                 </p>
                                                 <p className="text-xs text-gray-500">
                                                     Max Size: 5MB | Allowed: PNG, PDF, JPG, JPEG, WEBP
                                                 </p>
                                                 {formData.image && (
-                                                    <div className="mt-2 px-3 py-1.5 bg-[#213554]/10 text-[#213554] rounded-lg text-xs font-medium">
+                                                    <div className="mt-2 px-3 py-1.5 bg-[#192133]/10 text-[#192133] rounded-lg text-xs font-medium">
                                                         ✓ {formData.image.name}
                                                     </div>
                                                 )}
@@ -1016,248 +1029,127 @@ const ProductDetails = ({
                                     <Button
                                         type="submit"
                                         label={isLoading ? "Sending..." : "Request A Quote"}
-                                        className={`bg-[#213554] w-full text-white ${!validate() || isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                        className={`bg-[#192133] w-full text-white ${!validate() || isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
                                         disabled={!validate() || isLoading}
                                     />
                                 </div>
                             </div>
-                            
+
                         </form>
 
-                        
+
                     </div>
                 </div>
             </section>
-            <BottomHero />
-            <section className='sm:max-w-8xl max-w-[95%] mt-10 mx-auto'>
-                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center">
-                    {/* Small Product Image Preview - Left Side */}
-                    {images && images.length > 0 && (
-                        <div className="w-full sm:w-64 md:w-64 flex-shrink-0">
-                            <div className="rounded-lg overflow-hidden border-2 border-[#213554]/20 shadow-md hover:shadow-lg transition-all duration-300">
-                                <img
-                                    src={images[curr]}
-                                    alt={product?.images?.[curr]?.altText || product?.name || "Product Image"}
-                                    className="w-full h-auto object-cover"
-                                />
-                            </div>
-                        </div>
-                    )}
-                    
-                    {/* Right Side Content */}
-                    <div className="flex-1 w-full">
-                            {/* Quantity Selector and Add to Cart Button - Below Form */}
-                            <div className="mt-6 flex flex-col sm:flex-row gap-3 items-start sm:items-center">
-                                {/* Quantity Selector */}
-                                <div className="flex items-center gap-2">
-                                    <label className="text-sm font-semibold text-[#213554] hidden sm:block">Quantity:</label>
-                                    <div className="flex items-center border-2 border-[#213554] rounded-lg overflow-hidden bg-white">
-                                        <button
-                                            type="button"
-                                            onClick={() => setCartQuantity(prev => prev > 1 ? prev - 1 : 1)}
-                                            className="px-3 py-2 text-[#213554] hover:bg-[#213554] hover:text-white transition-colors duration-200 font-semibold"
-                                        >
-                                            −
-                                        </button>
-                                        <input
-                                            type="number"
-                                            min="1"
-                                            value={cartQuantity}
-                                            onChange={(e) => {
-                                                const value = parseInt(e.target.value) || 1;
-                                                setCartQuantity(value >= 1 ? value : 1);
-                                            }}
-                                            className="w-16 sm:w-20 px-3 py-2 text-center text-[#EE334B] font-bold text-lg border-0 focus:outline-none focus:ring-0"
-                                            style={{ color: '#EE334B' }}
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() => setCartQuantity(prev => prev + 1)}
-                                            className="px-3 py-2 text-[#213554] hover:bg-[#213554] hover:text-white transition-colors duration-200 font-semibold"
-                                        >
-                                            +
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                {/* Add to Cart Button */}
-                                <button
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        if (product) {
-                                            dispatch(addToCart({
-                                                _id: product._id,
-                                                name: product.name,
-                                                price: product.actualPrice || 0,
-                                                quantity: cartQuantity,
-                                                image: product.images?.[0]?.url || '',
-                                                slug: product.slug
-                                            }));
-                                            toast.success(`${cartQuantity} ${cartQuantity === 1 ? 'item' : 'items'} added to cart!`);
-                                            setCartQuantity(1);
-                                            // Navigate to cart page
-                                            navigate('/cart');
-                                        }
-                                    }}
-                                    className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-[#EE334B] hover:bg-[#EE334B]/90 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
-                                    style={{ color: '#ffffff' }}
-                                >
-                                    {/* Cart Icon */}
-                                    <RiShoppingCartLine size={20} className="text-white" style={{ color: '#ffffff' }} />
-                                    
-                                    {/* Button Text */}
-                                    <span className="text-base sm:text-lg text-white font-semibold" style={{ color: '#ffffff' }}>
-                                        Add to Cart
-                                    </span>
-                                </button>
-                            </div>
 
-{/* Buy Now Button and Product Information - Below Form */}
-<div className="mt-6">
-                            {/* Buy Now Button - Red Bar */}
-                            <button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    if (product) {
-                                        dispatch(addToCart({
-                                            _id: product._id,
-                                            name: product.name,
-                                            price: product.actualPrice || 0,
-                                            quantity: 1,
-                                            image: product.images?.[0]?.url || '',
-                                            slug: product.slug
-                                        }));
-                                        toast.success('Product added to cart!');
-                                        // Navigate to cart page
-                                        navigate('/cart');
-                                    }
-                                }}
-                                className="w-full mb-4 bg-[#EE334B] hover:bg-[#EE334B]/90 text-white font-bold py-4 px-6 rounded-lg flex items-center justify-center gap-3 transition-all duration-300 shadow-lg hover:shadow-xl"
-                                style={{ color: '#ffffff' }}
-                            >
-                                <RiShoppingCartLine size={24} className="text-white" style={{ color: '#ffffff' }} />
-                                <span className="text-lg" style={{ color: '#ffffff' }}>Buy Now</span>
-                            </button>
-
-                            {/* Product Information Display - Compact */}
-                            <div className="bg-gray-50 rounded-lg p-3">
-                                <div className="grid grid-cols-3 gap-2">
-                                    {/* Product Name */}
-                                    <div className="flex flex-col">
-                                        <div className="bg-[#213554] text-white font-semibold py-2.5 px-2 rounded-lg text-center text-xs mb-1">
-                                            Product Name
-                                        </div>
-                                        <div className="text-black font-medium py-1 px-2 text-center text-xs sm:text-sm">
-                                            {product?.name || "Custom Window Bakery Boxes"}
-                                        </div>
-                                    </div>
-                                    {/* Size */}
-                                    <div className="flex flex-col">
-                                        <div className="bg-[#213554] text-white font-semibold py-2.5 px-2 rounded-lg text-center text-xs mb-1">
-                                            Size
-                                        </div>
-                                        <div className="text-black font-medium py-1 px-2 text-center text-xs sm:text-sm">
-                                            {product?.size || "8 x 6 x 4 inch"}
-                                        </div>
-                                    </div>
-                                    {/* Price */}
-                                    <div className="flex flex-col">
-                                        <div className="bg-[#213554] text-white font-semibold py-2.5 px-2 rounded-lg text-center text-xs mb-1">
-                                            Price
-                                        </div>
-                                        <div className="text-black font-medium py-1 px-2 text-center text-xs sm:text-sm">
-                                            ${product?.actualPrice || "2.50"}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-              {/* Learn More About Section - Moved up and Modernized */}
-              {product?.description && (
-                <section className='sm:max-w-8xl max-w-[95%] mx-auto pt-8'>
-                    <div className="bg-gradient-to-br from-gray-50 via-white to-gray-50 rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-100">
-                        <div className="flex items-center gap-4 mb-6">
-                            <div className="w-1 h-12 bg-gradient-to-b from-[#EE334B] to-[#213554] rounded-full"></div>
-                            <h2 className='text-2xl sm:text-3xl font-bold text-[#213554]'>
-                                Learn More About {product?.name}
-                            </h2>
-                        </div>
-                        <div className='pt-2'>
-                            <div 
-                                className='prose prose-sm sm:prose-base max-w-none text-gray-700 leading-relaxed'
-                                dangerouslySetInnerHTML={{ __html: product?.description}}
-                                style={{
-                                    lineHeight: '1.75'
-                                }}
-                            ></div>
-                        </div>
-                    </div>
-                </section>
-            )}
-            
-           
-          
-
-<section className=' sm:max-w-8xl max-w-[95%] mx-auto'>
-                <div className="mt-10">
-                    <Tabs defaultTab={"MATERIALS"} tabs={data} />
-                </div>
-            </section>
-            <section className=' pt-12 pb-5'>
-                <div className=" sm:max-w-8xl  justify-between gap-5  max-w-[95%]  flex sm:flex-row flex-col  mx-auto">
-                    <div className=' sm:w-6/12 w-full'>
-                        <h2 className=' py-2'>{product?.bannerTitle}</h2>
-                        <p className=' py-2' dangerouslySetInnerHTML={{ __html: product?.bannerContent}}></p>
-                    </div>
-                    {product?.bannerImage && (
-                        <div className=' sm:w-5/12 w-full'>
-                            <img 
-                                src={`${BaseUrl}/${product.bannerImage}`}
-                                className='  shadow-2xl w-full rounded-2xl' 
-                                alt={product?.name || ''} 
-                            />
-                        </div>
-                    )}
-                </div>
-            </section>
-          
-
-
-          
-                <section className="py-8 sm:max-w-8xl max-w-[95%] mx-auto">
-                    <div className='mb-8 flex sm:flex-row flex-col items-center justify-between gap-4'>
-                        <div className="flex items-center gap-4">
-                            <div className="w-1 h-12 bg-gradient-to-b from-[#EE334B] to-[#213554] rounded-full"></div>
-                            <div>
-                                <h2 className='text-2xl sm:text-3xl font-bold text-[#213554]'>Related Products</h2>
-                                <p className='text-gray-600 text-sm mt-1'>Discover packaging tailored for your products</p>
-                            </div>
-                        </div>
-                        <Link to="" className="group">
-                            <div className='font-bold text-[#EE334B] flex items-center hover:text-[#213554] transition-colors duration-300 uppercase text-sm px-4 py-2 rounded-lg hover:bg-[#EE334B]/10'>
-                                View all <FaAngleRight className="ml-1 group-hover:translate-x-1 transition-transform duration-300" size={15} />
-                            </div>
+            <section className=''>
+                <div className='max-w-[95%] mx-auto pt-10'>
+                    <div className="text-left mb-8 inline-flex items-center gap-3  ">
+                        <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-2">
+                            Explore our Popular templates
+                        </h2>
+                        <Link
+                            to=""
+                            className="ml-2 uppercase font-bold text-[#AC292A] inline-flex items-center align-baseline hover:opacity-80 transition-opacity"
+                        >
+                            See all templates
+                            <FaAngleRight className="ml-1" size={15} />
                         </Link>
+
                     </div>
-                    
-                    {relatedProduct?.relatedProducts && relatedProduct.relatedProducts.length > 0 && (
-                        <div className="relative border-gray-100">
-                            <CardSlider
-                                top={50}
-                                items={relatedProduct.relatedProducts.map((item, index) => (
-                                    <div key={item?._id || index} className="w-[280px] sm:w-[320px] md:w-[350px] lg:w-[390px] flex-shrink-0 px-2 h-full">
-                                        <ProductCard data={item} disableSelection={true} />
-                                    </div>
-                                ))}
-                            />
+                    <TemplatePage />
+                   
+
+                </div>
+
+            </section>
+
+            <section className='bg-[#F7F7F7] py-10' id='more-detail'>
+                <div className='max-w-[95%] mx-auto pt-10'>
+                     <div className='grid grid-cols-2 gap-10'>
+                        <div className=' max-h-[500px] overflow-x-auto p-3'>
+                            <h2 className="text-xl font-bold">Create Can’t-Miss Vinyl Banners at Hard-to-Resist Prices</h2>
+
+                            <div className="features-highlight my-4">
+                                <p><strong>NEW:</strong> Heavy-duty outdoor material & light blockout option</p>
+                                <ul className="list-disc ml-5">
+                                    <li><strong>Eye-catching:</strong> Glossy coating option available</li>
+                                    <li><strong>Durable:</strong> Tough, fade-resistant vinyl in 3 indoor & outdoor weights</li>
+                                    <li><strong>Versatile:</strong> 28 standard sizes or custom sizes (1' x 2' to 8' x 12')</li>
+                                    <li><strong>Ready-to-Hang:</strong> Grommets and reinforced edge options for extra durability</li>
+                                    <li><strong>Flexible:</strong> Single- or double-sided printing available</li>
+                                </ul>
+                            </div>
+
+                            <p className="mb-4">
+                                You've only got a few seconds to grab people's attention – custom banners are a great way to make them count.
+                                With our high-quality, low-cost banner printing, you can easily design a budget-friendly vinyl sign that's
+                                crisp, fade-resistant, and built for long-term use. Create a noticeable banner with reinforced edges,
+                                metal grommets, and a glossy coating option. We’ve also added a heavy-duty outdoor material with built-in
+                                light blockout – and you can even upgrade your indoor material with this feature.
+                            </p>
+
+                            <h3 className="text-lg font-semibold mt-6">Great for Any Space</h3>
+                            <p className="mb-4">
+                                Need versatile signage? Look no further. These banners are a great option for grand openings, sales,
+                                event promotion, and memorable events. Our banner printing is built to last, whether you display it
+                                inside or out. With proper use and care, our weather-, water- and fade-resistant outdoor material
+                                can withstand the elements and last for up to 2 years outside.
+                            </p>
+
+                            <h3 className="text-lg font-semibold mt-6">Help When You Need It</h3>
+                            <p className="mb-4">
+                                To get started, upload your own design quickly or choose from a selection of fully customizable,
+                                industry-specific templates. If you need us along the way, our experts are available by phone,
+                                email, or chat. Whether it’s a brand-new logo or a vinyl banner from scratch, our community of
+                                professional graphic designers is ready to collaborate with you. Once your design is done,
+                                we’ll professionally print and ship it to your doorstep, looking sharp and ready to impress.
+                            </p>
+
+                            <p className="italic text-sm text-gray-600">
+                                VistaPrint offers Vinyl Banners design templates in assorted styles.
+                            </p></div>
+                        <div>
+                            <img src={Design} alt="Design" className='w-full rounded-2xl' />
                         </div>
-                    )}
-                </section>
+                    </div>
+
+                </div>
+            </section>
+            <section>
+                <div className='max-w-[95%] mx-auto'>
+                    
+                </div>
+            </section>
+          
+              {/**Related products */}
+            <section className="py-8 sm:max-w-8xl max-w-[95%] mx-auto">
+                <div className='mb-8 flex sm:flex-row flex-col items-center justify-between gap-4'>
+                    <div className="flex items-center gap-4">
+                        {/* <div className="w-1 h-12 bg-gradient-to-b from-[#AC292A] to-[#192133] rounded-full"></div> */}
+                        <div>
+                            <h2 className='text-2xl sm:text-3xl font-bold text-[#192133]'>Related Products</h2>
+                            <p className='text-gray-600 text-sm mt-1'>Discover packaging tailored for your products</p>
+                        </div>
+                    </div>
+                  
+                </div>
+
+                {relatedProduct?.relatedProducts && relatedProduct.relatedProducts.length > 0 && (
+                    <div className="relative border-gray-100">
+                        <CardSlider
+                            top={50}
+                            items={relatedProduct.relatedProducts.map((item, index) => (
+                                <div key={item?._id || index} className="w-[280px] sm:w-[320px] md:w-[350px] lg:w-[390px] flex-shrink-0 px-2 h-full">
+                                    <ProductCard data={item} disableSelection={true} />
+                                </div>
+                            ))}
+                        />
+                    </div>
+                )}
+            </section>
             {isViewerOpen && selectedImage && (
-                <div 
+                <div
                     className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn"
                     onClick={closeImageViewer}
                 >
@@ -1278,14 +1170,14 @@ const ProductDetails = ({
                                 e.stopPropagation();
                                 goToPrevious();
                             }}
-                            className="absolute left-6 z-10 w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-gradient-to-r hover:from-[#213554] hover:to-[#213554]/90 hover:border-[#213554] hover:scale-110 cursor-pointer hover:shadow-xl flex justify-center items-center transition-all duration-300 group"
+                            className="absolute left-6 z-10 w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-gradient-to-r hover:from-[#192133] hover:to-[#192133]/90 hover:border-[#192133] hover:scale-110 cursor-pointer hover:shadow-xl flex justify-center items-center transition-all duration-300 group"
                         >
                             <FaAngleLeft className="text-xl group-hover:scale-110 transition-transform duration-300" />
                         </button>
                     )}
 
                     {/* Image Container */}
-                    <div 
+                    <div
                         className="max-w-6xl max-h-[90vh] overflow-auto rounded-2xl bg-white/5 backdrop-blur-sm p-4 custom-scrollbar"
                         onClick={(e) => e.stopPropagation()}
                     >
@@ -1303,7 +1195,7 @@ const ProductDetails = ({
                                 e.stopPropagation();
                                 goToNext();
                             }}
-                            className="absolute right-6 z-10 w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-gradient-to-r hover:from-[#213554] hover:to-[#213554]/90 hover:border-[#213554] hover:scale-110 cursor-pointer hover:shadow-xl flex justify-center items-center transition-all duration-300 group"
+                            className="absolute right-6 z-10 w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-gradient-to-r hover:from-[#192133] hover:to-[#192133]/90 hover:border-[#192133] hover:scale-110 cursor-pointer hover:shadow-xl flex justify-center items-center transition-all duration-300 group"
                         >
                             <FaAngleRight className="text-xl group-hover:scale-110 transition-transform duration-300" />
                         </button>
@@ -1329,11 +1221,10 @@ const ProductDetails = ({
                                         setSelectedImage(img);
                                         setCurrentIndex(idx);
                                     }}
-                                    className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 ${
-                                        currentIndex === idx
-                                            ? 'border-[#EE334B] ring-2 ring-[#EE334B]/50 scale-110'
+                                    className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 ${currentIndex === idx
+                                            ? 'border-[#AC292A] ring-2 ring-[#AC292A]/50 scale-110'
                                             : 'border-white/20 hover:border-white/40 hover:scale-105'
-                                    }`}
+                                        }`}
                                 >
                                     <img
                                         src={`${BaseUrl}/${img.url}`}
@@ -1346,6 +1237,251 @@ const ProductDetails = ({
                     )}
                 </div>
             )}
+              {/**Frequently bought together with this product */}
+            <section className="py-8 sm:max-w-8xl max-w-[95%] mx-auto">
+                <div className='mb-8 flex sm:flex-row flex-col items-center justify-between gap-4'>
+                    <div className="flex items-center gap-4">
+                        {/* <div className="w-1 h-12 bg-gradient-to-b from-[#AC292A] to-[#192133] rounded-full"></div> */}
+                        <div>
+                            <h2 className='text-2xl sm:text-3xl font-bold text-[#192133]'>Frequently bought together with this product</h2>
+                            <p className='text-gray-600 text-sm mt-1'>Discover packaging tailored for your products</p>
+                        </div>
+                    </div>
+                    {/* <Link to="" className="group">
+                        <div className='font-bold text-[#AC292A] flex items-center hover:text-[#192133] transition-colors duration-300 uppercase text-sm px-4 py-2 rounded-lg hover:bg-[#AC292A]/10'>
+                            View all <FaAngleRight className="ml-1 group-hover:translate-x-1 transition-transform duration-300" size={15} />
+                        </div>
+                    </Link> */}
+                </div>
+
+                {relatedProduct?.relatedProducts && relatedProduct.relatedProducts.length > 0 && (
+                    <div className="relative border-gray-100">
+                        <CardSlider
+                            top={50}
+                            items={relatedProduct.relatedProducts.map((item, index) => (
+                                <div key={item?._id || index} className="w-[280px] sm:w-[320px] md:w-[350px] lg:w-[390px] flex-shrink-0 px-2 h-full">
+                                    <ProductCard data={item} disableSelection={true} />
+                                </div>
+                            ))}
+                        />
+                    </div>
+                )}
+            </section>
+            {isViewerOpen && selectedImage && (
+                <div
+                    className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn"
+                    onClick={closeImageViewer}
+                >
+                    {/* Close Button */}
+                    <button
+                        onClick={closeImageViewer}
+                        className="absolute top-6 right-6 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 flex items-center justify-center group"
+                    >
+                        <svg className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+
+                    {/* Previous Button */}
+                    {product?.images?.length > 1 && (
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                goToPrevious();
+                            }}
+                            className="absolute left-6 z-10 w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-gradient-to-r hover:from-[#192133] hover:to-[#192133]/90 hover:border-[#192133] hover:scale-110 cursor-pointer hover:shadow-xl flex justify-center items-center transition-all duration-300 group"
+                        >
+                            <FaAngleLeft className="text-xl group-hover:scale-110 transition-transform duration-300" />
+                        </button>
+                    )}
+
+                    {/* Image Container */}
+                    <div
+                        className="max-w-6xl max-h-[90vh] overflow-auto rounded-2xl bg-white/5 backdrop-blur-sm p-4 custom-scrollbar"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <img
+                            src={`${BaseUrl}/${selectedImage.url}`}
+                            alt={selectedImage.altText || 'Product Image'}
+                            className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl animate-zoomIn"
+                        />
+                    </div>
+
+                    {/* Next Button */}
+                    {product?.images?.length > 1 && (
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                goToNext();
+                            }}
+                            className="absolute right-6 z-10 w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-gradient-to-r hover:from-[#192133] hover:to-[#192133]/90 hover:border-[#192133] hover:scale-110 cursor-pointer hover:shadow-xl flex justify-center items-center transition-all duration-300 group"
+                        >
+                            <FaAngleRight className="text-xl group-hover:scale-110 transition-transform duration-300" />
+                        </button>
+                    )}
+
+                    {/* Image Counter */}
+                    {product?.images?.length > 1 && (
+                        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-2.5 rounded-full text-sm font-semibold shadow-lg">
+                            <span className="text-white/90">{currentIndex + 1}</span>
+                            <span className="mx-2 text-white/50">/</span>
+                            <span className="text-white/90">{product?.images?.length || 0}</span>
+                        </div>
+                    )}
+
+                    {/* Thumbnail Strip (Optional - shows at bottom) */}
+                    {product?.images?.length > 1 && product.images.length <= 10 && (
+                        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2 max-w-4xl overflow-x-auto px-4 py-2 bg-white/5 backdrop-blur-md rounded-full border border-white/10 custom-scrollbar">
+                            {product.images.map((img, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedImage(img);
+                                        setCurrentIndex(idx);
+                                    }}
+                                    className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 ${currentIndex === idx
+                                            ? 'border-[#AC292A] ring-2 ring-[#AC292A]/50 scale-110'
+                                            : 'border-white/20 hover:border-white/40 hover:scale-105'
+                                        }`}
+                                >
+                                    <img
+                                        src={`${BaseUrl}/${img.url}`}
+                                        alt={img.altText || `Thumbnail ${idx + 1}`}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            )}
+            {/**Your recently viewed items */}
+            <section className="py-8 sm:max-w-8xl max-w-[95%] mx-auto">
+                <div className='mb-8 flex sm:flex-row flex-col items-center justify-between gap-4'>
+                    <div className="flex items-center gap-4">
+                        {/* <div className="w-1 h-12 bg-gradient-to-b from-[#AC292A] to-[#192133] rounded-full"></div> */}
+                        <div>
+                            <h2 className='text-2xl sm:text-3xl font-bold text-[#192133]'>Your recently viewed items</h2>
+                            <p className='text-gray-600 text-sm mt-1'>Discover packaging tailored for your products</p>
+                        </div>
+                    </div>
+                    {/* <Link to="" className="group">
+                        <div className='font-bold text-[#AC292A] flex items-center hover:text-[#192133] transition-colors duration-300 uppercase text-sm px-4 py-2 rounded-lg hover:bg-[#AC292A]/10'>
+                            View all <FaAngleRight className="ml-1 group-hover:translate-x-1 transition-transform duration-300" size={15} />
+                        </div>
+                    </Link> */}
+                </div>
+
+                {relatedProduct?.relatedProducts && relatedProduct.relatedProducts.length > 0 && (
+                    <div className="relative border-gray-100">
+                        <CardSlider
+                            top={50}
+                            items={relatedProduct.relatedProducts.map((item, index) => (
+                                <div key={item?._id || index} className="w-[280px] sm:w-[320px] md:w-[350px] lg:w-[390px] flex-shrink-0 px-2 h-full">
+                                    <ProductCard data={item} disableSelection={true} />
+                                </div>
+                            ))}
+                        />
+                    </div>
+                )}
+            </section>
+            {isViewerOpen && selectedImage && (
+                <div
+                    className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fadeIn"
+                    onClick={closeImageViewer}
+                >
+                    {/* Close Button */}
+                    <button
+                        onClick={closeImageViewer}
+                        className="absolute top-6 right-6 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 flex items-center justify-center group"
+                    >
+                        <svg className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+
+                    {/* Previous Button */}
+                    {product?.images?.length > 1 && (
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                goToPrevious();
+                            }}
+                            className="absolute left-6 z-10 w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-gradient-to-r hover:from-[#192133] hover:to-[#192133]/90 hover:border-[#192133] hover:scale-110 cursor-pointer hover:shadow-xl flex justify-center items-center transition-all duration-300 group"
+                        >
+                            <FaAngleLeft className="text-xl group-hover:scale-110 transition-transform duration-300" />
+                        </button>
+                    )}
+
+                    {/* Image Container */}
+                    <div
+                        className="max-w-6xl max-h-[90vh] overflow-auto rounded-2xl bg-white/5 backdrop-blur-sm p-4 custom-scrollbar"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <img
+                            src={`${BaseUrl}/${selectedImage.url}`}
+                            alt={selectedImage.altText || 'Product Image'}
+                            className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl animate-zoomIn"
+                        />
+                    </div>
+
+                    {/* Next Button */}
+                    {product?.images?.length > 1 && (
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                goToNext();
+                            }}
+                            className="absolute right-6 z-10 w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-gradient-to-r hover:from-[#192133] hover:to-[#192133]/90 hover:border-[#192133] hover:scale-110 cursor-pointer hover:shadow-xl flex justify-center items-center transition-all duration-300 group"
+                        >
+                            <FaAngleRight className="text-xl group-hover:scale-110 transition-transform duration-300" />
+                        </button>
+                    )}
+
+                    {/* Image Counter */}
+                    {product?.images?.length > 1 && (
+                        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-2.5 rounded-full text-sm font-semibold shadow-lg">
+                            <span className="text-white/90">{currentIndex + 1}</span>
+                            <span className="mx-2 text-white/50">/</span>
+                            <span className="text-white/90">{product?.images?.length || 0}</span>
+                        </div>
+                    )}
+
+                    {/* Thumbnail Strip (Optional - shows at bottom) */}
+                    {product?.images?.length > 1 && product.images.length <= 10 && (
+                        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2 max-w-4xl overflow-x-auto px-4 py-2 bg-white/5 backdrop-blur-md rounded-full border border-white/10 custom-scrollbar">
+                            {product.images.map((img, idx) => (
+                                <button
+                                    key={idx}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedImage(img);
+                                        setCurrentIndex(idx);
+                                    }}
+                                    className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 ${currentIndex === idx
+                                            ? 'border-[#AC292A] ring-2 ring-[#AC292A]/50 scale-110'
+                                            : 'border-white/20 hover:border-white/40 hover:scale-105'
+                                        }`}
+                                >
+                                    <img
+                                        src={`${BaseUrl}/${img.url}`}
+                                        alt={img.altText || `Thumbnail ${idx + 1}`}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            )}
+            {/**Looking For Other Custom Boxes And packaging? */}
+            <section>
+                 <OfferCard  title={'Looking For Other Custom Boxes And packaging?'} subTitle={"Chat live with our packaging experts now for a free consultation and insert price quote."}  buttonText='Get Instant Qoute'/>
+                <Help title={"Let us design it for you"} description={"Our experts will create a custom design tailored to your needs."} btn={"Get Started"} img={prepare}/>
+            </section>
+            {/** FAQ */}
+            <FAQ/>
         </>
     )
 }

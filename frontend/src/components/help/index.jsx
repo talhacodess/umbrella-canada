@@ -5,7 +5,7 @@ const Help = ({img, title, description, btn, className}) => {
   return (
     <div className={`bg-[#192133] py-10 ${className}`}>
         <div className={`max-w-8xl w-[95%] mx-auto`}>
-            <div className={`grid grid-cols-2 gap-10 items-center ${className}`}>
+            <div className={`grid grid-cols-2 gap-10 items-center `}>
                 <div className=''>
                     <img src={img} alt="" className='rounded-xl h-94 w-full object-cover'  />
                     </div>
