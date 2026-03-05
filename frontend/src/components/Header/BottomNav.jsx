@@ -1,355 +1,380 @@
 import React, { useState, useEffect } from "react";
-import { FaAngleDown, FaAngleRight, FaBed, FaFacebookF, FaInstagram, FaLinkedinIn, FaPinterest, FaYoutube } from "react-icons/fa";
+import { FaAngleDown, FaBed, FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { MdOutdoorGrill } from "react-icons/md";
 import { TbToolsKitchen3 } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { LiaAngleRightSolid } from "react-icons/lia";
 import logo from '../../assets/images/brand/logo.png';
-import Button from "../common/Button";
 import axiosInstance from "../../utils/axiosConfig";
 import { BaseUrl } from "../../utils/BaseUrl";
-import usa from '../../assets/images/flag/usa.svg';
-import uk from '../../assets/images/flag/uk.svg';
-import australia from '../../assets/images/flag/australia.svg';
-import uae from '../../assets/images/flag/uae.svg';
-import chaina from '../../assets/images/flag/chaina.svg';
-import { canada } from "../../assets";
-import { FaXTwitter } from "react-icons/fa6";
 
-// Add animations to document head
-if (typeof document !== 'undefined' && !document.getElementById('bottomnav-animations')) {
-    const style = document.createElement('style');
-    style.id = 'bottomnav-animations';
-    style.textContent = `
-        @keyframes slideDown {
-            0% { transform: translateY(-10px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes slideInLeft {
-            0% { transform: translateX(-100%); opacity: 0; }
-            100% { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        .animate-slideDown {
-            animation: slideDown 0.3s ease-out;
-        }
-        .animate-slideInLeft {
-            animation: slideInLeft 0.3s ease-out;
-        }
-        .animate-fadeIn {
-            animation: fadeIn 0.3s ease-out;
-        }
-    `;
-    document.head.appendChild(style);
+// Inject styles
+if (typeof document !== 'undefined' && !document.getElementById('bottomnav-v2-animations')) {
+  const style = document.createElement('style');
+  style.id = 'bottomnav-v2-animations';
+  style.textContent = `
+  
+
+    @keyframes bnav-fadeSlide {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bnav-slideLeft {
+      from { opacity: 0; transform: translateX(-100%); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes bnav-fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes bnav-shimmer {
+      0%   { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .bnav-dropdown { animation: bnav-fadeSlide 0.22s cubic-bezier(.16,1,.3,1) both; }
+    .bnav-mobile   { animation: bnav-slideLeft 0.28s cubic-bezier(.16,1,.3,1) both; }
+    .bnav-overlay  { animation: bnav-fadeIn 0.2s ease both; }
+
+    .bnav-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 10px 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #1a1f2e;
+      border-radius: 8px;
+      transition: color 0.18s, background 0.18s;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .bnav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 14px;
+      right: 14px;
+      height: 2px;
+      border-radius: 99px;
+      background: #c0392b;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.22s cubic-bezier(.16,1,.3,1);
+    }
+    .bnav-link:hover { color: #c0392b; background: rgba(192,57,43,0.06); }
+    .bnav-link:hover::after { transform: scaleX(1); }
+
+    .bnav-link.active { color: #c0392b; }
+    .bnav-link.active::after { transform: scaleX(1); }
+
+    .bnav-chevron {
+      transition: transform 0.22s cubic-bezier(.16,1,.3,1);
+      color: #9ca3af;
+    }
+    .bnav-link:hover .bnav-chevron,
+    .bnav-link-open .bnav-chevron { transform: rotate(180deg); color: #c0392b; }
+
+    /* Mega menu item */
+    .bnav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+      transition: all 0.16s ease;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .bnav-item:hover {
+      background: #fef2f2;
+      color: #c0392b;
+      transform: translateX(2px);
+    }
+    .bnav-item:hover .bnav-arrow { opacity: 1; transform: translateX(0); }
+    .bnav-arrow {
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: all 0.16s ease;
+      color: #c0392b;
+      flex-shrink: 0;
+    }
+
+    /* Skeleton pulse */
+    .bnav-skeleton {
+      background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+      background-size: 200% 100%;
+      animation: bnav-shimmer 1.4s infinite;
+      border-radius: 6px;
+    }
+
+    /* Mobile submenu item */
+    .bnav-mobile-item {
+      display: block;
+      padding: 11px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1f2e;
+      border-radius: 10px;
+      transition: all 0.16s ease;
+      text-decoration: none;
+    }
+    .bnav-mobile-item:hover { background: rgba(192,57,43,0.07); color: #c0392b; }
+
+    .bnav-mobile-sub {
+      display: block;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #6b7280;
+      border-radius: 8px;
+      transition: all 0.16s ease;
+      text-decoration: none;
+    }
+    .bnav-mobile-sub:hover { background: rgba(192,57,43,0.05); color: #c0392b; }
+
+    /* Divider dot */
+    .bnav-dot {
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: #d1d5db;
+      flex-shrink: 0;
+    }
+
+    /* Category badge */
+    .bnav-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 7px;
+      border-radius: 99px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      background: #fef2f2;
+      color: #c0392b;
+      border: 1px solid rgba(192,57,43,0.15);
+    }
+  `;
+  document.head.appendChild(style);
 }
 
-// Cache for brands data
-const BRANDS_CACHE_KEY = 'brands_cache';
-const BRANDS_CACHE_TIMESTAMP = 'brands_cache_timestamp';
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes cache
+// Cache helpers
+const CACHE_KEY = 'brands_cache_v2';
+const CACHE_TS  = 'brands_cache_ts_v2';
+const CACHE_TTL = 5 * 60 * 1000;
 
-// Get cached brands data
-const getCachedBrands = () => {
+const getCached = () => {
   try {
-    const cached = localStorage.getItem(BRANDS_CACHE_KEY);
-    const timestamp = localStorage.getItem(BRANDS_CACHE_TIMESTAMP);
-    
-    if (cached && timestamp) {
-      const now = Date.now();
-      const cacheTime = parseInt(timestamp, 10);
-      
-      // Return cached data if still valid
-      if (now - cacheTime < CACHE_DURATION) {
-        return JSON.parse(cached);
-      }
-    }
-  } catch (error) {
-    console.error('Error reading cache:', error);
-  }
+    const d = localStorage.getItem(CACHE_KEY);
+    const t = localStorage.getItem(CACHE_TS);
+    if (d && t && Date.now() - parseInt(t) < CACHE_TTL) return JSON.parse(d);
+  } catch {}
   return null;
 };
-
-// Save brands data to cache
-const saveBrandsToCache = (data) => {
+const setCache = (data) => {
   try {
-    localStorage.setItem(BRANDS_CACHE_KEY, JSON.stringify(data));
-    localStorage.setItem(BRANDS_CACHE_TIMESTAMP, Date.now().toString());
-  } catch (error) {
-    console.error('Error saving cache:', error);
-  }
+    localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+    localStorage.setItem(CACHE_TS, Date.now().toString());
+  } catch {}
+};
+
+const iconMap = {
+  "box by industry": <FaBed />,
+  "Box by industry": <FaBed />,
+  "Shapes & Styles": <MdOutdoorGrill />,
+  "Shapes & styles": <MdOutdoorGrill />,
+  "Materials": <TbToolsKitchen3 />,
+  "Boxes By Material": <TbToolsKitchen3 />,
+  "Sticker labels & others": <TbToolsKitchen3 />,
+  "Sticker Labels & Others": <TbToolsKitchen3 />,
 };
 
 const BottomNav = ({ Menu, OpenMenu }) => {
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [hoveredCategory, setHoveredCategory] = useState(null);
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [hoveredCat, setHoveredCat]   = useState(null);
+  const [categories, setCategories]   = useState([]);
+  const [loading, setLoading]         = useState(true);
 
-  // Icon mapping for categories
-  const categoryIconMap = {
-    "box by industry": <FaBed />,
-    "Box by industry": <FaBed />,
-    "Shapes & Styles": <MdOutdoorGrill />,
-    "Shapes & styles": <MdOutdoorGrill />,
-    "Materials": <TbToolsKitchen3 />,
-    "Boxes By Material": <TbToolsKitchen3 />,
-    "Sticker labels & others": <TbToolsKitchen3 />,
-    "Sticker Labels & Others": <TbToolsKitchen3 />,
-  };
+  const transform = (raw) => raw.map((b) => ({
+    category: b.name,
+    slug: b.slug,
+    icon: iconMap[b.name] || <FaBed />,
+    menu: (b.midcategories || []).map((m) => ({
+      title: m.title,
+      icon: m.icon?.startsWith('http') ? m.icon : `${BaseUrl}/${m.icon}`,
+      slug: m.slug,
+    })),
+  }));
 
-  // Default icon if category not found in map
-  const getCategoryIcon = (categoryName) => {
-    return categoryIconMap[categoryName] || <FaBed />;
-  };
-
-  // Transform API data to component structure
-  const transformBrandsData = (brandsData) => {
-    return brandsData.map((brand) => ({
-      category: brand.name,
-      slug: brand.slug,
-      icon: getCategoryIcon(brand.name),
-      menu: brand.midcategories?.map((midcat) => ({
-        title: midcat.title,
-        icon: midcat.icon?.startsWith('http') 
-          ? midcat.icon 
-          : `${BaseUrl}/${midcat.icon}`,
-        slug: midcat.slug,
-      })) || [],
-    }));
-  };
-
-  // Disable body scroll when mobile menu is open
+  // Lock body scroll on mobile menu open
   useEffect(() => {
     if (Menu) {
-      // Save current scroll position
-      const scrollY = window.scrollY;
-      // Disable scroll
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
+      const y = window.scrollY;
+      document.body.style.cssText = `position:fixed;top:-${y}px;width:100%;overflow:hidden`;
     } else {
-      // Re-enable scroll
-      const scrollY = document.body.style.top;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      }
+      const y = document.body.style.top;
+      document.body.style.cssText = '';
+      if (y) window.scrollTo(0, parseInt(y) * -1);
     }
-    
-    return () => {
-      // Cleanup on unmount
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
-    };
+    return () => { document.body.style.cssText = ''; };
   }, [Menu]);
 
-  // Fetch brands from API
   useEffect(() => {
-    const fetchBrands = async () => {
-      // First, try to load from cache for instant display
-      const cachedData = getCachedBrands();
-      if (cachedData) {
-        setCategories(transformBrandsData(cachedData));
-        setLoading(false);
-      }
+    const init = async () => {
+      const cached = getCached();
+      if (cached) { setCategories(transform(cached)); setLoading(false); }
 
-      // Then fetch fresh data from API in background
       try {
-        console.log('Fetching brands from API...');
-        const response = await axiosInstance.get(`${BaseUrl}/brands/getAll`, {
-          timeout: 20000, // Increased timeout for iOS Safari
-        });
-        
-        console.log('Brands API Response:', {
-          status: response?.status,
-          dataStatus: response?.data?.status,
-          hasData: !!response?.data?.data,
-          dataLength: response?.data?.data?.length
-        });
-        
-        if (response.data.status === "success" && response.data.data) {
-          const transformedCategories = transformBrandsData(response.data.data);
-          
-          // Save to cache
-          saveBrandsToCache(response.data.data);
-          
-          // Update state with fresh data
-          setCategories(transformedCategories);
-          console.log(`Successfully loaded ${response.data.data.length} brands`);
-        } else {
-          console.warn('Unexpected brands API response format:', response?.data);
+        const res = await axiosInstance.get(`${BaseUrl}/brands/getAll`, { timeout: 20000 });
+        if (res.data.status === "success" && res.data.data) {
+          setCache(res.data.data);
+          setCategories(transform(res.data.data));
         }
-      } catch (error) {
-        console.error("Error fetching brands:", {
-          code: error.code,
-          message: error.message,
-          response: error.response?.data,
-          status: error.response?.status,
-          url: error.config?.url
-        });
-        // If no cached data and API fails, keep empty array
-        if (!cachedData) {
-          setCategories([]);
-        }
-      } finally {
-        setLoading(false);
-      }
+      } catch (e) {
+        if (!cached) setCategories([]);
+      } finally { setLoading(false); }
     };
-
-    fetchBrands();
+    init();
   }, []);
 
-  // Use categories from API, or empty array if loading/failed
-  const displayCategories = categories.length > 0 ? categories : [];
-
-  // Skeleton loader for categories
-  const CategorySkeleton = () => (
-    <div className="flex gap-7 items-center">
-      {[1, 2, 3, 4].map((i) => (
-        <div
-          key={i}
-          className="h-6 w-32 bg-gray-200 animate-pulse rounded"
-        ></div>
-      ))}
-    </div>
-  );
-
-  const handleCategoryHover = (category) => {
-    setHoveredCategory(category);
-    setSelectedCategory(category.menu);
-  };
-
-  const handleCategoryLeave = () => {
-    setHoveredCategory(null);
-    setSelectedCategory(null);
+  // Split menu items into columns
+  const getColumns = (items) => {
+    if (!items?.length) return [];
+    const perCol = Math.ceil(items.length / 3);
+    return [
+      items.slice(0, perCol),
+      items.slice(perCol, perCol * 2),
+      items.slice(perCol * 2),
+    ].filter(c => c.length > 0);
   };
 
   return (
-    <div className="relative shadow-md" onMouseLeave={handleCategoryLeave}>
-      {/* Desktop Menu */}
-      <div className="hidden sm:block pb-1  bg-gradient-to-r from-white via-gray-50/30 to-white border-b border-gray-100">
-        <div className="flex justify-between items-center sm:max-w-8xl max-w-[95%] mx-auto">
-        <ul className="flex gap-6 items-center">
-          <Link
-            to="/"
-            className="flex items-center gap-1 px-3 py-2.5 text-sm font-semibold text-[#213554] hover:text-[#EE334B] transition-all duration-300 rounded-lg hover:bg-[#EE334B]/5 relative group"
-          >
-            <span className="relative z-10">Home</span>
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#EE334B] to-[#213554] group-hover:w-full transition-all duration-300"></span>
-          </Link>
-          {displayCategories.map((category, index) => {
-            // Check if category name matches "box by industry"
-            const isBoxByIndustry = category.category?.toLowerCase().includes('box by industry') || category.category?.toLowerCase().includes('box by industry');
-            return (
-              <div
-                key={index}
-                className="relative"
-                onMouseEnter={() => handleCategoryHover(category)}
-                onMouseLeave={category.menu?.length > 0 ? undefined : handleCategoryLeave}
-              >
-                <Link
-                  to={`/${category?.slug || category?.category}`}
-                  className="flex relative cursor-pointer group items-center gap-1 px-3 py-2.5 text-sm font-semibold text-[#213554] hover:text-[#EE334B] transition-all duration-300 rounded-lg hover:bg-[#EE334B]/5"
-                >
-                  <span className="relative z-10">{isBoxByIndustry ? 'box by industry' : category.category}</span>
-                  {category.menu?.length > 0 && (
-                    <FaAngleDown className="ml-1 group-hover:rotate-180 transition-transform duration-300" size={14} />
-                  )}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#EE334B] to-[#213554] group-hover:w-full transition-all duration-300"></span>
-                </Link>
-              </div>
-            );
-          })}
-          <Link
-            to="#"
-            className="flex items-center gap-1 px-3 py-2.5 text-sm font-semibold text-[#213554] hover:text-[#EE334B] transition-all duration-300 rounded-lg hover:bg-[#EE334B]/5 relative group"
-          >
-            <span className="relative z-10">Client Spotlights</span>
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#EE334B] to-[#213554] group-hover:w-full transition-all duration-300"></span>
-          </Link>
-          <Link
-            to="/about-us"
-            className="flex items-center gap-1 px-3 py-2.5 text-sm font-semibold text-[#213554] hover:text-[#EE334B] transition-all duration-300 rounded-lg hover:bg-[#EE334B]/5 relative group"
-          >
-            <span className="relative z-10">About Us</span>
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-[#EE334B] to-[#213554] group-hover:w-full transition-all duration-300"></span>
-          </Link>
-        </ul>
-      
+    <div className="bnav-root relative" onMouseLeave={() => setHoveredCat(null)}>
+
+      {/* ── Desktop Bar ─────────────────────────────────────── */}
+      <div
+        className="hidden sm:block"
+        style={{
+          background: '#fff',
+          borderBottom: '1px solid #f1f1f4',
+          boxShadow: '0 1px 0 rgba(0,0,0,0.04)',
+        }}
+      >
+        <div style={{ maxWidth: '95%', margin: '0 auto', display: 'flex', alignItems: 'center', gap: 2, padding: '0 12px', height: 48 }}>
+
+          {/* Home */}
+          <Link to="/" className="bnav-link">Home</Link>
+
+          {/* Divider */}
+          <span className="bnav-dot" />
+
+          {/* Dynamic categories */}
+          {loading
+            ? [1,2,3,4].map(i => (
+                <div key={i} className="bnav-skeleton" style={{ width: 110, height: 20, margin: '12px 8px' }} />
+              ))
+            : categories.map((cat, i) => {
+                const isOpen = hoveredCat?.category === cat.category;
+                return (
+                  <div
+                    key={i}
+                    style={{ position: 'relative' }}
+                    onMouseEnter={() => setHoveredCat(cat)}
+                  >
+                    <Link
+                      to={`/${cat.slug || cat.category}`}
+                      className={`bnav-link ${isOpen ? 'bnav-link-open' : ''}`}
+                    >
+                      <span style={{ textTransform: cat.category?.toLowerCase().includes('box by industry') ? 'capitalize' : 'none' }}>
+                        {cat.category?.toLowerCase().includes('box by industry') ? 'Box by Industry' : cat.category}
+                      </span>
+                      {cat.menu?.length > 0 && (
+                        <FaAngleDown size={12} className="bnav-chevron" style={{ marginLeft: 2 }} />
+                      )}
+                    </Link>
+                  </div>
+                );
+              })
+          }
+
+          <span className="bnav-dot" />
+          <Link to="#" className="bnav-link">Client Spotlights</Link>
+          <span className="bnav-dot" />
+          <Link to="/about-us" className="bnav-link">About Us</Link>
         </div>
 
-        {/* Dropdown Menu */}
-        {hoveredCategory && selectedCategory && (
+        {/* ── Mega Menu Dropdown ───────────────────────────── */}
+        {hoveredCat && hoveredCat.menu?.length > 0 && (
           <div
-            className="absolute top-full left-0 w-full z-50 animate-fadeIn"
-            onMouseEnter={() => handleCategoryHover(hoveredCategory)}
-            onMouseLeave={handleCategoryLeave}
+            className="bnav-dropdown"
+            style={{ position: 'absolute', top: '100%', left: 0, right: 0, zIndex: 9999 }}
+            onMouseEnter={() => setHoveredCat(hoveredCat)}
+            onMouseLeave={() => setHoveredCat(null)}
           >
-            {/* Invisible bridge area to prevent cursor loss - overlaps with menu */}
-            <div className="h-3 w-full absolute top-0 left-0 -mt-3 bg-transparent pointer-events-auto"></div>
-            <div className="mx-8 pt-3">
-              <div className="max-w-8xl mx-auto shadow-2xl rounded-2xl bg-white/90 backdrop-blur-lg backdrop-saturate-150 border border-gray-200 justify-between p-6 flex gap-6 animate-slideDown">
-                <div className="w-9/12 grid grid-cols-5 gap-4">
-                  {selectedCategory.map((submenu, index) => (
-                    <Link
-                      key={index}
-                      to={`/category/${submenu.slug || submenu.title}`}
-                      className="text-gray-700 flex font-bold flex-col gap-2 items-center transition-all duration-300 group hover:scale-105"
-                    >
-                      <div className="h-56 w-full bg-gradient-to-br from-gray-50 to-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group-hover:border-[#213554]/30 relative">
-                        <img
-                          src={submenu?.icon}
-                          alt={submenu.title}
-                          className="w-full h-full object-cover rounded-2xl group-hover:scale-110 transition-transform duration-500"
-                        />
-                       
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#213554]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"></div>
-                       
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out pointer-events-none rounded-2xl"></div>
-                      </div>
-                      <p className="pt-2 text-sm text-center text-[#213554] group-hover:text-[#EE334B] transition-colors duration-300">{submenu.title}</p>
-                    </Link>
-                  ))}
+            {/* Bridge gap */}
+            <div style={{ height: 8, background: 'transparent' }} />
+
+            <div style={{ padding: '0 2.5% 20px' }}>
+              <div
+                style={{
+                  maxWidth: '100%',
+                  margin: '0 auto',
+                  background: '#fff',
+                  border: '1px solid #f0f0f4',
+                  borderRadius: 16,
+                  boxShadow: '0 20px 60px rgba(0,0,0,0.10), 0 4px 16px rgba(0,0,0,0.06)',
+                  overflow: 'hidden',
+                }}
+              >
+                {/* Header strip */}
+                <div
+                  style={{
+                    padding: '14px 28px',
+                    borderBottom: '1px solid #f5f5f8',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10,
+                    background: 'linear-gradient(to right, #fafafa, #fff)',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{ fontSize: 18, color: '#c0392b' }}>{hoveredCat.icon}</span>
+                    <span style={{ fontSize: 15, fontWeight: 700, color: '#1a1f2e', letterSpacing: '-0.02em' }}>
+                      {hoveredCat.category}
+                    </span>
+                    <span className="bnav-badge">{hoveredCat.menu.length} types</span>
+                  </div>
+
                 </div>
 
-                <div className="w-3/12 border-l border-gray-200 pl-6">
-                  <div className="mb-4">
-                    <h3 className="text-lg font-bold text-[#213554] mb-1">Explore Categories</h3>
-                    <div className="w-12 h-1 bg-gradient-to-r from-[#EE334B] to-[#213554] rounded-full"></div>
-                  </div>
-                  <ul className="flex flex-col ">
-                    {selectedCategory?.map((item, index) => (
-                      <Link
-                        to={`/category/${item?.slug || item?.title}`}
-                        key={index}
-                        className="font-semibold flex items-center justify-between py-2 px-3 rounded-lg text-[#213554] hover:bg-[#EE334B]/10 hover:text-[#EE334B] transition-all duration-300 group"
-                      >
-                        <span>{item?.title}</span>
-                        <LiaAngleRightSolid size={16} className="text-[#EE334B] group-hover:translate-x-1 transition-transform duration-300" />
-                      </Link>
-                    ))}
-
-                    {hoveredCategory && (
-                      <Link 
-                        to={`/${hoveredCategory?.slug || hoveredCategory?.category}`}
-                        className="mt-4"
-                      >
-                        <Button
-                          className="bg-gradient-to-r from-[#213554] to-[#213554]/90 hover:from-[#EE334B] hover:to-[#EE334B]/90 text-white w-full"
-                          label={`View all ${hoveredCategory?.category || 'Categories'}`}
-                        />
-                      </Link>
-                    )}
-                  </ul>
+                {/* Columns */}
+                <div style={{ display: 'flex', padding: '20px 20px 20px' }}>
+                  {getColumns(hoveredCat.menu).map((col, ci) => (
+                    <div
+                      key={ci}
+                      style={{
+                        flex: 1,
+                        paddingLeft: ci > 0 ? 16 : 8,
+                        marginLeft: ci > 0 ? 16 : 0,
+                        borderLeft: ci > 0 ? '1px solid #f0f0f4' : 'none',
+                      }}
+                    >
+                      {col.map((item, ii) => (
+                        <Link
+                          key={ii}
+                          to={`/category/${item.slug || item.title}`}
+                          className="bnav-item"
+                        >
+                          <span>{item.title}</span>
+                          <LiaAngleRightSolid size={13} className="bnav-arrow" />
+                        </Link>
+                      ))}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -357,112 +382,141 @@ const BottomNav = ({ Menu, OpenMenu }) => {
         )}
       </div>
 
-      {/* Mobile Menu */}
-      <div
-        className={`sm:hidden ${Menu ? "block" : "hidden"} bg-black/60 backdrop-blur-sm fixed z-[10000] inset-0 animate-fadeIn`}
-        onClick={() => OpenMenu(false)}
-      >
-        <div 
-          className="bg-gradient-to-br from-white to-gray-50 md:w-96 w-80 h-full overflow-y-auto shadow-2xl animate-slideInLeft"
-          onClick={(e) => e.stopPropagation()}
+      {/* ── Mobile Menu Overlay ──────────────────────────────── */}
+      {Menu && (
+        <div
+          className="bnav-overlay sm:hidden"
+          style={{
+            position: 'fixed', inset: 0, zIndex: 10000,
+            background: 'rgba(15,18,30,0.6)',
+            backdropFilter: 'blur(4px)',
+          }}
+          onClick={() => OpenMenu(false)}
         >
-          <div className="p-4 border-b border-gray-200 flex justify-between items-center bg-white">
-            <div>
-              <img src={logo} alt="Logo" className="w-36" />
-            </div>
-            <div className="cursor-pointer">
-              <div className="bg-gradient-to-r from-[#EE334B] to-[#213554] w-10 h-10 rounded-full flex justify-center items-center hover:scale-110 transition-transform duration-300 shadow-md hover:shadow-lg">
-                <svg
-                  onClick={() => OpenMenu(false)}
-                  width={20}
-                  aria-hidden="true"
-                  color="white"
-                  role="presentation"
-                  className="text-white"
-                  fill="white"
-                  viewBox="0 0 1000 1000"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M742 167L500 408 258 167C246 154 233 150 217 150 196 150 179 158 167 167 154 179 150 196 150 212 150 229 154 242 171 254L408 500 167 742C138 771 138 800 167 829 196 858 225 858 254 829L496 587 738 829C750 842 767 846 783 846 800 846 817 842 829 829 842 817 846 804 846 783 846 767 842 750 829 737L588 500 833 258C863 229 863 200 833 171 804 137 775 137 742 167Z"></path>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <ul className="flex flex-col p-4 gap-1">
-            <li>
-              <Link
-                to="/"
-                className="block px-4 py-3 font-semibold text-[#213554] hover:text-[#EE334B] hover:bg-[#EE334B]/10 rounded-lg transition-all duration-300"
-                onClick={OpenMenu}
+          {/* Panel */}
+          <div
+            className="bnav-mobile"
+            style={{
+              width: 320, height: '100%',
+              background: '#fff',
+              boxShadow: '4px 0 40px rgba(0,0,0,0.15)',
+              display: 'flex', flexDirection: 'column',
+              overflowY: 'auto',
+            }}
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div
+              style={{
+                padding: '16px 20px',
+                borderBottom: '1px solid #f0f0f4',
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                background: '#fafafa',
+                position: 'sticky', top: 0, zIndex: 10,
+              }}
+            >
+              <img src={logo} alt="Logo" style={{ height: 36, objectFit: 'contain' }} />
+              <button
+                onClick={() => OpenMenu(false)}
+                style={{
+                  width: 36, height: 36, borderRadius: '50%', border: 'none',
+                  background: 'linear-gradient(135deg, #c0392b, #1a1f2e)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  cursor: 'pointer', transition: 'transform 0.2s, box-shadow 0.2s',
+                  boxShadow: '0 2px 8px rgba(192,57,43,0.35)',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.08)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
               >
-                Home
-              </Link>
-            </li>
-            {displayCategories.map((category, index) => (
-              <li key={index}>
-                <Link
-                  to={`/${category?.slug || category?.category}`}
-                  className="block px-4 py-3 font-semibold text-[#213554] hover:text-[#EE334B] hover:bg-[#EE334B]/10 rounded-lg transition-all duration-300"
-                  onClick={OpenMenu}
-                >
-                  {category.category}
-                </Link>
-                {category.menu?.length > 0 && (
-                  <ul className="pl-6 mt-1 space-y-1">
-                    {category.menu.map((submenu, subIndex) => (
-                      <li key={subIndex}>
+                <svg width="14" fill="white" viewBox="0 0 1000 1000">
+                  <path d="M742 167L500 408 258 167C246 154 233 150 217 150 196 150 179 158 167 167 154 179 150 196 150 212 150 229 154 242 171 254L408 500 167 742C138 771 138 800 167 829 196 858 225 858 254 829L496 587 738 829C750 842 767 846 783 846 800 846 817 842 829 829 842 817 846 804 846 783 846 767 842 750 829 737L588 500 833 258C863 229 863 200 833 171 804 137 775 137 742 167Z"/>
+                </svg>
+              </button>
+            </div>
+
+            {/* Nav Items */}
+            <div style={{ padding: '12px 12px 24px', flex: 1 }}>
+              {/* Section label */}
+              <div style={{ padding: '8px 16px 4px', fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', color: '#9ca3af', textTransform: 'uppercase' }}>
+                Navigation
+              </div>
+
+              <Link to="/" className="bnav-mobile-item" onClick={OpenMenu}>Home</Link>
+
+              {categories.map((cat, i) => (
+                <div key={i}>
+                  <Link
+                    to={`/${cat.slug || cat.category}`}
+                    className="bnav-mobile-item"
+                    onClick={OpenMenu}
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+                  >
+                    <span>{cat.category}</span>
+                    {cat.menu?.length > 0 && (
+                      <span style={{ fontSize: 10, background: '#f3f4f6', color: '#6b7280', borderRadius: 99, padding: '2px 7px', fontWeight: 600 }}>
+                        {cat.menu.length}
+                      </span>
+                    )}
+                  </Link>
+                  {cat.menu?.length > 0 && (
+                    <div style={{ paddingLeft: 12, marginBottom: 4 }}>
+                      {cat.menu.map((sub, si) => (
                         <Link
-                          to={`/category/${submenu.slug || submenu.title}`}
-                          className="block px-4 py-2 text-gray-700 hover:text-[#EE334B] hover:bg-[#EE334B]/5 rounded-lg transition-all duration-300 text-sm"
+                          key={si}
+                          to={`/category/${sub.slug || sub.title}`}
+                          className="bnav-mobile-sub"
                           onClick={OpenMenu}
                         >
-                          {submenu.title}
+                          · {sub.title}
                         </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-            <li>
-              <Link
-                to="/portfolio"
-                className="block px-4 py-3 font-semibold text-[#213554] hover:text-[#EE334B] hover:bg-[#EE334B]/10 rounded-lg transition-all duration-300"
-                onClick={OpenMenu}
-              >
-                Portfolio
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/blog"
-                className="block px-4 py-3 font-semibold text-[#213554] hover:text-[#EE334B] hover:bg-[#EE334B]/10 rounded-lg transition-all duration-300"
-                onClick={OpenMenu}
-              >
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/about-us"
-                className="block px-4 py-3 font-semibold text-[#213554] hover:text-[#EE334B] hover:bg-[#EE334B]/10 rounded-lg transition-all duration-300"
-                onClick={OpenMenu}
-              >
-                About us
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/contact-us"
-                className="block px-4 py-3 font-semibold text-[#213554] hover:text-[#EE334B] hover:bg-[#EE334B]/10 rounded-lg transition-all duration-300"
-                onClick={OpenMenu}
-              >
-                Contact us
-              </Link>
-            </li>
-          </ul>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+
+              {/* Divider */}
+              <div style={{ margin: '12px 16px', height: 1, background: '#f0f0f4' }} />
+              <div style={{ padding: '0 16px 4px', fontSize: 10, fontWeight: 700, letterSpacing: '0.08em', color: '#9ca3af', textTransform: 'uppercase' }}>
+                Company
+              </div>
+
+              <Link to="/portfolio" className="bnav-mobile-item" onClick={OpenMenu}>Portfolio</Link>
+              <Link to="/blog" className="bnav-mobile-item" onClick={OpenMenu}>Blog</Link>
+              <Link to="/about-us" className="bnav-mobile-item" onClick={OpenMenu}>About Us</Link>
+              <Link to="/contact-us" className="bnav-mobile-item" onClick={OpenMenu}>Contact Us</Link>
+            </div>
+
+            {/* Footer strip */}
+            <div
+              style={{
+                padding: '16px 20px',
+                borderTop: '1px solid #f0f0f4',
+                display: 'flex', alignItems: 'center', gap: 12,
+                background: '#fafafa',
+              }}
+            >
+              {[FaFacebookF, FaInstagram, FaLinkedinIn].map((Icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  style={{
+                    width: 34, height: 34, borderRadius: '50%',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    background: '#f3f4f6', color: '#6b7280',
+                    transition: 'all 0.16s',
+                    textDecoration: 'none',
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.background = '#fef2f2'; e.currentTarget.style.color = '#c0392b'; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = '#f3f4f6'; e.currentTarget.style.color = '#6b7280'; }}
+                >
+                  <Icon size={13} />
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

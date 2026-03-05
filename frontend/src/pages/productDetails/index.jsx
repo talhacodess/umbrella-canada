@@ -24,11 +24,13 @@ import ProductCard from '../../components/common/ProductCard'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
 import { RiShoppingCartLine } from 'react-icons/ri'
 import TemplatePage from '../../components/TemplatePage'
-import Design from '../../assets/images/Design.webp'  
-import prepare from '../../assets/images/prepare.webp'  
+import Design from '../../assets/images/Design.webp'
+import prepare from '../../assets/images/prepare.webp'
 import Help from '../../components/help'
 import OfferCard from '../../components/common/OfferCard'
 import FAQ from '../../components/FAQ/FAQ'
+import ReviewsSection from '../../components/Reviews/ReviewsSection'
+import AnnouncementBanner from '../../components/AnnouncementBanner'
 
 // Skeleton shimmer animation style
 const shimmerStyle = {
@@ -640,6 +642,9 @@ const ProductDetails = ({
                     robots={product?.robots || serverData?.robots}
                 />
             ) : null} */}
+            <section>
+                <AnnouncementBanner/>
+            </section>
 
             <section className=' bg-[#F7F7F7] py-10'>
                 <div className=' lg:max-w-8xl max-w-[95%]   flex lg:flex-row flex-col gap-20 mx-auto'>
@@ -1058,7 +1063,7 @@ const ProductDetails = ({
 
                     </div>
                     <TemplatePage />
-                   
+
 
                 </div>
 
@@ -1066,7 +1071,7 @@ const ProductDetails = ({
 
             <section className='bg-[#F7F7F7] py-10' id='more-detail'>
                 <div className='max-w-[95%] mx-auto pt-10'>
-                     <div className='grid grid-cols-2 gap-10'>
+                    <div className='grid grid-cols-2 gap-10'>
                         <div className=' max-h-[500px] overflow-x-auto p-3'>
                             <h2 className="text-xl font-bold">Create Can’t-Miss Vinyl Banners at Hard-to-Resist Prices</h2>
 
@@ -1118,11 +1123,11 @@ const ProductDetails = ({
             </section>
             <section>
                 <div className='max-w-[95%] mx-auto'>
-                    
+
                 </div>
             </section>
-          
-              {/**Related products */}
+
+            {/**Related products */}
             <section className="py-8 sm:max-w-8xl max-w-[95%] mx-auto">
                 <div className='mb-8 flex sm:flex-row flex-col items-center justify-between gap-4'>
                     <div className="flex items-center gap-4">
@@ -1132,7 +1137,7 @@ const ProductDetails = ({
                             <p className='text-gray-600 text-sm mt-1'>Discover packaging tailored for your products</p>
                         </div>
                     </div>
-                  
+
                 </div>
 
                 {relatedProduct?.relatedProducts && relatedProduct.relatedProducts.length > 0 && (
@@ -1222,8 +1227,8 @@ const ProductDetails = ({
                                         setCurrentIndex(idx);
                                     }}
                                     className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 ${currentIndex === idx
-                                            ? 'border-[#AC292A] ring-2 ring-[#AC292A]/50 scale-110'
-                                            : 'border-white/20 hover:border-white/40 hover:scale-105'
+                                        ? 'border-[#AC292A] ring-2 ring-[#AC292A]/50 scale-110'
+                                        : 'border-white/20 hover:border-white/40 hover:scale-105'
                                         }`}
                                 >
                                     <img
@@ -1237,7 +1242,7 @@ const ProductDetails = ({
                     )}
                 </div>
             )}
-              {/**Frequently bought together with this product */}
+            {/**Frequently bought together with this product */}
             <section className="py-8 sm:max-w-8xl max-w-[95%] mx-auto">
                 <div className='mb-8 flex sm:flex-row flex-col items-center justify-between gap-4'>
                     <div className="flex items-center gap-4">
@@ -1341,8 +1346,8 @@ const ProductDetails = ({
                                         setCurrentIndex(idx);
                                     }}
                                     className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 ${currentIndex === idx
-                                            ? 'border-[#AC292A] ring-2 ring-[#AC292A]/50 scale-110'
-                                            : 'border-white/20 hover:border-white/40 hover:scale-105'
+                                        ? 'border-[#AC292A] ring-2 ring-[#AC292A]/50 scale-110'
+                                        : 'border-white/20 hover:border-white/40 hover:scale-105'
                                         }`}
                                 >
                                     <img
@@ -1460,8 +1465,8 @@ const ProductDetails = ({
                                         setCurrentIndex(idx);
                                     }}
                                     className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-300 ${currentIndex === idx
-                                            ? 'border-[#AC292A] ring-2 ring-[#AC292A]/50 scale-110'
-                                            : 'border-white/20 hover:border-white/40 hover:scale-105'
+                                        ? 'border-[#AC292A] ring-2 ring-[#AC292A]/50 scale-110'
+                                        : 'border-white/20 hover:border-white/40 hover:scale-105'
                                         }`}
                                 >
                                     <img
@@ -1477,11 +1482,12 @@ const ProductDetails = ({
             )}
             {/**Looking For Other Custom Boxes And packaging? */}
             <section>
-                 <OfferCard  title={'Looking For Other Custom Boxes And packaging?'} subTitle={"Chat live with our packaging experts now for a free consultation and insert price quote."}  buttonText='Get Instant Qoute'/>
-                <Help title={"Let us design it for you"} description={"Our experts will create a custom design tailored to your needs."} btn={"Get Started"} img={prepare}/>
+                <OfferCard title={'Looking For Other Custom Boxes And packaging?'} subTitle={"Chat live with our packaging experts now for a free consultation and insert price quote."} buttonText='Get Instant Qoute' />
+                <Help title={"Let us design it for you"} description={"Our experts will create a custom design tailored to your needs."} btn={"Get Started"} img={prepare} />
             </section>
+            <section><ReviewsSection /></section>
             {/** FAQ */}
-            <FAQ/>
+            <FAQ />
         </>
     )
 }

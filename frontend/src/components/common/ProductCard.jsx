@@ -8,9 +8,9 @@ const ProductSelectionContext = createContext();
 
 export const ProductSelectionProvider = ({ children }) => {
   const [selectedProducts, setSelectedProducts] = useState(new Set());
-  
+
   const toggleProduct = (productId) => {
-    setSelectedProducts(prev => {
+    setSelectedProducts((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(productId)) {
         newSet.delete(productId);
@@ -36,109 +36,173 @@ export const useProductSelection = () => {
   return context;
 };
 
-const ProductCard = ({data, disableSelection = false, size = 'default'}) => {
+const ProductCard = ({ data, disableSelection = false, size = "default" }) => {
   const { selectedProducts, toggleProduct } = useProductSelection();
   const isSelected = selectedProducts.has(data?._id);
+  const isCompact = size === "compact";
 
   const handleMouseEnter = () => {
-    if (data?.slug) {
-      prefetchProduct(data.slug);
-    }
+    if (data?.slug) prefetchProduct(data.slug);
   };
 
-  // Prefetch product data on mousedown (before click)
   const handleMouseDown = () => {
-    if (data?.slug) {
-      prefetchProduct(data.slug, true);
-    }
+    if (data?.slug) prefetchProduct(data.slug, true);
   };
 
   const handleProductClick = (e) => {
-    // Only handle selection if not disabled and click is not on the link
-    if (!disableSelection && !e.target.closest('a')) {
+    if (!disableSelection && !e.target.closest("a")) {
       e.preventDefault();
       e.stopPropagation();
-      if (data?._id) {
-        toggleProduct(data._id);
-      }
+      if (data?._id) toggleProduct(data._id);
     }
   };
 
-  // Size-based styling
-  const isCompact = size === 'compact';
-  const imageHeight = isCompact 
-    ? 'h-[100px] sm:h-[120px] md:h-[140px]' 
-    : 'aspect-[4/3] sm:aspect-[3/2]';
-  const padding = isCompact ? 'p-1.5 sm:p-2' : 'p-2 sm:p-3 md:p-4';
-  const borderRadius = isCompact ? 'rounded-lg sm:rounded-xl' : 'rounded-2xl sm:rounded-3xl';
-  const imageBorderRadius = isCompact ? 'rounded-md sm:rounded-lg' : 'rounded-xl sm:rounded-2xl';
-  const textSize = isCompact ? 'text-xs sm:text-sm pb-1 sm:pb-2' : 'text-xs sm:text-sm pb-2 sm:pb-3';
-  const placeholderHeight = isCompact 
-    ? 'h-[100px] sm:h-[120px] md:h-[140px]' 
-    : 'aspect-[4/3] sm:aspect-[3/2]';
-  const placeholderTextSize = isCompact ? 'text-xl sm:text-2xl' : 'text-3xl sm:text-4xl';
-  
   const cardContent = (
-    <div className={`text-gray-700 bg-[#F9F9F9] hover:bg-white ${borderRadius} flex font-bold flex-col gap-0.5 items-center transition-all duration-300 border border-gray-200 hover:border-[#AC292A]/20 hover:shadow-lg transform hover:-translate-y-1 h-auto w-full group ${isSelected && !disableSelection ? 'ring-2 ring-[#AC292A] shadow-lg' : ''}`}>
-      <div className={`${padding} relative overflow-hidden ${borderRadius} w-full`}>
+    <div
+      style={{
+        borderRadius: "16px",
+        overflow: "hidden",
+        backgroundColor: "#ffffff",
+        border: isSelected && !disableSelection
+          ? "2px solid #AC292A"
+          : "1px solid transparent",
+        boxShadow: isSelected && !disableSelection
+          ? "0 0 0 3px rgba(172,41,42,0.12)"
+          : "0 2px 8px rgba(0,0,0,0.08)",
+        transition: "box-shadow 0.25s ease, transform 0.25s ease",
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        cursor: "pointer",
+      }}
+      className="card-hover-effect"
+    >
+      {/* Square image area */}
+      <div
+        style={{
+          width: "100%",
+          aspectRatio: "1 / 1",
+          overflow: "hidden",
+          backgroundColor: "#f0f0f0",
+          position: "relative",
+        }}
+      >
         {data?.images?.[0]?.url ? (
-          <div className={`relative w-full ${isCompact ? imageHeight : 'h-[230px]'} ${imageBorderRadius} overflow-hidden`}>
-            <img 
-              src={`${BaseUrl}/${data?.images?.[0]?.url}`} 
-              alt={data?.name || 'Product'} 
-              className={`w-full h-full ${imageBorderRadius} object-cover`}
-              loading="lazy"
-            />
-            {/* Gallery Hover Overlay Gradient */}
-            <div className={`absolute inset-0 bg-gradient-to-t from-[#192133]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none ${imageBorderRadius}`}></div>
-            {/* Gallery Shine Effect - Sweeps across on hover */}
-            <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out pointer-events-none ${imageBorderRadius}`}></div>
-          </div>
+          <img
+            src={`${BaseUrl}/${data.images[0].url}`}
+            alt={data?.name || "Product"}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+              transition: "transform 0.35s ease",
+            }}
+            loading="lazy"
+            onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+          />
         ) : (
-          <div className={`w-full ${isCompact ? placeholderHeight : 'aspect-[4/3] sm:aspect-[3/2]'} bg-gradient-to-br from-[#192133]/10 to-[#AC292A]/10 flex items-center justify-center ${imageBorderRadius} relative overflow-hidden`}>
-            <span className={`${placeholderTextSize} font-bold text-[#192133]/30 relative z-10`}>
-              {data?.name?.charAt(0) || 'P'}
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "linear-gradient(135deg, #192133 0%, #2e3f62 100%)",
+            }}
+          >
+            <span
+              style={{
+                fontSize: isCompact ? "32px" : "52px",
+                fontWeight: "700",
+                color: "rgba(255,255,255,0.2)",
+              }}
+            >
+              {data?.name?.charAt(0) || "P"}
             </span>
-            {/* Gallery Hover Overlay Gradient */}
-            <div className={`absolute inset-0 bg-gradient-to-t from-[#192133]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none ${imageBorderRadius}`}></div>
-            {/* Gallery Shine Effect - Sweeps across on hover */}
-            <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out pointer-events-none ${imageBorderRadius}`}></div>
+          </div>
+        )}
+
+        {/* Selected checkmark badge */}
+        {isSelected && !disableSelection && (
+          <div
+            style={{
+              position: "absolute",
+              top: "10px",
+              right: "10px",
+              width: "28px",
+              height: "28px",
+              borderRadius: "50%",
+              backgroundColor: "#AC292A",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.25)",
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2.5 7L5.5 10L11.5 4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </div>
         )}
       </div>
-      <p className={`${textSize} font-bold group-hover:text-[#AC292A] transition-colors duration-300 text-center px-2 line-clamp-2`}>{data?.name || 'Product Name'}</p>
+
+      {/* Name label below image */}
+      <div
+        style={{
+          padding: isCompact ? "8px 10px" : "10px 14px",
+          backgroundColor: "#ffffff",
+        }}
+      >
+        <p
+          style={{
+            margin: 0,
+            fontSize: isCompact ? "13px" : "14px",
+            fontWeight: "600",
+            color: "#192133",
+            lineHeight: "1.4",
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
+          {data?.name || "Product Name"}
+        </p>
+      </div>
     </div>
   );
-  
+
   return (
     <>
+      <style>{`
+        .card-hover-effect:hover {
+          box-shadow: 0 8px 24px rgba(0,0,0,0.13) !important;
+          transform: translateY(-3px);
+        }
+      `}</style>
+
       {disableSelection ? (
-        // For related products - no selection, just navigation
-        <Link 
-          state={{ productSlug: data._id}} 
+        <Link
+          state={{ productSlug: data._id }}
           to={`/product/${data?.slug}`}
           onMouseEnter={handleMouseEnter}
           onMouseDown={handleMouseDown}
-          className="block h-full w-full"
+          style={{ display: "block", width: "100%", textDecoration: "none" }}
         >
           {cardContent}
         </Link>
       ) : (
-        // For category pages - with selection functionality
-        <div 
-          className={`transition-all duration-300 cursor-pointer h-full w-full ${isSelected ? 'ring-2 ring-[#AC292A] rounded-3xl p-0.5 sm:p-1' : ''}`}
-          onClick={handleProductClick}
-        >
-          <Link 
-            state={{ productSlug: data._id}} 
+        <div onClick={handleProductClick} style={{ width: "100%" }}>
+          <Link
+            state={{ productSlug: data._id }}
             to={`/product/${data?.slug}`}
             onMouseEnter={handleMouseEnter}
             onMouseDown={handleMouseDown}
-            className="block h-full w-full"
-            onClick={(e) => {
-              // Allow navigation to work normally
-              e.stopPropagation();
-            }}
+            style={{ display: "block", width: "100%", textDecoration: "none" }}
+            onClick={(e) => e.stopPropagation()}
           >
             {cardContent}
           </Link>
