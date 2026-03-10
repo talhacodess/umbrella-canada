@@ -57,7 +57,7 @@ const Footer = () => {
       <div className='flex items-center gap-4'>
         {/* WhatsApp - Explicitly forced white on hover */}
         <Link 
-          to={'#'} 
+          to={'https://api.whatsapp.com/send/?phone=%2B17472470456&text=Hello%2C+I+am+reaching+out+to+inquire+about+http%3A%2F%2Flocalhost%3A7070%2Fprivacy-policy&type=phone_number&app_absent=0'} target='_blank'
           className='flex items-center gap-1.5 text-white no-underline text-sm hover:text-white/90 transition-colors'
         >
           <FaWhatsapp size={18} className="text-white" /> WhatsApp
@@ -111,22 +111,22 @@ const Footer = () => {
 
           {/* Company */}
           <FooterSection title='Company'>
-            {['About Us', 'Terms & Conditions', 'Refund / Cancellation Policy', 'Shipping Policy', 'Bulk Order'].map(item => (
-              <li key={item}><Link to={'#'} className={navLinkClass}>{item}</Link></li>
+            {['About Us', 'Terms and Conditions', 'Returns Refunds', 'Shipping Policy', 'Privacy Policy'].map(item => (
+              <li key={item}><Link to={'/' + item.toLowerCase().replace(/ /g, '-')} className={navLinkClass}>{item}</Link></li>
             ))}
           </FooterSection>
 
           {/* Products Packaging */}
           <FooterSection title='Products Packaging'>
             {['Mailer Boxes', 'Rigid Boxes', 'Kraft Boxes', 'Cardboard Boxes', 'Sustainable Packaging', 'Product Boxes'].map(item => (
-              <li key={item}><Link to={'#'} className={navLinkClass}>{item}</Link></li>
+              <li key={item}><Link to={'/' + item.toLowerCase().replace(/ /g, '-')} className={navLinkClass}>{item}</Link></li>
             ))}
           </FooterSection>
 
           {/* Packaging Styles */}
           <FooterSection title='Packaging Styles'>
             {['Sleeve and Tray', 'Die Cut Boxes', 'Cigarette Boxes', 'Child Resistant Boxes', 'Window Boxes', 'Gable Boxes'].map(item => (
-              <li key={item}><Link to={'#'} className={navLinkClass}>{item}</Link></li>
+              <li key={item}><Link to={'/' + item.toLowerCase().replace(/ /g, '-')} className={navLinkClass}>{item}</Link></li>
             ))}
           </FooterSection>
 
@@ -134,15 +134,15 @@ const Footer = () => {
           <FooterSection title='Inspiration'>
             <li><Link to={'/blogs'} className={navLinkClass}>Blog</Link></li>
             <li><Link to={'/reviews'} className={navLinkClass}>Reviews</Link></li>
-            <li><Link to={'#'} className={navLinkClass}>Materials</Link></li>
+            <li><Link to={'/materials'} className={navLinkClass}>Materials</Link></li>
           </FooterSection>
 
           {/* Contact Us */}
           <FooterSection title='Contact Us'>
-            <li><Link to={'#'} className={navLinkClass}>866-255-2112</Link></li>
-            <li><Link to={'#'} className={`${navLinkClass} break-all !text-[13px]`}>orders@xcustompackaging.com</Link></li>
+            <li><Link to={'tel:8662552112'} className={navLinkClass}>866-255-2112</Link></li>
+            <li><Link to={'mailto:sales@umbrellapackaging.ca'} className={`${navLinkClass} break-all !text-[13px]`}>sales@umbrellapackaging.ca</Link></li>
             <li><Link to={'/contact-us'} className={navLinkClass}>Contact Us</Link></li>
-            <li><Link to={'#'} className={navLinkClass}>9854 National Blvd # 1042 Los Angeles, CA 90034 USA</Link></li>
+            <li><Link to={'https://maps.app.goo.gl/7JrUaRTLc5PEqwsV8'} target='_blank' rel='noopener noreferrer' className={navLinkClass}>9854 National Blvd # 1042 Los Angeles, CA 90034 USA</Link></li>
 
           </FooterSection>
 
@@ -182,7 +182,7 @@ const Footer = () => {
             <Link to={'/terms-and-conditions'} className='text-[13px] text-[#888] hover:text-[#ac292a] no-underline transition-colors duration-200'>
               Terms & Conditions
             </Link>
-            <Link to={''} className='text-[13px] text-[#888] hover:text-[#ac292a] no-underline transition-colors duration-200'>
+            <Link to={'/privacy-policy'} className='text-[13px] text-[#888] hover:text-[#ac292a] no-underline transition-colors duration-200'>
               Privacy Policy
             </Link>
           </div>

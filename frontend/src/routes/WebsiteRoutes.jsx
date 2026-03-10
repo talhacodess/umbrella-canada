@@ -21,13 +21,13 @@ const Blogs = lazy(() => import("../pages/blogs/Blogs"));
 const About = lazy(() => import("../pages/about/About"));
 const MyAccount = lazy(() => import("../pages/myAccount/MyAccount"));
 // import Portfolio from "../pages/Portfolio/Portfolio";
-// import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
+import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
 // import ProductDetails from "../pages/productDetails";
-// import ReturnRefunds from "../pages/ReturnRefunds/ReturnRefunds";
+import ReturnRefunds from "../pages/ReturnRefunds/ReturnRefunds";
 import Reviews from "../pages/reviews";
 import ContactUs from "../pages/contactUs/ContactUs";
 import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
-// import ShippingPolicy from "../pages/shippingPolicy/ShippingPolicy";
+import ShippingPolicy from "../pages/shippingPolicy/ShippingPolicy";
 // import Shop from "../pages/shop";
 // import SubCategory from "../pages/subCategory/SubCategory";
 // import TargetPrice from "../pages/targetPrice";
@@ -35,7 +35,7 @@ import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
 // import axios from "axios";
 // import { BaseUrl } from "../utils/BaseUrl";
 // import Dielines from "../pages/Dielines";
-// import SuccessPage from "../pages/thankYouPage";
+import SuccessPage from "../pages/thankYouPage";
 // import { getCachedProduct } from "../utils/prefetchUtils";
 
 // function ProductDetailsWrapper({ initialProduct }) {
@@ -95,14 +95,14 @@ export default function useWebsiteRoutes(serverData, CategoryProducts, homePageD
     { path: '/about-us', element: <About key="about" /> },
     { path: '/contact-us', element: <ContactUs key="contact" /> },
     { path: '/blogs', element: <Blogs key="blogs" /> },
-    // { path: '/thank-you-page', element: <SuccessPage key="success" /> },
+    { path: '/thank-you-page', element: <SuccessPage key="success" /> },
     { path: '/shop', element: <Shop key="shop" /> },
     { path: '/cart', element: <Cart key="cart" /> },
     { path: '/checkout', element: <Checkout key="checkout" /> },
-    // { path: '/privacy-policy', element: <PrivacyPolicy key="privacy-policy" /> },
+    { path: '/privacy-policy', element: <PrivacyPolicy key="privacy-policy" /> },
     { path: '/terms-and-conditions', element: <TermsAndConditions key="terms-and-conditions" /> },
-    // { path: '/shipping-policy', element: <ShippingPolicy key="shipping-policy" /> },
-    // { path: '/returns-refunds', element: <ReturnRefunds key="returns-refunds" /> },
+    { path: '/shipping-policy', element: <ShippingPolicy key="shipping-policy" /> },
+    { path: '/returns-refunds', element: <ReturnRefunds key="returns-refunds" /> },
     { path: '/reviews', element: <Reviews key="reviews" /> },
     { path: '/my-account', element: <MyAccount key="my-account" /> },
     // { path: '/dielines', element: <Dielines key="dielines" /> },

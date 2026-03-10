@@ -210,37 +210,37 @@ const Navbar = () => {
 
               <div className="flex items-center space-x-2">
 
-                <a href="#" className="w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-[#AC292A] group transition-all border border-gray-100">
+                <a href="https://www.facebook.com/umbrellapackaging" target="_blank" className="w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-[#AC292A] group transition-all border border-gray-100">
 
                   <FaFacebookF size={14} className="text-gray-600 group-hover:text-white transition-colors" />
 
                 </a>
 
-                <a href="#" className="w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-[#AC292A] group transition-all border border-gray-100">
+                <a href="https://twitter.com/umbrellapack" target="_blank" className="w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-[#AC292A] group transition-all border border-gray-100">
 
                   <FaXTwitter size={14} className="text-gray-600 group-hover:text-white transition-colors" />
 
                 </a>
 
-                <a href="#" className="w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-[#AC292A] group transition-all border border-gray-100">
+                <a href="https://www.instagram.com/umbrellacustompackaging/" target="_blank" className="w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-[#AC292A] group transition-all border border-gray-100">
 
                   <FaInstagram size={14} className="text-gray-600 group-hover:text-white transition-colors" />
 
                 </a>
 
-                <a href="#" className="w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-[#AC292A] group transition-all border border-gray-100">
+                <a href="https://wa.me/message/JTJTB4YWJYNQP1" target="_blank" className="w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-[#AC292A] group transition-all border border-gray-100">
 
-                  <FaPinterest size={14} className="text-gray-600 group-hover:text-white transition-colors" />
+                  <FaWhatsapp size={14} className="text-gray-600 group-hover:text-white transition-colors" /> 
 
                 </a>
 
-                <a href="#" className="w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-[#AC292A] group transition-all border border-gray-100">
+                <a href="https://www.youtube.com/channel/UCkxeWyAJqxjFSzlbnSoIVLQ" target="_blank" className="w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-[#AC292A] group transition-all border border-gray-100">
 
                   <FaYoutube size={14} className="text-gray-600 group-hover:text-white transition-colors" />
 
                 </a>
 
-                <a href="#" className="w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-[#AC292A] group transition-all border border-gray-100">
+                <a href="https://www.linkedin.com/company/umbrellacustompackaging/" target="_blank" className="w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-[#AC292A] group transition-all border border-gray-100">
 
                   <FaLinkedinIn size={14} className="text-gray-600 group-hover:text-white transition-colors" />
 
@@ -263,18 +263,17 @@ const Navbar = () => {
                 <span className="text-gray-700 font-bold hidden md:inline">Local Globally:</span>
 
                 <div className="flex items-center space-x-1">
+                  <Link to={"/"}> <img src={canada} alt="Canada" className="w-6 h-6 object-contain" title="Canada" /></Link>
 
-                  <img src={usa} alt="USA" className="w-6 h-6 object-contain" title="USA" />
+                  <Link to={"https://www.umbrellapackaging.com/"} target="_blank"> <img src={usa} alt="USA" className="w-6 h-6 object-contain" title="USA" /></Link>
 
-                  <img src={uk} alt="UK" className="w-6 h-6 object-contain" title="UK" />
+                  <Link to={"http://umbrellapackaging.co.uk/"} target="_blank"> <img src={uk} alt="UK" className="w-6 h-6 object-contain" title="UK" /></Link>
 
-                  <img src={canada} alt="Canada" className="w-6 h-6 object-contain" title="Canada" />
+                  <Link to={"https://www.umbrellapackaging.com/australia"} target="_blank"> <img src={australia} alt="Australia" className="w-6 h-6 object-contain" title="Australia" /></Link>
 
-                  <img src={australia} alt="Australia" className="w-6 h-6 object-contain" title="Australia" />
+                  <Link to={"https://www.umbrellapackaging.com/uae"} target="_blank"> <img src={uae} alt="UAE" className="w-6 h-6 object-contain" title="UAE" /></Link>
 
-                  <img src={uae} alt="UAE" className="w-6 h-6 object-contain" title="UAE" />
-
-                  <img src={chaina} alt="China" className="w-6 h-6 object-contain" title="China" />
+                  <Link to={"https://www.umbrellapackaging.com/china"} target="_blank"> <img src={chaina} alt="China" className="w-6 h-6 object-contain" title="China" /></Link>
 
                 </div>
 
@@ -520,7 +519,7 @@ const Navbar = () => {
 
               <Link
 
-                to="/portfolio"
+                to="tel:747-247-0456"
 
                 className="group flex items-center gap-1  rounded-lg  py-1 lg:py-2 transition-all cursor-pointer "
 

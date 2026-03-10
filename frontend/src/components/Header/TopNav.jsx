@@ -2,8 +2,9 @@ import {
   FaYoutube,
   FaInstagram,
   FaLinkedinIn,
-  FaPinterest,
+
   FaFacebookF,
+  FaWhatsapp,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
@@ -19,22 +20,22 @@ const TopNav = () => {
         <div className="flex sm:justify-between justify-center flex-wrap items-center  sm:py-2 py-1.5 border-b border-gray-200 text-sm text-gray-700 gap-4">
           {/* Left Side: Social Media Icons with About US */}
           <div className="flex items-center space-x-2">
-            <a href="#" className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
+            <a href="https://www.facebook.com/umbrellapackaging" className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
               <FaFacebookF size={14} className="text-gray-600 group-hover:text-white transition-colors" />
             </a>
-            <a href="#" className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
+            <a href="https://twitter.com/umbrellapack" className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
               <FaXTwitter size={14} className="text-gray-600 group-hover:text-white transition-colors" />
             </a>
-            <a href="#" className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
+            <a href="https://www.instagram.com/umbrellacustompackaging/" className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
               <FaInstagram size={14} className="text-gray-600 group-hover:text-white transition-colors" />
             </a>
-            <a href="#" className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
-              <FaPinterest size={14} className="text-gray-600 group-hover:text-white transition-colors" />
+            <a href="https://wa.me/message/JTJTB4YWJYNQP1" className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
+              <FaWhatsapp size={14} className="text-gray-600 group-hover:text-white transition-colors" />
             </a>
-            <a href="#" className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
+            <a href="https://www.youtube.com/channel/UCkxeWyAJqxjFSzlbnSoIVLQ" className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
               <FaYoutube size={14} className="text-gray-600 group-hover:text-white transition-colors" />
             </a>
-            <a href="#" className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
+            <a href="https://www.linkedin.com/company/umbrellacustompackaging/" className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center hover:bg-[#EE334B] group transition-colors">
               <FaLinkedinIn size={14} className="text-gray-600 group-hover:text-white transition-colors" />
             </a>
             {/* Red Separator */}
