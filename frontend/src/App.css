@@ -6,9 +6,7 @@
   font-family: 'Inter', sans-serif !important;
 }
 
-  h5{
-    @apply  sm:text-lg text-sm  font-medium
-    }
+
   
 
 

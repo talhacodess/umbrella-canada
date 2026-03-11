@@ -31,8 +31,8 @@ function ReturnRefunds() {
     <>
       <PageMetadata {...metadata} />
       <Banner subTitle="Returns & Refunds" />
-      <div className='bg-[#f7f7f7] '>
-              <div className='max-w-[95%] mx-auto h-30  flex justify-start items-center '><h2 className='text-2xl'>Returns & Refunds</h2></div>
+      <div className='bg-[#192133] '>
+              <div className='max-w-[95%] mx-auto h-30  flex justify-start items-center '><h2 className='text-4xl text-white'>Returns & Refunds</h2></div>
               
 
              </div>

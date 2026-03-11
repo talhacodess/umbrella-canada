@@ -231,7 +231,7 @@ const Navbar = () => {
 
                 <a href="https://wa.me/message/JTJTB4YWJYNQP1" target="_blank" className="w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-[#AC292A] group transition-all border border-gray-100">
 
-                  <FaWhatsapp size={14} className="text-gray-600 group-hover:text-white transition-colors" /> 
+                  <FaWhatsapp size={14} className="text-gray-600 group-hover:text-white transition-colors" />
 
                 </a>
 
@@ -380,9 +380,9 @@ const Navbar = () => {
 
       <div className={`${menu ? '' : 'sticky'} top-0 z-50 transition-all duration-300 ${isScrolled
 
-          ? 'bg-white/90 backdrop-blur-lg backdrop-saturate-150 shadow-md '
+        ? 'bg-white/90 backdrop-blur-lg backdrop-saturate-150 shadow-md '
 
-          : 'bg-gradient-to-r from-white via-gray-50/30'
+        : 'bg-gradient-to-r from-white via-gray-50/30'
 
         }`}
 
@@ -548,13 +548,14 @@ const Navbar = () => {
 
               {/* Project Button */}
 
-              <button
+              <Link 
+              to={"/portfolio"}
 
-                onClick={() => setIsQuoteModalOpen(true)}
 
-                className="group flex items-center gap-1  rounded-lg px-1 lg:px-3 py-1 lg:py-2 transition-all cursor-pointer"
+                className="group flex items-center gap-1  rounded-lg px-1 lg:px-3 py-1 lg:py-2 transition-all cursor-pointer">
 
-              >
+
+
 
                 <div className="w-12 h-12">
 
@@ -576,8 +577,8 @@ const Navbar = () => {
 
                 </div>
 
-              </button>
 
+              </Link>
               {/* Custom Pricing Button */}
 
               <button
@@ -638,7 +639,7 @@ const Navbar = () => {
 
                   <span className="text-[10px] lg:text-xs text-gray-500 mt-0.5">Login / Register</span>
 
-               
+
 
                 </div>
 
@@ -780,7 +781,7 @@ const Navbar = () => {
 
         />
 
-        
+
       </div>
 
     </>

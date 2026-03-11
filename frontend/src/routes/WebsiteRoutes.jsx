@@ -20,7 +20,7 @@ const Category = lazy(() => import("../pages/category/Category"));
 const Blogs = lazy(() => import("../pages/blogs/Blogs"));
 const About = lazy(() => import("../pages/about/About"));
 const MyAccount = lazy(() => import("../pages/myAccount/MyAccount"));
-// import Portfolio from "../pages/Portfolio/Portfolio";
+import Portfolio from "../pages/Portfolio/Portfolio";
 import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
 // import ProductDetails from "../pages/productDetails";
 import ReturnRefunds from "../pages/ReturnRefunds/ReturnRefunds";
@@ -109,7 +109,7 @@ export default function useWebsiteRoutes(serverData, CategoryProducts, homePageD
     // { path: '/get-custom-quote', element: <GetCustomQoutePage key="get-custom-quote" /> },
     // { path: '/target-price', element: <TargetPrice key="target-price" /> },
     // { path: '/faqs', element: <FAQ key="faqs" /> },
-    // { path: '/portfolio', element: <Portfolio key="portfolio" /> },
+    { path: '/portfolio', element: <Portfolio key="portfolio" /> },
     // { path: '/404', element: <NotFound key="not-found" /> },
     // { path: '/category/:slug', element: <Category key="category" serverData={sharedServer} /> },
     { path: '/:slug', element: <Category key="category" serverData={sharedServer} /> },

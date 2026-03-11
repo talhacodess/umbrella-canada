@@ -19,10 +19,12 @@ import australia from '../../assets/images/about-imges/australia.svg';
 import uae from '../../assets/images/about-imges/uae.svg';
 import chaina from '../../assets/images/about-imges/chaina.svg';
 import CreativePackaging from '../../components/CreativeBanner/CreativePackaging';
+import hero from "../../assets/images/about-us-banner.webp";
+import BottomHero from '../../components/Hero/BottomHero';
 
 // ── Reusable Section Label ─────────────────────────────────────
 const SectionLabel = ({ text }) => (
-  <span className="inline-flex w-50 items-center gap-2 px-3 py-1.5 rounded-full bg-[#AC292A]/10 text-[#AC292A] text-[10px] font-bold uppercase tracking-widest">
+  <span className="inline-flex w-50 items-center gap-2 px-3 py-1.5  rounded-full bg-[#AC292A]/10 text-[#AC292A] text-[18px] font-bold uppercase tracking-widest">
     <span className="w-1.5 h-1.5 rounded-full bg-[#AC292A] flex-shrink-0" />
     {text}
   </span>
@@ -82,101 +84,53 @@ export default function About() {
   ];
 
   return (
-    <div className="font-sans bg-[#f7f8fc] text-[#192133] selection:bg-[#AC292A] selection:text-white">
+    <div className=" bg-[#f7f7f7] text-[#192133] selection:bg-[#AC292A] selection:text-white">
 
       {/* ══ BANNER ══════════════════════════════════════════════ */}
       <Banner title={"About Us"} subTitle={"About Us"} />
 
-      {/* ══ INTRO / WHO WE ARE ══════════════════════════════════ */}
-      <section className="bg-white">
-        <div className="max-w-8xl mx-auto px-6 md:px-10 py-16 md:py-24 flex flex-col lg:flex-row items-center gap-14">
+      {/* ══ INTRO / Banner ══════════════════════════════════ */}
+      <div className="w-full lg:h-[50vh] h-[50vh] relative overflow-hidden">
+    
 
-          {/* Media stack */}
-          <div className="relative w-full lg:w-[48%] flex-shrink-0 flex items-center justify-center min-h-[320px] md:min-h-[420px]">
-            {/* Main image */}
-            <div className="relative w-[85%] aspect-[5/4] rounded-3xl overflow-hidden shadow-2xl z-0">
-              <img src={xpackaging} alt="X Custom Packaging" className="w-full h-full object-cover" />
-              {/* Red corner accent */}
-              <div className="absolute bottom-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#AC292A] to-transparent" />
-            </div>
-            {/* Floating video card */}
-            <div className="absolute top-0 right-0 w-[45%] aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl z-10 border-4 border-white">
-              <video src={videoabout} autoPlay loop muted playsInline className="w-full h-full object-cover scale-110" />
-              <div className="absolute inset-0 bg-black/10" />
-            </div>
-            {/* Floating stat badge */}
-            <div className="absolute -bottom-4 left-4 z-20 bg-[#192133] text-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3">
-              <div>
-                <p className="text-[#AC292A] text-xl font-black leading-none">1k+</p>
-                <p className="text-gray-300 text-[10px] font-bold uppercase tracking-widest mt-0.5">Happy Clients</p>
-              </div>
-              <div className="w-px h-10 bg-white/10" />
-              <div>
-                <p className="text-[#AC292A] text-xl font-black leading-none">10+</p>
-                <p className="text-gray-300 text-[10px] font-bold uppercase tracking-widest mt-0.5">Years</p>
-              </div>
-            </div>
-          </div>
+      {/* Linear Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/75 to-black/40 z-10" style={{backgroundImage:`url(${hero})`, backgroundSize: 'cover', backgroundPosition: 'right'}}></div>
 
-          {/* Text content */}
-          <div className="w-full lg:w-1/2 flex flex-col gap-6">
-            <SectionLabel text="Who We Are" />
+      {/* Text Content Overlay */}
+      <div className="relative w-full h-full flex items-center justify-start z-20 ">
+        <div className="w-full sm:w-3/5 px-6 sm:px-8 md:px-12 lg:px-16 text-left">
+          {/* Background behind content - Half screen */}
+          {/* bg-black/30 backdrop-blur-sm */}
+          <div className=" rounded-lg p-0 sm:p-8 md:p-10  text-left">
+            <div className=" space-x-3 ">
+              <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-5xl font-bold mb-4 sm:mb-6 uppercase tracking-wide">
+              About Us
+              </h1>
+              <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8  tracking-wide">
+             We give your product the attention they deserve.
 
-            <h2 className="text-4xl md:text-5xl font-bold text-[#192133] leading-tight">
-              Delivering Premium Custom Packaging{' '}
-              <span className="text-[#AC292A]">at Scale</span>
-            </h2>
-
-            <div className="w-12 h-1 rounded-full bg-gradient-to-r from-[#AC292A] to-[#AC292A]/20" />
-
-            <div className="overflow-y-auto max-h-52 pr-1">
-              <p className="text-gray-500 leading-relaxed text-base">
-                At X Custom Packaging, we believe packaging is more than just protection—it is a powerful representation of your brand's identity and values. With a state-of-the-art production facility and a reliable logistics network, we deliver high-quality custom packaging solutions designed to meet the evolving needs of modern businesses.
               </p>
-              <p className="text-gray-500 leading-relaxed text-base mt-4">
-                Our advanced manufacturing capabilities allow us to produce a wide range of packaging styles, from simple and cost-effective boxes to premium, luxury packaging. We work with durable materials such as cardboard, kraft, corrugated, rigid, and specialty stocks to ensure maximum product safety and visual appeal.
-              </p>
-              <p className="text-gray-500 leading-relaxed text-base mt-4">
-                Timely delivery is one of our strongest commitments. Supported by an organized shipping and logistics system, we ensure your orders are completed and dispatched within agreed timelines.
-              </p>
+             
+              
+                <Button variant="primary" className="font-semibold" label="Get Instant Quote" onClick={()=> setInstantQuote(true)} />
+         
+             
+            
+              <Link to={'/dielines'}>
+                <Button variant="primary" className="font-semibold" label="Get Custom Template" />
+              </Link>
+            
+              <Link to={'/contact-us'}>
+                <Button variant="red" className="font-semibold " label="Order Sample Kit" />
+              </Link>
             </div>
-
-            <a href="#brand-details-section" className="w-fit">
-              <Button label={"See Our Work in Action"} />
-            </a>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* ══ STRENGTHS / WHY US ══════════════════════════════════ */}
-      <section className="bg-[#f7f8fc] border-t border-gray-100">
-        <div className="max-w-8xl mx-auto px-6 md:px-10 py-16 md:py-20">
-          <SectionHeader
-            label="Why Choose Us"
-            title="Built on Four Pillars"
-            subtitle="The principles that drive every order we fulfil"
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {strengths.map((s, i) => (
-              <div
-                key={i}
-                className="group bg-white rounded-2xl border border-gray-100 p-7 hover:border-[#AC292A]/25 hover:shadow-lg transition-all duration-300"
-              >
-                {/* Icon circle */}
-                <div className="w-12 h-12 rounded-xl bg-[#AC292A]/10 flex items-center justify-center text-[#AC292A] text-xl mb-5 group-hover:bg-[#AC292A] group-hover:text-white transition-all duration-300">
-                  {s.icon}
-                </div>
-                <h4 className="text-base font-bold text-[#192133] mb-2">{s.title}</h4>
-                <p className="text-gray-400 text-sm leading-relaxed">{s.desc}</p>
-                {/* Bottom bar */}
-                <div className="w-8 h-0.5 rounded-full bg-gray-100 group-hover:w-full group-hover:bg-[#AC292A] transition-all duration-500 mt-5" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+    </div>
+    {/** icons under hero */}
+    <BottomHero/>
       {/* ══ BRAND PARTNERS ══════════════════════════════════════ */}
       <section id="brand-details-section" className="bg-white border-t border-gray-100">
         <div className="max-w-8xl mx-auto px-6 md:px-10 py-16 md:py-20">
@@ -184,7 +138,7 @@ export default function About() {
             label="Our Portfolio"
             title="Brand Partners"
             subtitle="A family of companies built on quality & innovation"
-            action={{ label: "View All" }}
+           
           />
 
           {/* Tabbed panel */}
@@ -279,6 +233,71 @@ export default function About() {
         </div>
       </section>
 
+
+      
+       {/* ══ INTRO / WHO WE ARE ══════════════════════════════════ */}
+      <section className="bg-[#f7f7f7]">
+        <div className="max-w-8xl mx-auto px-6 md:px-10 py-16 md:py-24 flex flex-col lg:flex-row items-center gap-14">
+
+          {/* Media stack */}
+          <div className="relative w-full lg:w-[48%] flex-shrink-0 flex items-center justify-center min-h-[320px] md:min-h-[420px]">
+            {/* Main image */}
+            <div className="relative w-[85%] aspect-[5/4] rounded-3xl overflow-hidden shadow-2xl z-0">
+              <img src={xpackaging} alt="X Custom Packaging" className="w-full h-full object-cover" />
+              {/* Red corner accent */}
+              <div className="absolute bottom-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#AC292A] to-transparent" />
+            </div>
+            {/* Floating video card */}
+            <div className="absolute top-0 right-0 w-[45%] aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl z-10 border-4 border-white">
+              <video src={videoabout} autoPlay loop muted playsInline className="w-full h-full object-cover scale-110" />
+              <div className="absolute inset-0 bg-black/10" />
+            </div>
+            {/* Floating stat badge */}
+            <div className="absolute -bottom-4 left-4 z-20 bg-[#192133] text-white px-5 py-3 rounded-2xl shadow-xl flex items-center gap-3">
+              <div>
+                <p className="text-[#AC292A] text-xl font-black leading-none">1k+</p>
+                <p className="text-gray-300 text-[10px] font-bold uppercase tracking-widest mt-0.5">Happy Clients</p>
+              </div>
+              <div className="w-px h-10 bg-white/10" />
+              <div>
+                <p className="text-[#AC292A] text-xl font-black leading-none">10+</p>
+                <p className="text-gray-300 text-[10px] font-bold uppercase tracking-widest mt-0.5">Years</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Text content */}
+          <div className="w-full lg:w-1/2 flex flex-col gap-6">
+            <SectionLabel text="Who We Are" />
+
+            <h2 className="text-4xl md:text-5xl font-bold text-[#192133] leading-tight">
+              Delivering Premium Custom Packaging{' '}
+              <span className="text-[#AC292A]">at Scale</span>
+            </h2>
+
+            <div className="w-12 h-1 rounded-full bg-gradient-to-r from-[#AC292A] to-[#AC292A]/20" />
+
+            <div className="overflow-y-auto max-h-52 pr-1">
+              <p className="text-gray-500 leading-relaxed text-base">
+                At X Custom Packaging, we believe packaging is more than just protection—it is a powerful representation of your brand's identity and values. With a state-of-the-art production facility and a reliable logistics network, we deliver high-quality custom packaging solutions designed to meet the evolving needs of modern businesses.
+              </p>
+              <p className="text-gray-500 leading-relaxed text-base mt-4">
+                Our advanced manufacturing capabilities allow us to produce a wide range of packaging styles, from simple and cost-effective boxes to premium, luxury packaging. We work with durable materials such as cardboard, kraft, corrugated, rigid, and specialty stocks to ensure maximum product safety and visual appeal.
+              </p>
+              <p className="text-gray-500 leading-relaxed text-base mt-4">
+                Timely delivery is one of our strongest commitments. Supported by an organized shipping and logistics system, we ensure your orders are completed and dispatched within agreed timelines.
+              </p>
+            </div>
+
+            <a href="#brand-details-section" className="w-fit">
+              <Button label={"See Our Work in Action"} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+
+    
       {/* ══ GALLERY ═════════════════════════════════════════════ */}
       <CreativePackaging />
 
