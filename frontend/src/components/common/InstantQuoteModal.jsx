@@ -1,45 +1,41 @@
 import React, { useEffect } from "react";
 import { MdClose } from "react-icons/md";
+import { RiCheckboxCircleLine } from "react-icons/ri";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import Modal from "./Modal";
 import Input from "./Input";
-import Button from "./Button";
 import { BaseUrl } from "../../utils/BaseUrl";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+// ── Shared label — identical to GetQuoteModal ──────────────────
+const FieldLabel = ({ text, required, hint }) => (
+  <label className="block pb-1.5 text-[#192133] text-xs font-bold uppercase tracking-wide">
+    {text}
+    {required && <span className="text-[#AC292A]"> *</span>}
+    {hint && <span className="ml-1.5 normal-case tracking-normal font-normal text-gray-400 text-[10px]">{hint}</span>}
+  </label>
+);
+
+// ── Shared input class — identical to GetQuoteModal ────────────
+const fieldCls = (hasError) =>
+  `w-full border ${hasError ? "border-red-400" : "border-gray-200"} bg-white text-sm px-3 py-2.5 rounded-xl text-[#192133] placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#AC292A]/30 focus:border-[#AC292A] transition-all duration-200`;
+
+// ── Field error ────────────────────────────────────────────────
+const FieldError = ({ msg }) =>
+  msg ? <p className="text-red-400 text-[11px] mt-1 font-medium">{msg}</p> : null;
+
+// ── Main Component ─────────────────────────────────────────────
 const InstantQuoteModal = ({ isModalOpen, setIsModalOpen, closeModal, categoryData }) => {
+  const navigate = useNavigate();
 
-
-  const navigate = useNavigate()
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     email: Yup.string()
       .email("Invalid email address")
       .required("Email is required"),
-    // phoneNumber: Yup.string()
-    //   .matches(/^[0-9]+$/, "Must be only digits")
-    //   .min(10, "Must be at least 10 digits")
-    //   .required("Phone number is required"),
-    // message: Yup.string().required("Message is required"),
-    // image: Yup.mixed()
-    //   .required("Image is required")
-    //   .test(
-    //     "fileSize",
-    //     "File too large (max 5MB)",
-    //     (value) => value && value.size <= 5 * 1024 * 1024
-    //   )
-    //   .test(
-    //     "fileType",
-    //     "Unsupported file format",
-    //     (value) =>
-    //       value &&
-    //       ["image/png", "image/jpeg", "image/jpg", "image/webp", "application/pdf"].includes(
-    //         value.type
-    //       )
-    //   ),
   });
 
   const formik = useFormik({
@@ -54,7 +50,7 @@ const InstantQuoteModal = ({ isModalOpen, setIsModalOpen, closeModal, categoryDa
     validationSchema,
     enableReinitialize: true,
     onSubmit: async (values, { setSubmitting, resetForm }) => {
-      setSubmitting(true)
+      setSubmitting(true);
       try {
         const formData = new FormData();
         formData.append("name", values.name);
@@ -66,226 +62,231 @@ const InstantQuoteModal = ({ isModalOpen, setIsModalOpen, closeModal, categoryDa
         formData.append("pageUrl", window.location.href);
 
         const response = await axios.post(`${BaseUrl}/instantQuote/create`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+          headers: { "Content-Type": "multipart/form-data" },
         });
 
-        if(response?.data?.status==="success"){
-        //  toast.success(response?.data?.message)
-         navigate('/thank-your-page')
-        }else{
-          toast.error(response?.data?.message)
+        if (response?.data?.status === "success") {
+          navigate("/thank-you-page");
+        } else {
+          toast.error(response?.data?.message);
         }
-
         resetForm();
         setIsModalOpen(false);
       } catch (error) {
-        toast.error(error?.response?.data?.message)
+        toast.error(error?.response?.data?.message);
       } finally {
         setSubmitting(false);
       }
     },
   });
 
-  // Auto-fill category name when modal opens and categoryData is available
   useEffect(() => {
     if (isModalOpen && categoryData?.title) {
-      formik.setFieldValue('categoryName', categoryData.title);
+      formik.setFieldValue("categoryName", categoryData.title);
     } else if (!isModalOpen) {
-      // Reset category name when modal closes
-      formik.setFieldValue('categoryName', '');
+      formik.setFieldValue("categoryName", "");
     }
   }, [isModalOpen, categoryData?.title]);
 
   return (
-    <Modal isOpen={isModalOpen} onClose={closeModal} className={"rounded-xl"}>
-      <div className="p-5 overflow-y-auto ">
-      
-        <div className="bg-[#F7F7F7] rounded-[10px] flex flex-col items-center p-6">
-            <div className="cursor-pointer flex w-full justify-end">
-          <MdClose
-            onClick={() => {
-              formik.resetForm();
-              setIsModalOpen(false);
-            }}
-            size={25}
-          />
+    <Modal isOpen={isModalOpen} onClose={closeModal} className="rounded-3xl max-w-xl w-[95%] sm:w-[90%]">
+      <div className="bg-white overflow-hidden rounded-3xl">
+
+        {/* ── Header — same style as GetQuoteModal right-panel header ── */}
+        <div className="flex items-center justify-between px-7 py-5 border-b border-gray-100">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-[#AC292A]/10 flex items-center justify-center flex-shrink-0">
+              <svg className="w-4 h-4 text-[#AC292A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-[#192133] text-sm font-bold leading-tight">Get an Instant Quote</p>
+              <p className="text-gray-400 text-xs mt-0.5">We respond within 24 business hours</p>
+            </div>
+          </div>
+          <button
+            onClick={() => { formik.resetForm(); setIsModalOpen(false); }}
+            className="w-8 h-8 rounded-xl bg-gray-100 hover:bg-[#AC292A]/10 hover:text-[#AC292A] flex items-center justify-center text-gray-400 transition-all duration-200"
+          >
+            <MdClose size={18} />
+          </button>
         </div>
-          <h2 className="text-xl font-semibold mb-4">Get an Instant Quote</h2>
 
-          <form onSubmit={formik.handleSubmit} className="w-full">
-            <div className="flex flex-col w-full gap-3 justify-between">
-              {/* Category Name Field */}
-              <div className="w-full">
-                <Input
-                  label="Category Name"
-                  type="text"
-                  name="categoryName"
-                  placeholder="Category Name"
-                  value={formik.values.categoryName}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  className={`rounded-[8px] w-full border-[#333333] border bg-[#fff] p-3 ${
-                    formik.touched.categoryName && formik.errors.categoryName
-                      ? "border-red-500"
-                      : ""
-                  }`}
-                  disabled
-                />
-              </div>
-              <div className=" grid grid-cols-2 gap-2">
-                {/* Name Field */}
-              <div className="w-full">
-                <Input
-                  label="Name"
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  value={formik.values.name}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  className={`rounded-[8px] w-full border-[#333333] border bg-[#fff] p-3 ${
-                    formik.touched.name && formik.errors.name
-                      ? "border-red-500"
-                      : ""
-                  }`}
-                />
-                {formik.touched.name && formik.errors.name && (
-                  <div className="text-red-500 text-xs mt-1">
-                    {formik.errors.name}
+        {/* ── Form body ── */}
+        <div className="px-7 py-6 overflow-y-auto max-h-[75vh]">
+          <form onSubmit={formik.handleSubmit}>
+
+            {/* Section label — same style as GetQuoteModal section dividers */}
+            <div className="flex items-center gap-2 mb-5">
+              <div className="w-1 h-5 rounded-full bg-[#AC292A]" />
+              <h6 className="text-sm font-bold text-[#192133] uppercase tracking-wide">Your Information</h6>
+            </div>
+
+            <div className="flex flex-col gap-4">
+
+              {/* Category (auto-filled, read-only display) */}
+              {formik.values.categoryName && (
+                <div>
+                  <FieldLabel text="Category" />
+                  <div className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-[#f7f8fc] border border-gray-100">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#AC292A] flex-shrink-0" />
+                    <span className="text-[#192133] text-sm font-semibold">{formik.values.categoryName}</span>
                   </div>
-                )}
+                </div>
+              )}
+
+              {/* Name + Email */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <FieldLabel text="Full Name" required />
+                  <Input
+                    type="text"
+                    name="name"
+                    placeholder="John Doe"
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={fieldCls(formik.touched.name && formik.errors.name)}
+                  />
+                  <FieldError msg={formik.touched.name && formik.errors.name} />
+                </div>
+                <div>
+                  <FieldLabel text="Email Address" required />
+                  <Input
+                    type="email"
+                    name="email"
+                    placeholder="john@umbrellapackaging.ca"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={fieldCls(formik.touched.email && formik.errors.email)}
+                  />
+                  <FieldError msg={formik.touched.email && formik.errors.email} />
+                </div>
               </div>
 
-              
-              {/* Email Field */}
-              <div className="w-full">
+              {/* Phone */}
+              <div>
+                <FieldLabel text="Phone Number" />
                 <Input
-                  label="Email"
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={formik.values.email}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  className={`rounded-[8px] w-full border-[#333333] border bg-[#fff] p-3 ${
-                    formik.touched.email && formik.errors.email
-                      ? "border-red-500"
-                      : ""
-                  }`}
-                />
-                  {formik.touched.email && formik.errors.email && (
-                  <div className="text-red-500 text-xs mt-1">
-                    {formik.errors.email}
-                  </div>
-                )}
-              </div>
-
-            
-              </div>
-
-              {/* Phone Number Field */}
-              <div className="w-full">
-                <Input
-                  label="Phone Number"
                   type="tel"
                   name="phoneNumber"
-                  placeholder="Phone Number"
+                  placeholder="+1 (000) 000-0000"
                   value={formik.values.phoneNumber}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className={`rounded-[8px] w-full border-[#333333] border bg-[#fff] p-3 ${
-                    formik.touched.phoneNumber && formik.errors.phoneNumber
-                      ? "border-red-500"
-                      : ""
-                  }`}
+                  className={fieldCls(formik.touched.phoneNumber && formik.errors.phoneNumber)}
                 />
+                <FieldError msg={formik.touched.phoneNumber && formik.errors.phoneNumber} />
               </div>
 
-              {formik.touched.phoneNumber && formik.errors.phoneNumber && (
-                  <div className="text-red-500 text-xs mt-1">
-                    {formik.errors.phoneNumber}
-                  </div>
-                )}
-
-              
-
-              {formik.touched.categoryName && formik.errors.categoryName && (
-                  <div className="text-red-500 text-xs mt-1">
-                    {formik.errors.categoryName}
-                  </div>
-                )}
-
-              {/* Message Field */}
-              <div className="flex flex-col">
-                <label
-                  className="pb-1.5 flex text-[#333333] text-sm font-medium text-textColor"
-                  htmlFor="message"
-                >
-                  Message
-                </label>
+              {/* Message */}
+              <div>
+                <FieldLabel text="Message" />
                 <textarea
-                  id="message"
                   name="message"
-                  rows={3}
-                  placeholder="Please share specific packaging details such as dimensions, materials, weight limits, and design preferences. We'll promptly provide you with a quote"
+                  rows={4}
+                  placeholder="Please share specific packaging details such as dimensions, materials, weight limits, and design preferences. We'll promptly provide you with a quote."
                   value={formik.values.message}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className={`rounded-[8px] w-full border-[#333333] border bg-[#fff] p-3 ${
-                    formik.touched.message && formik.errors.message
-                      ? "border-red-500"
-                      : ""
-                  }`}
-                ></textarea>
-                {formik.touched.message && formik.errors.message && (
-                  <div className="text-red-500 text-xs mt-1">
-                    {formik.errors.message}
-                  </div>
-                )}
-              </div>
-
-              {/* File Upload Field */}
-              <div className="w-full">
-                <label
-                  className="pb-1.5 flex text-[#333333] text-sm font-medium text-textColor"
-                  htmlFor="image"
-                >
-                  Upload Image
-                  <span className="text-xs text-gray-500 ml-1">
-                    (Max Size 5MB, Allowed: png, pdf, jpg, jpeg, webp)
-                  </span>
-                </label>
-                <input
-                  id="image"
-                  name="image"
-                  type="file"
-                  onChange={(event) => {
-                    formik.setFieldValue("image", event.currentTarget.files[0]);
-                  }}
-                  onBlur={formik.handleBlur}
-                  className="border w-full rounded-lg bg-white border-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#4440E6] file:text-white hover:file:bg-[#3a36c7]"
+                  className={`${fieldCls(formik.touched.message && formik.errors.message)} resize-none leading-relaxed`}
                 />
-                {formik.touched.image && formik.errors.image && (
-                  <div className="text-red-500 text-xs mt-1">
-                    {formik.errors.image}
-                  </div>
-                )}
+                <FieldError msg={formik.touched.message && formik.errors.message} />
               </div>
 
-              {/* Submit Button */}
+              {/* File upload — same drag-zone style as GetQuoteModal */}
               <div>
-                <Button
-                  type="submit"
-                  label={
-                    formik.isSubmitting ? "Submitting..." : "Get Instant Quote"
-                  }
-                  disabled={formik.isSubmitting || !formik.isValid}
-                  className="bg-[#4440E6] text-white w-full py-2 rounded-lg font-medium disabled:opacity-50"
+                <FieldLabel
+                  text="Upload Image"
+                  hint="(Max 5MB · PNG, PDF, JPG, JPEG, WEBP)"
                 />
+                <label
+                  htmlFor="image"
+                  className="group flex flex-col items-center justify-center gap-2 border-2 border-dashed border-gray-200 rounded-2xl py-6 px-4 cursor-pointer hover:border-[#AC292A]/40 hover:bg-[#AC292A]/3 transition-all duration-300"
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    const file = e.dataTransfer.files[0];
+                    if (!file) return;
+                    if (file.size > 5 * 1024 * 1024) { toast.error("File size exceeds 5MB limit."); return; }
+                    formik.setFieldValue("image", file);
+                  }}
+                >
+                  {formik.values.image ? (
+                    <div className="flex items-center gap-2">
+                      <svg className="w-3.5 h-3.5 text-[#AC292A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-[#AC292A] text-xs font-bold truncate max-w-[200px]">{formik.values.image.name}</span>
+                    </div>
+                  ) : (
+                    <>
+                      <p className="text-[#192133] text-xs font-semibold group-hover:text-[#AC292A] transition-colors duration-300">
+                        Click to upload or drag &amp; drop
+                      </p>
+                      <p className="text-gray-400 text-[10px]">PNG, PDF, JPG, WEBP · Max 5MB</p>
+                    </>
+                  )}
+                  <input
+                    id="image"
+                    name="image"
+                    type="file"
+                    accept=".png,.pdf,.jpg,.jpeg,.webp"
+                    onChange={(e) => {
+                      const file = e.currentTarget.files[0];
+                      if (file?.size > 5 * 1024 * 1024) { toast.error("File size exceeds 5MB limit."); return; }
+                      formik.setFieldValue("image", file);
+                    }}
+                    onBlur={formik.handleBlur}
+                    className="hidden"
+                  />
+                </label>
+                <FieldError msg={formik.touched.image && formik.errors.image} />
               </div>
+
+              {/* Confirm checkbox — same as GetQuoteModal step 2 */}
+              <label className="flex items-start gap-3 p-4 rounded-xl bg-[#f7f8fc] border border-gray-100 cursor-pointer group hover:border-[#AC292A]/20 transition-all duration-200">
+                <input
+                  type="checkbox"
+                  className="mt-0.5 w-4 h-4 accent-[#AC292A] cursor-pointer flex-shrink-0"
+                />
+                <span className="text-sm text-gray-500 group-hover:text-[#192133] transition-colors duration-200 leading-relaxed">
+                  I confirm that all the information provided is accurate and complete.
+                </span>
+              </label>
+
             </div>
+
+            {/* Submit row — same layout as GetQuoteModal step 2 buttons */}
+            <div className="flex justify-end mt-6 pt-5 border-t border-gray-100">
+              <button
+                type="submit"
+                disabled={formik.isSubmitting || !formik.isValid}
+                className={`inline-flex items-center justify-center gap-2 px-8 py-2.5 rounded-xl text-sm font-bold text-white uppercase tracking-wide transition-all duration-200
+                  ${formik.isValid && !formik.isSubmitting
+                    ? "bg-[#AC292A] hover:bg-[#AC292A]/90 hover:shadow-[0_4px_16px_rgba(172,41,42,0.40)] active:scale-[0.98]"
+                    : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                  }`}
+              >
+                {formik.isSubmitting ? (
+                  <>
+                    <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                    </svg>
+                    Submitting…
+                  </>
+                ) : (
+                  <>
+                    Get Instant Quote
+                    <RiCheckboxCircleLine size={16} />
+                  </>
+                )}
+              </button>
+            </div>
+
           </form>
         </div>
       </div>

@@ -96,10 +96,10 @@ const ContactUs = () => {
 
               {/* Left — headline */}
               <div>
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/8 border border-white/10 text-[#AC292A] text-[10px] font-bold uppercase tracking-widest mb-7">
+                {/* <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/8 border border-white/10 text-[#AC292A] text-[10px] font-bold uppercase tracking-widest mb-7">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#AC292A] animate-pulse" />
                   Instant Project Inquiry
-                </span>
+                </span> */}
 
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
                   Let's Build Something <br />

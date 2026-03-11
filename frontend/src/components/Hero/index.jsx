@@ -4,6 +4,7 @@ import hero from "../../assets/images/hero-banner.png";
 import Button from "../../components/common/Button";
 import { Link } from "react-router-dom";
 import AnnouncementBanner from "../AnnouncementBanner";
+import InstantQuoteModal from "../common/InstantQuoteModal";
  
 
 const Hero = () => {
@@ -39,6 +40,9 @@ const Hero = () => {
     }
   }, [isFirstLoad]);
 
+const [InstantQuote, setInstantQuote] = useState(false);
+
+
   return (
     <>
     <AnnouncementBanner/>
@@ -55,7 +59,7 @@ const Hero = () => {
           {/* bg-black/30 backdrop-blur-sm */}
           <div className=" rounded-lg p-0 sm:p-8 md:p-10 bg-[#192133] text-center">
             <div className=" space-x-3 ">
-              <h1 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 uppercase tracking-wide">
+              <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-5xl font-bold mb-4 sm:mb-6 uppercase tracking-wide">
               If you need it, we print it.
               </h1>
               <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8  tracking-wide">
@@ -63,16 +67,16 @@ const Hero = () => {
 
               </p>
              
-              <Link to={'/shop'}>
-                <Button variant="red" className="font-semibold" label="Get Instant Quote" />
-              </Link>
+              
+                <Button variant="red" className="font-semibold" label="Get Instant Quote" onClick={()=> setInstantQuote(true)} />
+         
              
             
-              <Link to={'/shop'}>
+              <Link to={'/dielines'}>
                 <Button variant="white" className="font-semibold" label="Get Custom Template" />
               </Link>
             
-              <Link to={'/shop'}>
+              <Link to={'/contact-us'}>
                 <Button variant="white" className="font-semibold" label="Order Sample Kit" />
               </Link>
             </div>
@@ -81,6 +85,14 @@ const Hero = () => {
       </div>
 
     </div>
+    {/** Instant Quote Modal */}
+    <InstantQuoteModal
+      isModalOpen={InstantQuote}
+      setIsModalOpen={setInstantQuote}
+      closeModal={()=> setInstantQuote(false)}
+   
+    
+    />
     </>
   );
 };

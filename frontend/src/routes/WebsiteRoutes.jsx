@@ -34,7 +34,7 @@ import ShippingPolicy from "../pages/shippingPolicy/ShippingPolicy";
 // import TermsAndConditions from "../pages/TermsAndConditions/TermsAndConditions";
 // import axios from "axios";
 // import { BaseUrl } from "../utils/BaseUrl";
-// import Dielines from "../pages/Dielines";
+import Dielines from "../pages/Dielines";
 import SuccessPage from "../pages/thankYouPage";
 // import { getCachedProduct } from "../utils/prefetchUtils";
 
@@ -105,7 +105,7 @@ export default function useWebsiteRoutes(serverData, CategoryProducts, homePageD
     { path: '/returns-refunds', element: <ReturnRefunds key="returns-refunds" /> },
     { path: '/reviews', element: <Reviews key="reviews" /> },
     { path: '/my-account', element: <MyAccount key="my-account" /> },
-    // { path: '/dielines', element: <Dielines key="dielines" /> },
+    { path: '/dielines', element: <Dielines key="dielines" /> },
     // { path: '/get-custom-quote', element: <GetCustomQoutePage key="get-custom-quote" /> },
     // { path: '/target-price', element: <TargetPrice key="target-price" /> },
     // { path: '/faqs', element: <FAQ key="faqs" /> },

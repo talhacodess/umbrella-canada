@@ -64,6 +64,7 @@ const Navbar = () => {
 
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
+
   const [isScrolled, setIsScrolled] = useState(false);
 
   const searchRef = useRef(null);
@@ -779,6 +780,7 @@ const Navbar = () => {
 
         />
 
+        
       </div>
 
     </>
