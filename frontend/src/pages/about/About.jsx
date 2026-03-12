@@ -112,8 +112,9 @@ export default function About() {
 
               </p>
              
-              
-                <Button variant="primary" className="font-semibold" label="Get Instant Quote" onClick={()=> setInstantQuote(true)} />
+              <Link to={'#work'}>
+                <Button variant="primary" className="font-semibold" label="See Our Work"  />
+                  </Link>
          
              
             
@@ -300,14 +301,38 @@ export default function About() {
 
     
       {/* ══ GALLERY ═════════════════════════════════════════════ */}
-      <CreativePackaging />
+      <div id="work"><CreativePackaging /></div>
+      
 
       {/* ══ GLOBAL FOOTPRINT ════════════════════════════════════ */}
       <section className="bg-white border-t border-gray-100">
         <div className="max-w-8xl mx-auto px-6 md:px-10 py-16 md:py-24">
+           {/* Bottom inline stats row */}
+          <div className=" grid grid-cols-2 sm:grid-cols-4 gap-4 pb-10">
+            {stats.map((s, i) => (
+              <div
+                key={i}
+                className="flex flex-col items-center justify-center text-center py-10 rounded-2xl bg-[#f7f8fc] border border-gray-100"
+              >
+                <p className="text-3xl font-black text-[#192133] mb-1">{s.value}</p>
+                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{s.label}</p>
+              </div>
+            ))}
+          </div>
 
           {/* Top stats + heading row */}
           <div className="flex flex-col lg:flex-row items-center gap-10 mb-16">
+             {/* Heading */}
+            <div className="flex-1 space-y-3 lg:pr-8 lg:border-r lg:border-gray-100">
+             
+              <h3 className="text-4xl lg:text-5xl font-black text-[#192133] leading-tight tracking-tight">
+                Our Global Footprint Operating at the speed of{' '}
+                <span className="text-[#AC292A]">International Commerce.</span>
+              </h3>
+              <p className="text-gray-400 text-base leading-relaxed max-w-xl">
+                From North America to Asia Pacific, our global presence ensures we can serve brands wherever they operate — with the same standard of quality and care.
+              </p>
+            </div>
 
             {/* Stat cards */}
             <div className="grid grid-cols-2 gap-4 w-full lg:w-auto lg:flex-shrink-0">
@@ -321,17 +346,7 @@ export default function About() {
               </div>
             </div>
 
-            {/* Heading */}
-            <div className="flex-1 space-y-3 lg:pl-8 lg:border-l lg:border-gray-100">
-             
-              <h3 className="text-4xl lg:text-5xl font-black text-[#192133] leading-tight tracking-tight">
-                Our Global Footprint Operating at the speed of{' '}
-                <span className="text-[#AC292A]">International Commerce.</span>
-              </h3>
-              <p className="text-gray-400 text-base leading-relaxed max-w-xl">
-                From North America to Asia Pacific, our global presence ensures we can serve brands wherever they operate — with the same standard of quality and care.
-              </p>
-            </div>
+           
           </div>
 
           {/* Location cards */}
@@ -361,18 +376,7 @@ export default function About() {
             ))}
           </div>
 
-          {/* Bottom inline stats row */}
-          <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {stats.map((s, i) => (
-              <div
-                key={i}
-                className="flex flex-col items-center justify-center text-center p-6 rounded-2xl bg-[#f7f8fc] border border-gray-100"
-              >
-                <p className="text-3xl font-black text-[#192133] mb-1">{s.value}</p>
-                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{s.label}</p>
-              </div>
-            ))}
-          </div>
+         
         </div>
       </section>
 
