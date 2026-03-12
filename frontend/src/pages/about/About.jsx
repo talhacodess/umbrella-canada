@@ -21,6 +21,7 @@ import chaina from '../../assets/images/about-imges/chaina.svg';
 import CreativePackaging from '../../components/CreativeBanner/CreativePackaging';
 import hero from "../../assets/images/about-us-banner.webp";
 import BottomHero from '../../components/Hero/BottomHero';
+import AnnouncementBanner from '../../components/AnnouncementBanner';
 
 // ── Reusable Section Label ─────────────────────────────────────
 const SectionLabel = ({ text }) => (
@@ -87,7 +88,7 @@ export default function About() {
     <div className=" bg-[#f7f7f7] text-[#192133] selection:bg-[#AC292A] selection:text-white">
 
       {/* ══ BANNER ══════════════════════════════════════════════ */}
-      <Banner title={"About Us"} subTitle={"About Us"} />
+       <AnnouncementBanner/>
 
       {/* ══ INTRO / Banner ══════════════════════════════════ */}
       <div className="w-full lg:h-[50vh] h-[50vh] relative overflow-hidden">
@@ -322,9 +323,9 @@ export default function About() {
 
             {/* Heading */}
             <div className="flex-1 space-y-3 lg:pl-8 lg:border-l lg:border-gray-100">
-              <SectionLabel text="Our Global Footprint" />
+             
               <h3 className="text-4xl lg:text-5xl font-black text-[#192133] leading-tight tracking-tight">
-                Operating at the speed of{' '}
+                Our Global Footprint Operating at the speed of{' '}
                 <span className="text-[#AC292A]">International Commerce.</span>
               </h3>
               <p className="text-gray-400 text-base leading-relaxed max-w-xl">

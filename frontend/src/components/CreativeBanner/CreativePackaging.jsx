@@ -3,6 +3,7 @@ import gallery1 from '../../assets/images/about-imges/gallery1.jpg';
 import gallery2 from '../../assets/images/about-imges/gallery2.jpg';
 import { FaArrowRight, FaExpand } from 'react-icons/fa';
 import Button from '../common/Button';
+import { Link } from 'react-router-dom';
 
 const CreativePackaging = () => {
   const images = [
@@ -35,13 +36,14 @@ const CreativePackaging = () => {
               </p>
             </div>
           </div>
-
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#AC292A]/25 text-[#AC292A] text-xs font-bold uppercase tracking-wide hover:bg-[#AC292A] hover:text-white hover:border-[#AC292A] transition-all duration-200 flex-shrink-0 self-start sm:self-end"
-          >
-            View Gallery <FaArrowRight size={10} />
-          </a>
+          <Link to={"/portfolio"}>
+          <Button
+            
+            label={" View Portfolio"}
+          
+           
+          />
+          </Link>
         </div>
 
         {/* ── Main Gallery Grid ── */}
