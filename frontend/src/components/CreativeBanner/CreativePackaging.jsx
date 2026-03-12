@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import gallery1 from '../../assets/images/about-imges/gallery1.jpg';
 import gallery2 from '../../assets/images/about-imges/gallery2.jpg';
+import gallery3 from '../../assets/images/about-imges/gallery3.webp';
+import gallery4 from '../../assets/images/about-imges/gallery4.webp';  
+import gallery5 from '../../assets/images/about-imges/gallery5.webp';  
 import { FaArrowRight, FaExpand } from 'react-icons/fa';
 import Button from '../common/Button';
 import { Link } from 'react-router-dom';
@@ -9,9 +12,9 @@ const CreativePackaging = () => {
   const images = [
     { id: 1, url: gallery1,                                                                          title: "Main Display",  tag: "Featured"   },
     { id: 2, url: gallery2,                                                                          title: "Retail Wall",   tag: "Retail"     },
-    { id: 3, url: "https://images.unsplash.com/photo-1586769852836-bc069f19e1b6?q=80&w=800",        title: "Eco-Friendly",  tag: "Sustainable"},
-    { id: 4, url: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=800",        title: "Box Structure", tag: "Design"     },
-    { id: 5, url: "https://images.unsplash.com/photo-1512331283953-19967202267a?q=80&w=800",        title: "Luxury Kit",    tag: "Premium"    },
+    { id: 3, url: gallery3,                                                                          title: "Eco-Friendly",  tag: "Sustainable"},
+    { id: 4, url: gallery4,                                                                          title: "Box Structure", tag: "Design"     },
+    { id: 5, url: gallery5,                                                                          title: "Luxury Kit",    tag: "Premium"    },
   ];
 
   const [activeIndex, setActiveIndex] = useState(0);
