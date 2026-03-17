@@ -5,12 +5,16 @@ import { Link } from 'react-router-dom';
 import { FaAngleRight, FaMapMarkerAlt, FaExternalLinkAlt, FaCheckCircle, FaShippingFast, FaLeaf, FaStar } from 'react-icons/fa';
 
 // Assets
-import Leatherjackets from '../../assets/images/about-imges/Good-vibe-cbd.webp';
-import xinc from '../../assets/images/about-imges/x-inc.webp';
-import xcustompacakging from '../../assets/images/about-imges/xcustompacakging.webp';
-import xcustomclothing from '../../assets/images/about-imges/xcustomclothing.webp';
-import Silks from '../../assets/images/about-imges/Silks.webp';
+import goodvibecbd from '../../assets/images/about-imges/Good-vibe-cbd.webp';
 import xpackaging from '../../assets/images/about-imges/xpackaging.webp';
+import luxefragrance from '../../assets/images/about-imges/luxe-fragrance.webp';
+import Fatsals from '../../assets/images/about-imges/Fat-sals.webp';
+import STF from '../../assets/images/about-imges/STF.webp';
+import xbox from '../../assets/images/about-imges/xbox.webp';
+import xcitetech from '../../assets/images/about-imges/xcite-tech.webp';
+import Nike from '../../assets/images/about-imges/Nike.webp';
+import chanel from '../../assets/images/about-imges/chanel.webp';
+import adidas from '../../assets/images/about-imges/adidas.webp';
 import videoabout from '../../assets/images/about-imges/videoabout.mp4';
 import usa from '../../assets/images/about-imges/usa.svg';
 import uk from '../../assets/images/about-imges/uk.svg';
@@ -54,11 +58,15 @@ export default function About() {
   const [activeBrand, setActiveBrand] = useState(0);
 
   const companyLogos = [
-    { name: "X-Custom Packaging", logo: xcustompacakging, location: "Global Solutions", tagline: "Tailored packaging solutions designed to elevate your brand identity.", tag: "Packaging" },
-    { name: "Leather Jackets", logo: Leatherjackets, location: "Premium Apparel", tagline: "Timeless craftsmanship meets modern style in every premium hide.", tag: "Apparel" },
-    { name: "X-Inc", logo: xinc, location: "Innovation Hub", tagline: "Driving innovation and excellence across global enterprise sectors.", tag: "Enterprise" },
-    { name: "X-Custom Clothing", logo: xcustomclothing, location: "Bespoke Fashion", tagline: "Bespoke apparel crafted with precision for the modern individual.", tag: "Fashion" },
-    { name: "Silks", logo: Silks, location: "Luxury Textiles", tagline: "Exquisite luxury fabrics defined by elegance and superior comfort.", tag: "Textiles" },
+    { name: "Good Vibe CBD", logo: goodvibecbd, location: "Wellness & Health", tagline: "Premium wellness products for a balanced and vibrant lifestyle.", tag: "Wellness" },
+    { name: "Luxe Fragrance", logo: luxefragrance, location: "Boutique Perfumery", tagline: "Captivating scents crafted with the finest ingredients.", tag: "Fragrance" },
+    { name: "Fat Sal's", logo: Fatsals, location: "Culinary Hub", tagline: "Indulgent and creatively crafted sandwiches for every craving.", tag: "Food & Beverage" },
+    { name: "STF Apparel", logo: STF, location: "Urban Streetwear", tagline: "Bold and edgy street fashion for the modern trendsetter.", tag: "Streetwear" },
+    { name: "Xbox", logo: xbox, location: "Gaming Tech", tagline: "Next-generation gaming consoles and immersive entertainment.", tag: "Gaming" },
+    { name: "Xcite Tech", logo: xcitetech, location: "Innovation Hub", tagline: "Cutting-edge technology solutions driving the future forward.", tag: "Technology" },
+    { name: "Nike", logo: Nike, location: "Global Sports", tagline: "Innovative athletic footwear and apparel for peak performance.", tag: "Sports" },
+    { name: "Chanel", logo: chanel, location: "High Fashion", tagline: "Iconic luxury fashion, timeless elegance, and exquisite beauty.", tag: "Luxury" },
+    { name: "Adidas", logo: adidas, location: "Sportswear", tagline: "Empowering athletes with high-performance gear and modern style.", tag: "Sportswear" },
   ];
 
   const strengths = [
