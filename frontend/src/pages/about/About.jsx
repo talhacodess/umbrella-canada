@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { FaAngleRight, FaMapMarkerAlt, FaExternalLinkAlt, FaCheckCircle, FaShippingFast, FaLeaf, FaStar } from 'react-icons/fa';
 
 // Assets
-import Leatherjackets from '../../assets/images/about-imges/leatherjackets.webp';
+import Leatherjackets from '../../assets/images/about-imges/Good-vibe-cbd.webp';
 import xinc from '../../assets/images/about-imges/x-inc.webp';
 import xcustompacakging from '../../assets/images/about-imges/xcustompacakging.webp';
 import xcustomclothing from '../../assets/images/about-imges/xcustomclothing.webp';
@@ -54,85 +54,85 @@ export default function About() {
   const [activeBrand, setActiveBrand] = useState(0);
 
   const companyLogos = [
-    { name: "X-Custom Packaging", logo: xcustompacakging, location: "Global Solutions",  tagline: "Tailored packaging solutions designed to elevate your brand identity.",       tag: "Packaging" },
-    { name: "Leather Jackets",    logo: Leatherjackets,   location: "Premium Apparel",   tagline: "Timeless craftsmanship meets modern style in every premium hide.",           tag: "Apparel"    },
-    { name: "X-Inc",              logo: xinc,             location: "Innovation Hub",    tagline: "Driving innovation and excellence across global enterprise sectors.",         tag: "Enterprise" },
-    { name: "X-Custom Clothing",  logo: xcustomclothing,  location: "Bespoke Fashion",   tagline: "Bespoke apparel crafted with precision for the modern individual.",           tag: "Fashion"    },
-    { name: "Silks",              logo: Silks,            location: "Luxury Textiles",   tagline: "Exquisite luxury fabrics defined by elegance and superior comfort.",          tag: "Textiles"   },
+    { name: "X-Custom Packaging", logo: xcustompacakging, location: "Global Solutions", tagline: "Tailored packaging solutions designed to elevate your brand identity.", tag: "Packaging" },
+    { name: "Leather Jackets", logo: Leatherjackets, location: "Premium Apparel", tagline: "Timeless craftsmanship meets modern style in every premium hide.", tag: "Apparel" },
+    { name: "X-Inc", logo: xinc, location: "Innovation Hub", tagline: "Driving innovation and excellence across global enterprise sectors.", tag: "Enterprise" },
+    { name: "X-Custom Clothing", logo: xcustomclothing, location: "Bespoke Fashion", tagline: "Bespoke apparel crafted with precision for the modern individual.", tag: "Fashion" },
+    { name: "Silks", logo: Silks, location: "Luxury Textiles", tagline: "Exquisite luxury fabrics defined by elegance and superior comfort.", tag: "Textiles" },
   ];
 
   const strengths = [
-    { icon: <FaCheckCircle />, title: "Precision Quality",    desc: "Every product inspected to the highest standard before dispatch." },
-    { icon: <FaShippingFast />, title: "On-Time Delivery",    desc: "Reliable logistics ensuring your orders arrive on schedule."      },
-    { icon: <FaLeaf />,         title: "Eco Materials",       desc: "Sustainable materials that protect both product and planet."       },
-    { icon: <FaStar />,         title: "Custom Solutions",    desc: "Fully bespoke packaging tailored to your exact brand needs."      },
+    { icon: <FaCheckCircle />, title: "Precision Quality", desc: "Every product inspected to the highest standard before dispatch." },
+    { icon: <FaShippingFast />, title: "On-Time Delivery", desc: "Reliable logistics ensuring your orders arrive on schedule." },
+    { icon: <FaLeaf />, title: "Eco Materials", desc: "Sustainable materials that protect both product and planet." },
+    { icon: <FaStar />, title: "Custom Solutions", desc: "Fully bespoke packaging tailored to your exact brand needs." },
   ];
 
   const stats = [
-    { value: "10+",  label: "Years Experience"      },
-    { value: "1k+",  label: "Brand Partners"        },
-    { value: "50+",  label: "Material Options"      },
-    { value: "6",    label: "Global Offices"        },
+    { value: "10+", label: "Years Experience" },
+    { value: "1k+", label: "Brand Partners" },
+    { value: "50+", label: "Material Options" },
+    { value: "6", label: "Global Offices" },
   ];
 
   const offices = [
-    { country: "USA",       address: "9854 National Blvd #1042, Los Angeles, CA 90034", flag: usa       },
-    { country: "UK",        address: "275 New North Road, Islington, Suite 1946, London", flag: uk      },
-    { country: "Canada",    address: "7398 Yonge St #6d, Thornhill, ON L4J 8J2",        flag: canda     },
-    { country: "Australia", address: "7398 Yonge St #6d, Thornhill, ON L4J 8J2",        flag: australia },
-    { country: "UAE",       address: "7398 Yonge St #6d, Thornhill, ON L4J 8J2",        flag: uae       },
-    { country: "China",     address: "7398 Yonge St #6d, Thornhill, ON L4J 8J2",        flag: chaina    },
+    { country: "USA", address: "9854 National Blvd #1042, Los Angeles, CA 90034", flag: usa },
+    { country: "UK", address: "275 New North Road, Islington, Suite 1946, London", flag: uk },
+    { country: "Canada", address: "7398 Yonge St #6d, Thornhill, ON L4J 8J2", flag: canda },
+    { country: "Australia", address: "7398 Yonge St #6d, Thornhill, ON L4J 8J2", flag: australia },
+    { country: "UAE", address: "7398 Yonge St #6d, Thornhill, ON L4J 8J2", flag: uae },
+    { country: "China", address: "7398 Yonge St #6d, Thornhill, ON L4J 8J2", flag: chaina },
   ];
 
   return (
     <div className=" bg-[#f7f7f7] text-[#192133] selection:bg-[#AC292A] selection:text-white">
 
       {/* ══ BANNER ══════════════════════════════════════════════ */}
-       <AnnouncementBanner/>
+      <AnnouncementBanner />
 
       {/* ══ INTRO / Banner ══════════════════════════════════ */}
       <div className="w-full lg:h-[50vh] h-[50vh] relative overflow-hidden">
-    
 
-      {/* Linear Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/75 to-black/40 z-10" style={{backgroundImage:`url(${hero})`, backgroundSize: 'cover', backgroundPosition: 'right'}}></div>
 
-      {/* Text Content Overlay */}
-      <div className="relative w-full h-full flex items-center justify-start z-20 ">
-        <div className="w-full sm:w-3/5 px-6 sm:px-8 md:px-12 lg:px-16 text-left">
-          {/* Background behind content - Half screen */}
-          {/* bg-black/30 backdrop-blur-sm */}
-          <div className=" rounded-lg p-0 sm:p-8 md:p-10  text-left">
-            <div className=" space-x-3 ">
-              <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-5xl font-bold mb-4 sm:mb-6 uppercase tracking-wide">
-              About Us
-              </h1>
-              <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8  tracking-wide">
-             We give your product the attention they deserve.
+        {/* Linear Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/75 to-black/40 z-10" style={{ backgroundImage: `url(${hero})`, backgroundSize: 'cover', backgroundPosition: 'right' }}></div>
 
-              </p>
-             
-              <Link to={'#work'}>
-                <Button variant="primary" className="font-semibold" label="See Our Work"  />
-                  </Link>
-         
-             
-            
-              <Link to={'/dielines'}>
-                <Button variant="primary" className="font-semibold" label="Get Custom Template" />
-              </Link>
-            
-              <Link to={'/contact-us'}>
-                <Button variant="red" className="font-semibold " label="Order Sample Kit" />
-              </Link>
+        {/* Text Content Overlay */}
+        <div className="relative w-full h-full flex items-center justify-start z-20 ">
+          <div className="w-full sm:w-3/5 px-6 sm:px-8 md:px-12 lg:px-16 text-left">
+            {/* Background behind content - Half screen */}
+            {/* bg-black/30 backdrop-blur-sm */}
+            <div className=" rounded-lg p-0 sm:p-8 md:p-10  text-left">
+              <div className=" space-x-3 ">
+                <h1 className="text-white text-3xl sm:text-5xl md:text-6xl lg:text-5xl font-bold mb-4 sm:mb-6 uppercase tracking-wide">
+                  About Us
+                </h1>
+                <p className="text-white text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8  tracking-wide">
+                  We give your product the attention they deserve.
+
+                </p>
+
+                <Link to={'#work'}>
+                  <Button variant="primary" className="font-semibold" label="See Our Work" />
+                </Link>
+
+
+
+                <Link to={'/dielines'}>
+                  <Button variant="primary" className="font-semibold" label="Get Custom Template" />
+                </Link>
+
+                <Link to={'/contact-us'}>
+                  <Button variant="red" className="font-semibold " label="Order Sample Kit" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-    </div>
-    {/** icons under hero */}
-    <BottomHero/>
+      </div>
+      {/** icons under hero */}
+      <BottomHero />
       {/* ══ BRAND PARTNERS ══════════════════════════════════════ */}
       <section id="brand-details-section" className="bg-white border-t border-gray-100">
         <div className="max-w-8xl mx-auto px-6 md:px-10 py-16 md:py-20">
@@ -140,7 +140,7 @@ export default function About() {
             label="Our Portfolio"
             title="Brand Partners"
             subtitle="A family of companies built on quality & innovation"
-           
+
           />
 
           {/* Tabbed panel */}
@@ -236,8 +236,8 @@ export default function About() {
       </section>
 
 
-      
-       {/* ══ INTRO / WHO WE ARE ══════════════════════════════════ */}
+
+      {/* ══ INTRO / WHO WE ARE ══════════════════════════════════ */}
       <section className="bg-[#f7f7f7]">
         <div className="max-w-8xl mx-auto px-6 md:px-10 py-16 md:py-24 flex flex-col lg:flex-row items-center gap-14">
 
@@ -299,15 +299,15 @@ export default function About() {
       </section>
 
 
-    
+
       {/* ══ GALLERY ═════════════════════════════════════════════ */}
       <div id="work"><CreativePackaging /></div>
-      
+
 
       {/* ══ GLOBAL FOOTPRINT ════════════════════════════════════ */}
       <section className="bg-white border-t border-gray-100">
         <div className="max-w-8xl mx-auto px-6 md:px-10 py-16 md:py-24">
-           {/* Bottom inline stats row */}
+          {/* Bottom inline stats row */}
           <div className=" grid grid-cols-2 sm:grid-cols-4 gap-4 pb-10">
             {stats.map((s, i) => (
               <div
@@ -322,9 +322,9 @@ export default function About() {
 
           {/* Top stats + heading row */}
           <div className="flex flex-col lg:flex-row items-center gap-10 mb-16">
-             {/* Heading */}
+            {/* Heading */}
             <div className="flex-1 space-y-3 lg:pr-8 lg:border-r lg:border-gray-100">
-             
+
               <h3 className="text-4xl lg:text-5xl font-black text-[#192133] leading-tight tracking-tight">
                 Our Global Footprint Operating at the speed of{' '}
                 <span className="text-[#AC292A]">International Commerce.</span>
@@ -346,7 +346,7 @@ export default function About() {
               </div>
             </div>
 
-           
+
           </div>
 
           {/* Location cards */}
@@ -376,7 +376,7 @@ export default function About() {
             ))}
           </div>
 
-         
+
         </div>
       </section>
 

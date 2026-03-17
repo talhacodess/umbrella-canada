@@ -38,6 +38,7 @@ import { MdClose, MdChevronLeft, MdChevronRight } from 'react-icons/md'
 import { FaArrowRight } from 'react-icons/fa'
 import Button from '../../components/common/Button'
 import { Link } from 'react-router-dom'
+import AnnouncementBanner from '../../components/AnnouncementBanner'
 
 // ── Inline PortfolioCard ───────────────────────────────────────
 const PortfolioCard = ({ img1, img2, index, onClick }) => {
@@ -221,6 +222,7 @@ function Portfolio() {
   return (
     <>
       <PageMetadata {...metadata} />
+      <AnnouncementBanner/>
 
       <div className="bg-[#f7f8fc] selection:bg-[#AC292A] selection:text-white">
 

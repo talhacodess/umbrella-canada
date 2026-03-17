@@ -6,6 +6,7 @@ import ProductCard, { ProductSelectionProvider } from '../../components/common/P
 import axios from 'axios';
 import { BaseUrl } from '../../utils/BaseUrl';
 import { useSearchParams } from 'react-router-dom';
+import AnnouncementBanner from '../../components/AnnouncementBanner';
 
 // ── Skeleton loader card ───────────────────────────────────────
 const SkeletonCard = () => (
@@ -216,6 +217,7 @@ const Shop = () => {
 
   return (
     <>
+       <AnnouncementBanner/>
       <Banner title="Catalogue" subTitle="Catalogue" />
 
       <div className="bg-[#f7f8fc] min-h-screen selection:bg-[#AC292A] selection:text-white">

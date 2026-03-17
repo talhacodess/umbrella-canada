@@ -67,12 +67,12 @@ const AnnouncementBanner = () => {
       <div 
         className="h-px w-full" 
         style={{ 
-          backgroundColor: '#213554',
+          backgroundColor: '#192133',
           boxShadow: '0 1px 2px rgba(33, 53, 84, 0.2)'
         }}
       ></div>
       
-      <div className="bg-[#213554] relative overflow-hidden w-full z-30">
+      <div className="bg-[#192133] relative overflow-hidden w-full z-30">
         <div className="relative w-full py-1 sm:py-1">
           {/* Sliding Announcement Container */}
           <div className="flex announcement-scroll whitespace-nowrap">
@@ -107,7 +107,7 @@ const AnnouncementBanner = () => {
       <div 
         className="h-px w-full" 
         style={{ 
-          backgroundColor: '#213554',
+          backgroundColor: '#192133',
           boxShadow: '0 -1px 2px rgba(33, 53, 84, 0.2)'
         }}
       ></div>
